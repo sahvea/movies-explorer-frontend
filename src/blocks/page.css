@@ -1,0 +1,35 @@
+.page {
+  font-family: 'Inter', Arial, sans-serif;
+  color: var(--font-main-color);
+  min-width: 320px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: var(--bg-main-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  /* -переменные- */
+    /* фон */
+  --bg-main-color: #202020;
+  --bg-accent-color: #272727;
+  --bg-landing-color: #073042;
+    /* шрифты */
+  --font-main-color: #ffffff;
+  --font-accent-color: #000000;
+  --font-transp-color: #8b8b8b;
+    /* карточки */
+  --card-bg-color: #222222;
+    /* элементы */
+  --landing-elements-color: #303030;
+  --main-elements-color: #313131;
+  --title-divider-color: #dadada;
+  --divider-color: #424242;
+  --input-border-color: #aaaaaa;
+  --more-bnt-color: #2f2f2f;
+    /* акцентные цвета */
+  --bright-color: #3ddc84;
+  --error-color: #cf252c;
+}

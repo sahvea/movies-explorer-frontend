@@ -11,6 +11,10 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
+
+}
+
+.page_theme_dark {
   /* -переменные- */
     /* фон */
   --bg-main-color: #202020;
@@ -31,5 +35,7 @@
   --more-bnt-color: #2f2f2f;
     /* акцентные цвета */
   --bright-color: #3ddc84;
+  --bright-color-darker: #17806e;
+  --bright-color-lighter: #68d4c6;
   --error-color: #cf252c;
 }

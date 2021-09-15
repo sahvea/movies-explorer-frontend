@@ -7,7 +7,7 @@ function Navigation() {
       <nav className="navigation__menu">
         <ul className="navigation__list">
           <li className="navigation__list-item navigation__list-item_link-direction_main-page">
-            <NavLink to="/" className="link navigation__link" activeClassName="navigation__link_active">Главная</NavLink>
+            <NavLink exact to="/" className="link navigation__link" activeClassName="navigation__link_active">Главная</NavLink>
           </li>
           <li className="navigation__list-item">
             <NavLink to="/movies" className="link navigation__link" activeClassName="navigation__link_active">Фильмы</NavLink>

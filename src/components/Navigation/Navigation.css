@@ -1,82 +1,38 @@
-/* для экранов от 320px */
-.navigation {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, .7);
-  transition: .4s linear;
-  visibility: hidden;
-  opacity: 0;
-}
-
-.navigation_visible {
-  visibility: visible;
-  opacity: 1;
-}
-
 .navigation__menu {
-  position: fixed;
-  top: 0;
-  right: -100%;
-  margin: 0;
-  padding: 144px 10px 50px;
-  width: 100vw;
-  height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   box-sizing: border-box;
-  background-color: var(--bg-main-color);
-  transition: .4s linear;
-  z-index: 1;
-}
-
-.navigation__menu_active {
-  right: 0;
 }
 
 .navigation__list {
-  margin: 0;
+  margin: 0 50px 0 0;
   padding: 0;
   list-style: none;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   justify-items: center;
-  text-align: center;
 }
 
 .navigation__list-item {
-  margin-top: 24px;
+  margin-right: 20px;
 }
 
 .navigation__list-item:first-of-type {
   margin-top: 0;
 }
 
+.navigation__list-item_link-direction_main-page {
+  display: none;
+}
+
 .navigation__link {
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 1.2;
+  font-weight: 400;
+  font-size: 14px;
 }
 
 .navigation__link_active {
-  position: relative;
-}
-
-.navigation__link_active::after {
-  content: '';
-  position: absolute;
-  bottom: -7px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  width: 72px;
-  height: 2px;
-  background-color: var(--font-main-color);
+  font-weight: 500;
 }
 
 .navigation__profile {
@@ -123,71 +79,93 @@
   }
 }
 
-/* для экранов от 576px */
-
-@media screen and (min-width: 576px) {
-  .navigation__menu {
-    padding: 160px 90px 90px;
-    width: 520px;
-  }
-
-  .navigation__list-item {
-    margin-top: 28px;
-  }
-}
-
-/* для экранов от 1024px */
-
-@media screen and (min-width: 1024px) {
+@media screen and (max-width: 1023px) {
   .navigation {
-    position: static;
-    background-color: unset;
-    transition: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .7);
+    transition: .4s linear;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .navigation_visible {
     visibility: visible;
     opacity: 1;
   }
 
   .navigation__menu {
-    position: static;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    margin: 0;
+    padding: 160px 90px 90px;
+    width: 100vw;
+    max-width: 520px;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    background-color: var(--bg-main-color);
+    transition: .4s linear;
+    z-index: 1;
+  }
+
+  .navigation__menu_active {
     right: 0;
-    padding: 0;
-    width: unset;
-    height: unset;
-    background-color: unset;
-    transition: unset;
-    flex-direction: row;
   }
 
   .navigation__list {
-    flex-direction: row;
-    text-align: right;
-    margin-right: 50px;
+    margin-right: 0;
+    flex-direction: column;
+    text-align: center;
   }
 
   .navigation__list-item {
-    margin-top: 0;
-    margin-right: 20px;
-  }
-
-  .navigation__list-item:last-of-type {
     margin-right: 0;
+    margin-top: 28px;
   }
 
   .navigation__list-item_link-direction_main-page {
-    display: none;
+    display: block;
+  }
+
+  .navigation__list-item:first-of-type {
+    margin-top: 0;
   }
 
   .navigation__link {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1.3;
+    font-weight: 500;
+    font-size: 18px;
   }
 
   .navigation__link_active {
-    font-weight: 500;
+    position: relative;
   }
 
   .navigation__link_active::after {
-    content: none;
+    content: '';
+    position: absolute;
+    bottom: -7px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 72px;
+    height: 2px;
+    background-color: var(--font-main-color);
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .navigation__menu {
+    padding: 144px 10px 50px;
+    max-width: unset;
+  }
+
+  .navigation__list-item {
+    margin-top: 24px;
   }
 }

@@ -21,9 +21,14 @@
   top: 0;
   right: -100%;
   margin: 0;
-  padding: 144px 0 48px;
+  padding: 144px 10px 50px;
   width: 100vw;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
   background-color: var(--bg-main-color);
   transition: .4s linear;
   z-index: 1;
@@ -74,15 +79,115 @@
   background-color: var(--font-main-color);
 }
 
+.navigation__profile {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.1;
+  color: var(--font-main-color);
+  text-decoration: none;
+  transition: .2s linear;
+}
+
+.navigation__profile-icon-area {
+  position: relative;
+  top: 2px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 13px;
+  width: 30px;
+  height: 30px;
+  background-color: var(--main-elements-color);
+  border-radius: 6px;
+}
+
+.navigation__profile-icon {
+  width: 11px;
+  height: 11px;
+}
+
+.navigation__profile-svg {
+  fill: var(--font-main-color);
+}
+
+.navigation__profile:hover .navigation__profile-icon {
+  animation: rotate .3s linear 2;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(180deg);
+  }
+}
+
 /* для экранов от 576px */
 
 @media screen and (min-width: 576px) {
   .navigation__menu {
-    padding: 160px 0 92px;
+    padding: 160px 90px 90px;
     width: 520px;
   }
 
   .navigation__list-item {
     margin-top: 28px;
+  }
+}
+
+/* для экранов от 1024px */
+
+@media screen and (min-width: 1024px) {
+  .navigation {
+    position: static;
+    background-color: unset;
+    transition: none;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .navigation__menu {
+    position: static;
+    right: 0;
+    padding: 0;
+    width: unset;
+    height: unset;
+    background-color: unset;
+    transition: unset;
+    flex-direction: row;
+  }
+
+  .navigation__list {
+    flex-direction: row;
+    text-align: right;
+    margin-right: 50px;
+  }
+
+  .navigation__list-item {
+    margin-top: 0;
+    margin-right: 20px;
+  }
+
+  .navigation__list-item:last-of-type {
+    margin-right: 0;
+  }
+
+  .navigation__list-item_link-direction_main-page {
+    display: none;
+  }
+
+  .navigation__link {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.3;
+  }
+
+  .navigation__link_active {
+    font-weight: 500;
+  }
+
+  .navigation__link_active::after {
+    content: none;
   }
 }

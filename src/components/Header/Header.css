@@ -147,3 +147,15 @@
     margin-top: 7px;
   }
 }
+
+/* для экранов от 1024px */
+
+@media screen and (min-width: 1024px) {
+  .header {
+    padding: 18px 70px;
+  }
+
+  .header__burger {
+    display: none;
+  }
+}

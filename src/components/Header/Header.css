@@ -81,6 +81,13 @@
   display: none;
 }
 
+.header__auth-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);

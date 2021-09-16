@@ -38,4 +38,6 @@
   --bright-color-darker: #17806e;
   --bright-color-lighter: #68d4c6;
   --error-color: #cf252c;
+    /* rgb */
+  --rgb-font-main-color: 255, 255, 255;
 }

@@ -6,7 +6,7 @@ function AuthNav() {
     <nav className="auth-nav">
       <ul className="auth-nav__list">
         <li>
-          <Link to="/signup" className="link auth-nav__-link">Регистрация</Link>
+          <Link to="/signup" className="link auth-nav__link">Регистрация</Link>
         </li>
         <li>
           <Link to="/signin" className="link auth-nav__link auth-nav__link_type_btn">Войти</Link>

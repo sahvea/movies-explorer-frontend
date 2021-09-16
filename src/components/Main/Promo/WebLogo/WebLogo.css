@@ -1,0 +1,77 @@
+.web-logo {
+  width: 310px;
+  height: fit-content;
+}
+
+.web-logo__word {
+  fill: var(--font-main-color);
+}
+
+.web-logo__word:nth-child(4n+1) {
+  animation: change-color 8s linear infinite;
+}
+
+.web-logo__word:nth-child(3n) {
+  animation: change-color-light 10s linear infinite;
+}
+
+.web-logo__word:nth-child(6n+2) {
+  animation: change-color-dark 5s linear infinite;
+}
+
+@keyframes change-color {
+  0% {
+    fill: var(--font-main-color);
+    transform: scaleX(1);
+  }
+
+  40% {
+    fill: var(--font-transp-color);
+    transform: scaleX(0.98);
+  }
+
+  100% {
+    fill: var(--font-main-color);
+    transform: scaleX(1);
+  }
+}
+
+@keyframes change-color-light {
+  0% {
+    fill: var(--font-main-color);
+    transform: scaleX(1);
+  }
+
+  40% {
+    fill: var(--bright-color-lighter);
+    transform: scaleX(0.95);
+  }
+
+  100% {
+    fill: var(--font-main-color);
+    transform: scaleX(1);
+  }
+}
+
+@keyframes change-color-dark {
+  0% {
+    fill: var(--font-main-color);
+    transform: scale(1);
+  }
+
+  40% {
+    fill: var(--bright-color-darker);
+    transform: scale(1.01);
+  }
+
+  100% {
+    fill: var(--font-main-color);
+    transform: scale(1);
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .web-logo {
+    width: 210px;
+  }
+}

@@ -29,6 +29,7 @@
 .main-nav__link {
   font-weight: 400;
   font-size: 14px;
+  line-height: 1.3;
 }
 
 .main-nav__link_active {
@@ -38,7 +39,7 @@
 .main-nav__profile {
   font-weight: 500;
   font-size: 14px;
-  line-height: 1.1;
+  line-height: 1.3;
   color: var(--font-main-color);
   text-decoration: none;
   transition: .2s linear;

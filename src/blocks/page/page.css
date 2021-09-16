@@ -2,7 +2,6 @@
   font-family: 'Inter', Arial, sans-serif;
   color: var(--font-main-color);
   min-width: 320px;
-  /* max-width: 1280px; */
   margin: 0 auto;
   padding: 0;
   box-sizing: border-box;
@@ -44,8 +43,7 @@
 .page__section {
   max-width: 1280px;
   margin: 0 auto;
-  padding-left: 70px;
-  padding-right: 70px;
+  padding: 100px 70px;
   box-sizing: border-box;
 }
 
@@ -62,14 +60,17 @@
 
 @media screen and (max-width: 1023px) {
   .page__section {
-    padding-left: 50px;
-    padding-right: 50px;
+    padding: 90px 50px;
   }
 }
 
 @media screen and (max-width: 575px) {
   .page__section {
-    padding-left: 18px;
-    padding-right: 18px;
+    padding: 70px 18px;
+  }
+
+  .page__section-title {
+    padding-bottom: 28px;
+    font-size: 18px;
   }
 }

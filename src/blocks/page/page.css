@@ -2,7 +2,7 @@
   font-family: 'Inter', Arial, sans-serif;
   color: var(--font-main-color);
   min-width: 320px;
-  max-width: 1280px;
+  /* max-width: 1280px; */
   margin: 0 auto;
   padding: 0;
   box-sizing: border-box;
@@ -11,7 +11,6 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
-
 }
 
 .page_theme_dark {
@@ -40,4 +39,37 @@
   --error-color: #cf252c;
     /* rgb */
   --rgb-font-main-color: 255, 255, 255;
+}
+
+.page__section {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: 70px;
+  padding-right: 70px;
+  box-sizing: border-box;
+}
+
+.page__section-title {
+  width: 100%;
+  margin: 0;
+  padding-bottom: 23px;
+  border-bottom: 1px solid var(--title-divider-color);
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+
+@media screen and (max-width: 1023px) {
+  .page__section {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .page__section {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
 }

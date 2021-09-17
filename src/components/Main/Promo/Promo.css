@@ -21,7 +21,7 @@
   line-height: 1.15;
 }
 
-.promo__paragraph {
+.promo__subtitle {
   max-width: 310px;
   margin: 35px 0 0;
   font-weight: 400;
@@ -64,7 +64,7 @@
     line-height: 1.3;
   }
 
-  .promo__paragraph {
+  .promo__subtitle {
     max-width: 260px;
     margin: 22px auto 0;
   }
@@ -88,7 +88,7 @@
     letter-spacing: -0.04em;
   }
 
-  .promo__paragraph {
+  .promo__subtitle {
     margin-top: 24px;
   }
 

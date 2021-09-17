@@ -61,23 +61,20 @@
 .main-nav__profile-icon {
   width: 11px;
   height: 11px;
+  transition: .8s ease-in-out;
 }
 
 .main-nav__profile-svg {
   fill: var(--font-main-color);
+  transition: .8s ease-in-out;
 }
 
 .main-nav__profile:hover .main-nav__profile-icon {
-  animation: rotate .3s linear 2;
+  transform: rotateY(360deg);
 }
 
-@keyframes rotate {
-  from {
-    transform: rotateY(0deg);
-  }
-  to {
-    transform: rotateY(180deg);
-  }
+.main-nav__profile:hover .main-nav__profile-svg {
+  fill: var(--bright-color);
 }
 
 @media screen and (max-width: 1023px) {

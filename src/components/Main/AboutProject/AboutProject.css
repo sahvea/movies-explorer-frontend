@@ -27,11 +27,8 @@
   letter-spacing: -0.04em;
 }
 
-.about__desc-text {
-  margin: 26px 0 0;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.5;
+.about__desc-paragraph {
+  margin-top: 26px;
 }
 
 .about__table {
@@ -71,7 +68,7 @@
     gap: 30px;
   }
 
-  .about__desc-text {
+  .about__desc-paragraph {
     margin-top: 22px;
   }
 
@@ -96,9 +93,8 @@
     font-size: 18px;
   }
 
-  .about__desc-text {
+  .about__desc-paragraph {
     margin-top: 16px;
-    font-size: 11px;
   }
 
   .about__table {

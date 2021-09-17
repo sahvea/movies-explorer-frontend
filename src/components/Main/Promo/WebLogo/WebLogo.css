@@ -7,15 +7,15 @@
   fill: var(--font-main-color);
 }
 
-.web-logo__word:nth-child(4n+1) {
+.web-logo__word:nth-child(5n) {
   animation: change-color 8s linear infinite;
 }
 
-.web-logo__word:nth-child(3n) {
+.web-logo__word:nth-child(5n+1) {
   animation: change-color-light 10s linear infinite;
 }
 
-.web-logo__word:nth-child(6n+2) {
+.web-logo__word:nth-child(5n+2) {
   animation: change-color-dark 5s linear infinite;
 }
 

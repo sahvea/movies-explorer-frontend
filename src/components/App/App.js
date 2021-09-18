@@ -16,7 +16,8 @@ function App() {
       <main>
         {location.pathname === '/' && <Main />}
       </main>
-      <Footer />
+
+      {( location.pathname === '/' ||  loggedIn) && <Footer />}
     </>
   );
 }

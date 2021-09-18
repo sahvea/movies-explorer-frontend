@@ -6,6 +6,7 @@ import * as menu from '../../utils/menu';
 
 function Header(props) {
   const location = useLocation();
+  const [isFixed, setIsFixed] = React.useState(false);
 
   React.useEffect(() => {
     switchClass();
@@ -13,6 +14,18 @@ function Header(props) {
       switchClass();
     });
   });
+
+  React.useEffect(() => {
+    let current = 0;
+    const checkScroll = () => {
+      setIsFixed(window.pageYOffset < current && window.pageYOffset > 30);
+      current = window.pageYOffset;
+    };
+
+    document.addEventListener('scroll', checkScroll);
+
+    return () => document.removeEventListener('scroll', checkScroll);
+  }, []);
 
   function switchClass() {
     menu.switchClass();
@@ -23,7 +36,7 @@ function Header(props) {
   }
 
   return (
-    <header className={`header ${location.pathname === '/' ? "header_position_main-page" : ""}`}>
+    <header className={`header ${isFixed ? "header_fixed" : ""}`}>
       <div className={`header__container page__section ${( location.pathname === '/signup' || location.pathname === '/signin' ) ? "header__container_unauthorized" : ""}`}>
         <Link to="/" className="header__logo-link">
           <svg className="header__logo" width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">

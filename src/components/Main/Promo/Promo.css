@@ -3,7 +3,7 @@
 }
 
 .promo__container {
-  padding-top: 75px;
+  padding-top: 150px;
   padding-bottom: 75px;
   display: grid;
   grid-template-columns: 1fr 310px;
@@ -43,7 +43,7 @@
 
 @media screen and (max-width: 1023px) {
   .promo__container {
-    padding: 140px 44px 75px;
+    padding: 215px 44px 75px;
     grid-template-columns: 1fr;
     justify-items: center;
     gap: 0;
@@ -76,7 +76,7 @@
 
 @media screen and (max-width: 575px) {
   .promo__container {
-    padding: 70px 10px 30px;
+    padding: 145px 10px 30px;
   }
 
   .promo__intro-text {

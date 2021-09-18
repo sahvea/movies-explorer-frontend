@@ -1,9 +1,14 @@
 .header {
-  background-color: var(--bg-main-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
 }
 
-.header_position_main-page {
-  background-color: var(--bg-landing-color);
+.header_fixed {
+  position: fixed;
+  background-color: var(--bg-main-color);
 }
 
 .header__container {

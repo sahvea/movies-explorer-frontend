@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import Footer from '../Footer/Footer';
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 
@@ -15,6 +16,7 @@ function App() {
       <main>
         {location.pathname === '/' && <Main />}
       </main>
+      <Footer />
     </>
   );
 }

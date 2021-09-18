@@ -1,5 +1,6 @@
 import './AboutMe.css';
 import student from '../../../images/avatar-example.jpg';
+import Portfolio from './Portfolio/Portfolio';
 
 function AboutMe() {
   return (
@@ -22,6 +23,7 @@ function AboutMe() {
         </div>
         <img className="about-me__image" src={student} alt="фото студента"/>
       </div>
+      <Portfolio />
     </section>
   )
 }

@@ -1,5 +1,6 @@
 .about-me {
   margin-top: 10px;
+  margin-bottom: 25px;
 }
 
 .about-me__info-wrap {
@@ -13,7 +14,7 @@
   max-width: 600px;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: flex-start;
 }
 
@@ -71,6 +72,7 @@
 @media screen and (max-width: 1023px) {
   .about-me {
     margin-top: 0;
+    margin-bottom: 0;
   }
 
   .about-me__info-wrap {
@@ -79,7 +81,6 @@
   }
 
   .about-me__name {
-    margin: 0;
     font-size: 40px;
     line-height: 1;
   }
@@ -101,6 +102,43 @@
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 680px) {
+  .about-me__info-wrap {
+    margin-top: 60px;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    justify-items: center;
+  }
 
+  .about-me__image {
+    grid-row: 1 / 2;
+    width: 292px;
+    height: 352px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .about-me {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .about-me__name {
+    font-size: 30px;
+    line-height: 1.2;
+  }
+
+  .about-me__activity {
+    margin-top: 20px;
+    font-size: 11px;
+  }
+
+  .about-me__links-list {
+    margin-top: 40px;
+    padding-top: 0;
+  }
+
+  .about-me__links-item {
+    margin-left: 26px;
+  }
 }

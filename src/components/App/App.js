@@ -1,8 +1,9 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
 import Footer from '../Footer/Footer';
-import Header from "../Header/Header";
-import Main from "../Main/Main";
+import Header from '../Header/Header';
+import Main from '../Main/Main';
+import Movies from '../Movies/Movies'
 
 function App() {
   const location = useLocation();
@@ -13,9 +14,14 @@ function App() {
   return (
     <>
       <Header loggedIn={loggedIn} />
-      <main>
-        {location.pathname === '/' && <Main />}
-      </main>
+      <Switch>
+        <Route exact path="/">
+          <Main />
+        </Route>
+        <Route path="/movies">
+          <Movies />
+        </Route>
+      </Switch>
 
       {( location.pathname === '/' ||  loggedIn) && <Footer />}
     </>

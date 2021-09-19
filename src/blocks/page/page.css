@@ -40,6 +40,7 @@
     /* rgb */
   --rgb-font-main-color: 255, 255, 255;
   --rgb-bright-color: 61, 220, 132;
+  --rgb-input-border-color: 170, 170, 170;
 }
 
 .page__section {

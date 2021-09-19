@@ -1,4 +1,4 @@
-.header {
+/* .header {
   position: absolute;
   top: 0;
   left: 0;
@@ -9,6 +9,18 @@
 .header_fixed {
   position: fixed;
   background-color: var(--bg-main-color);
+}
+
+.header_static {
+  position: static;
+} */
+
+.header {
+  background-color: var(--bg-main-color);
+}
+
+.header_position_main-page {
+  background-color: var(--bg-landing-color);
 }
 
 .header__container {

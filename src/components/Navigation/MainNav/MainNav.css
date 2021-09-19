@@ -93,6 +93,7 @@
   .main-nav_visible {
     visibility: visible;
     opacity: 1;
+    z-index: 1;
   }
 
   .main-nav__menu {

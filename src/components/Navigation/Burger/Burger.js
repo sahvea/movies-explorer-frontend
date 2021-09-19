@@ -2,10 +2,10 @@ import './Burger.css';
 
 function Burger(props) {
   return (
-    <button type="button" className="button burger" onClick={props.onBurgerClick}>
-      <span className="burger__line"></span>
-      <span className="burger__line"></span>
-      <span className="burger__line"></span>
+    <button type="button" className="button burger" onClick={props.handleBurgerClick}>
+      <span className={`burger__line ${props.mobMenu ? "burger__line_active" : ""}`}></span>
+      <span className={`burger__line ${props.mobMenu ? "burger__line_active" : ""}`}></span>
+      <span className={`burger__line ${props.mobMenu ? "burger__line_active" : ""}`}></span>
     </button>
   )
 }

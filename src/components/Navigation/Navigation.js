@@ -7,10 +7,10 @@ function Navigation(props) {
   const location = useLocation();
 
   return (
-    props.loggedIn && ( location.pathname === '/movies' || location.pathname === '/saved-movies' || location.pathname === '/profile' ) ?
+    props.loggedIn ?
       <>
-        <Burger onBurgerClick={props.onBurgerClick} />
-        <MainNav />
+        <Burger mobMenu={props.mobMenu} handleBurgerClick={props.handleBurgerClick} />
+        <MainNav mobMenu={props.mobMenu} handleBurgerClick={props.handleBurgerClick} />
       </>
     : location.pathname === '/' &&
       <AuthNav />

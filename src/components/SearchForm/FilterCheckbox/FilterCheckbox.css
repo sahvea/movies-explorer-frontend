@@ -1,0 +1,33 @@
+.filter-checkbox {
+  position: relative;
+  cursor: pointer;
+  appearance: none;
+  width: 36px;
+  height: 20px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  background-color: var(--checkbox-bg-disabled);
+  transition: .3s ease-in-out;
+}
+
+.filter-checkbox:checked{
+  background-color: var(--bright-color);
+}
+
+.filter-checkbox::before{
+  content: '';
+  position: absolute;
+  height: 16px;
+  width: 16px;
+  border-radius: 100%;
+  background-color: var(--checkbox-circle-disabled);
+  top: 2px;
+  left: 2px;
+  transition: .3s ease-in-out;
+}
+
+.filter-checkbox:checked::before{
+  transform: translateX(16px);
+  background-color: var(--checkbox-circle);
+}

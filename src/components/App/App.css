@@ -1,4 +1,4 @@
-.page {
+.app {
   font-family: 'Inter', Arial, sans-serif;
   color: var(--font-main-color);
   min-width: 320px;
@@ -12,7 +12,7 @@
   -moz-text-size-adjust: 100%;
 }
 
-.page_theme_dark {
+.app_theme_dark {
   /* -переменные- */
     /* фон */
   --bg-main-color: #202020;
@@ -48,14 +48,14 @@
   --rgb-input-border-color: 170, 170, 170;
 }
 
-.page__section {
+.app__section {
   max-width: 1280px;
   margin: 0 auto;
   padding: 100px 70px;
   box-sizing: border-box;
 }
 
-.page__section-title {
+.app__section-title {
   width: 100%;
   margin: 0;
   padding-bottom: 23px;
@@ -66,19 +66,70 @@
   letter-spacing: -0.04em;
 }
 
+.app__link {
+  color: var(--font-main-color);
+  text-decoration: none;
+  transition: .2s linear;
+}
+
+.app__link:hover {
+  opacity: .7;
+}
+
+.app__button {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+  transition: .2s linear;
+  border: none;
+  outline: 0;
+}
+
+.app__button:hover {
+  opacity: .8;
+}
+
+.app__button:disabled {
+  pointer-events: none;
+  user-select: none;
+}
+
+.app-form__fieldset {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.app__paragraph {
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
 @media screen and (max-width: 1023px) {
-  .page__section {
+  .app__section {
     padding: 90px 50px;
+  }
+
+  .app__paragraph {
+    font-size: 12px;
+    line-height: 1.5;
   }
 }
 
 @media screen and (max-width: 575px) {
-  .page__section {
+  .app__section {
     padding: 70px 18px;
   }
 
-  .page__section-title {
+  .app__section-title {
     padding-bottom: 28px;
     font-size: 18px;
+  }
+
+  .app__paragraph {
+    font-size: 11px;
   }
 }

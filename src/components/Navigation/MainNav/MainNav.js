@@ -7,13 +7,13 @@ function MainNav(props) {
       <nav className={`main-nav__menu ${props.mobMenu ? "main-nav__menu_active" : ""}`}>
         <ul className="main-nav__list">
           <li className="main-nav__list-item main-nav__list-item_link-direction_main-page">
-            <NavLink exact to="/" className="link main-nav__link" activeClassName="main-nav__link_active" onClick={props.handleBurgerClick}>Главная</NavLink>
+            <NavLink exact to="/" className="app__link main-nav__link" activeClassName="main-nav__link_active" onClick={props.handleBurgerClick}>Главная</NavLink>
           </li>
           <li className="main-nav__list-item">
-            <NavLink to="/movies" className="link main-nav__link" activeClassName="main-nav__link_active" onClick={props.handleBurgerClick}>Фильмы</NavLink>
+            <NavLink to="/movies" className="app__link main-nav__link" activeClassName="main-nav__link_active" onClick={props.handleBurgerClick}>Фильмы</NavLink>
           </li>
           <li className="main-nav__list-item">
-            <NavLink to="/saved-movies" className="link main-nav__link" activeClassName="main-nav__link_active" onClick={props.handleBurgerClick}>Сохранённые фильмы</NavLink>
+            <NavLink to="/saved-movies" className="app__link main-nav__link" activeClassName="main-nav__link_active" onClick={props.handleBurgerClick}>Сохранённые фильмы</NavLink>
           </li>
         </ul>
 

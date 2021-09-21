@@ -23,18 +23,20 @@
   --font-accent-color: #000;
   --font-transp-color: #8b8b8b;
     /* карточки */
-  --card-bg-color: #222222;
+  --card-bg-color: #222;
     /* элементы */
   --landing-elements-color: #303030;
   --main-elements-color: #313131;
   --title-divider-color: #dadada;
   --divider-color: #424242;
   --divider-color-light: #e5e5e5;
-  --input-border-color: #aaaaaa;
+  --input-border-color: #aaa;
   --more-bnt-color: #2f2f2f;
+    /* checkbox */
+  --checkbox-bg: #3ddc84;
   --checkbox-bg-disabled: #343434;
-  --checkbox-circle-disabled: #a0a0a0;
   --checkbox-circle: #fff;
+  --checkbox-circle-disabled: #a0a0a0;
     /* акцентные цвета */
   --bright-color: #3ddc84;
   --bright-color-darker: #17806e;

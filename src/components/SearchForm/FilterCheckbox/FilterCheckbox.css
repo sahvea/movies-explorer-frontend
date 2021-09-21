@@ -12,7 +12,7 @@
 }
 
 .filter-checkbox:checked{
-  background-color: var(--bright-color);
+  background-color: var(--checkbox-bg);
 }
 
 .filter-checkbox::before{

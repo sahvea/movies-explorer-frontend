@@ -1,8 +1,8 @@
 import './FilterCheckbox.css';
 
-function FilterCheckbox() {
+function FilterCheckbox(props) {
   return (
-    <label className="search__checkbox"> Короткометражки
+    <label className={props.labelClass}> Короткометражки
       <input type="checkbox" className="filter-checkbox" name="short" defaultChecked />
     </label>
   );

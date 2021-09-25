@@ -1,37 +1,34 @@
 import React from 'react';
-import { Route, Switch, useLocation } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import initialMovies from '../../utils/initialMovies';
 import savedMovies from '../../utils/savedMovies';
+import NotFound from '../NotFound/NotFound';
 
 
 function App() {
-  const location = useLocation();
-
   // eslint-disable-next-line no-unused-vars
   const [loggedIn, setLoggedIn] = React.useState(true);
 
   return (
     <>
-      <Header loggedIn={loggedIn} />
       <Switch>
         <Route exact path="/">
-          <Main />
+          <Main loggedIn={loggedIn} />
         </Route>
         <Route path="/movies">
-          <Movies movies={initialMovies} />
+          <Movies loggedIn={loggedIn} movies={initialMovies} />
         </Route>
         <Route path="/saved-movies">
-          <SavedMovies movies={savedMovies} />
+          <SavedMovies loggedIn={loggedIn} movies={savedMovies} />
+        </Route>
+        <Route path="*">
+          <NotFound />
         </Route>
       </Switch>
-
-      {( location.pathname === '/' ||  loggedIn) && <Footer />}
     </>
   );
 }

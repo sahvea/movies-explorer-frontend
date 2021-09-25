@@ -1,13 +1,19 @@
-import SearchForm from '../SearchForm/SearchForm';
 import './Movies.css';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 function Movies(props) {
   return (
-    <main className="movies">
-      <SearchForm />
-      <MoviesCardList movies={props.movies}/>
-    </main>
+    <>
+      <Header loggedIn={props.loggedIn} />
+      <main className="movies">
+        <SearchForm />
+        <MoviesCardList movies={props.movies}/>
+      </main>
+      <Footer />
+    </>
   )
 }
 

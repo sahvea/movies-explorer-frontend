@@ -4,7 +4,11 @@ import './App.css';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
-import Movies from '../Movies/Movies'
+import Movies from '../Movies/Movies';
+import SavedMovies from '../SavedMovies/SavedMovies';
+import initialMovies from '../../utils/initialMovies';
+import savedMovies from '../../utils/savedMovies';
+
 
 function App() {
   const location = useLocation();
@@ -20,7 +24,10 @@ function App() {
           <Main />
         </Route>
         <Route path="/movies">
-          <Movies />
+          <Movies movies={initialMovies} />
+        </Route>
+        <Route path="/saved-movies">
+          <SavedMovies movies={savedMovies} />
         </Route>
       </Switch>
 

@@ -3,9 +3,8 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import initialMovies from '../../utils/movies';
 
-function MoviesCardList() {
+function MoviesCardList(props) {
   const location = useLocation();
   const [cardsToShow, setCardsToShow] = React.useState([]);
   const [cardsPerPage, setCardsPerPage] = React.useState(0);
@@ -20,11 +19,14 @@ function MoviesCardList() {
     if (location.pathname === '/movies') {
       showCards(0, cardsPerPage);
 
-      if (initialMovies.length <= cardsPerPage) {
+      if (props.movies.length <= cardsPerPage) {
         setIsShowMoreBtnVisible(false);
       }
+    } else {
+      setCardsToShow(props.movies);
     }
-  }, [cardsPerPage, location.pathname]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cardsPerPage, location.pathname, props.movies]);
 
   function changeCardsNumber() {
     if (window.innerWidth > 768) {
@@ -40,7 +42,7 @@ function MoviesCardList() {
   }
 
   function showCards(start, end) {
-    setCardsToShow(initialMovies.slice(start, end));
+    setCardsToShow(props.movies.slice(start, end));
   };
 
 
@@ -51,7 +53,7 @@ function MoviesCardList() {
 
   /* TODO: разобраться с состоянием, подобрать нужное условие */
   function checkBntState() {
-    if (cardsToShow.lenght >= initialMovies.length - nextCards) {
+    if (cardsToShow.lenght >= props.movies.length - nextCards) {
       console.log('!');
       setIsShowMoreBtnVisible(false);
     }
@@ -61,7 +63,7 @@ function MoviesCardList() {
     <section className="card-list">
       <ul className="card-list__list">
       {cardsToShow.map((movie, index) => (
-        <li key={index}>
+        <li className="card-list__list-item" key={index}>
           <MoviesCard movie={movie} />
         </li>
         ))}

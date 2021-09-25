@@ -1,4 +1,5 @@
 import React from 'react';
+import { unmountComponentAtNode } from 'react-dom';
 import { useLocation } from 'react-router-dom';
 import './MoviesCard.css';
 
@@ -24,11 +25,16 @@ function MoviesCard(props) {
     }
   }, [setSavedMovie, location, props]);
 
-  function handleBtnClick() {
+  function handleBtnClick(e) {
     if (location.pathname === '/movies' && !savedMovie) {
       setSavedMovie(true);
     } else {
       setSavedMovie(false);
+    }
+
+    if (location.pathname === '/saved-movies') {
+      const card = e.target.closest('.card-list__list-item');
+      card.remove();
     }
   }
 

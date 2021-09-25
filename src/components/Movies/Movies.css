@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+.movies_position_saved {
+  padding-bottom: 60px;
+}
+
 @media screen and (max-width: 1023px) {
   .movies {
     padding-right: 30px;

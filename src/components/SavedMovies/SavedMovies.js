@@ -10,9 +10,9 @@ function SavedMovies(props) {
       <Header loggedIn={props.loggedIn} />
       <main className="movies movies_position_saved">
         <SearchForm />
-        <MoviesCardList movies={props.movies} />
+        <MoviesCardList movies={props.movies} isLoading={props.isLoading}/>
       </main>
-      <Footer />
+      <Footer isLoading={props.isLoading}/>
     </>
   )
 }

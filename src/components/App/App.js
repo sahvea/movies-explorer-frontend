@@ -12,6 +12,7 @@ import NotFound from '../NotFound/NotFound';
 function App() {
   // eslint-disable-next-line no-unused-vars
   const [loggedIn, setLoggedIn] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   return (
     <>
@@ -20,10 +21,10 @@ function App() {
           <Main loggedIn={loggedIn} />
         </Route>
         <Route path="/movies">
-          <Movies loggedIn={loggedIn} movies={initialMovies} />
+          <Movies loggedIn={loggedIn} movies={initialMovies} isLoading={isLoading} />
         </Route>
         <Route path="/saved-movies">
-          <SavedMovies loggedIn={loggedIn} movies={savedMovies} />
+          <SavedMovies loggedIn={loggedIn} movies={savedMovies} isLoading={isLoading} />
         </Route>
         <Route path="*">
           <NotFound />

@@ -3,6 +3,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
+import Preloader from '../Preloader/Preloader';
 
 function MoviesCardList(props) {
   const location = useLocation();
@@ -45,7 +46,6 @@ function MoviesCardList(props) {
     setCardsToShow(props.movies.slice(start, end));
   };
 
-
   function handleShowMoreCards() {
     showCards(0, cardsToShow.length + nextCards)
     checkBntState();
@@ -60,6 +60,9 @@ function MoviesCardList(props) {
   }
 
   return (
+    props.isLoading ?
+      <Preloader />
+    :
     <section className="card-list">
       <ul className="card-list__list">
       {cardsToShow.map((movie, index) => (

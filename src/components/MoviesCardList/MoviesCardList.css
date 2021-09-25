@@ -1,13 +1,32 @@
 .card-list {
-  padding: 70px 0 30px;
+  padding: 70px 0 80px;
+}
+
+.card-list__list {
+  padding: 0 0 30px;
+  margin: 0;
+  list-style: none;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(273px, 1fr));
   gap: 30px 24px;
   justify-items: center;
 }
 
+.card-list__more-btn {
+  margin-top: 50px;
+  width: 100%;
+  height: 36px;
+  background-color: var(--more-bnt-color);
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.2;
+  color: var(--font-main-color);
+  text-align: center;
+}
+
 @media screen and (max-width: 1023px) {
-  .card-list {
+  .card-list__list {
     gap: 36px 30px;
   }
 }
@@ -15,6 +34,9 @@
 @media screen and (max-width: 575px) {
   .card-list {
     padding-top: 40px;
+  }
+
+  .card-list__list {
     gap: 16px;
   }
 }

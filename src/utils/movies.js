@@ -95,6 +95,41 @@ const initialMovies = [
     image: image12,
     saved: false,
     trailerLink: 'https://www.youtube.com/watch?v=5ovzC93EneA',
+  },
+  {
+    nameRu: '33 слова о дизайне',
+    duration: '1ч 47м',
+    image: image1,
+    saved: false,
+    trailerLink: 'https://www.youtube.com/watch?v=5ovzC93EneA',
+  },
+  {
+    nameRu: '33 слова о дизайне',
+    duration: '1ч 47м',
+    image: image2,
+    saved: false,
+    trailerLink: 'https://www.youtube.com/watch?v=5ovzC93EneA',
+  },
+  {
+    nameRu: '33 слова о дизайне',
+    duration: '1ч 47м',
+    image: image3,
+    saved: true,
+    trailerLink: 'https://www.youtube.com/watch?v=5ovzC93EneA',
+  },
+  {
+    nameRu: '33 слова о дизайне',
+    duration: '1ч 47м',
+    image: image4,
+    saved: false,
+    trailerLink: 'https://www.youtube.com/watch?v=5ovzC93EneA',
+  },
+  {
+    nameRu: '33 слова о дизайне',
+    duration: '1ч 47м',
+    image: image5,
+    saved: true,
+    trailerLink: 'https://www.youtube.com/watch?v=5ovzC93EneA',
   }
 ]
 

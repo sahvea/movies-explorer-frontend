@@ -4,7 +4,7 @@ import DotsLoader from '../DotsLoader/DotsLoader';
 
 function AuthForm(props) {
   const location = useLocation();
-  // const BtnClassName = `app__button form__button ${props.isSubmitDisabled && "form__button_disabled"}`;
+
   const redirectionText = location.pathname === '/signup'
     ? "Уже зарегистрированы?"
     : "Ещё не зарегистрированы?";

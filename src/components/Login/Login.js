@@ -12,7 +12,7 @@ function Login(props) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    props.onAuthenticationError();
+    props.onAuthenticationError('При авторизации произошла ошибка. Токен не передан или передан не в том формате.');
     setPasswordValidityError('Просто пример ошибки.')
   }
 

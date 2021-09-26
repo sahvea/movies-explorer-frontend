@@ -25,6 +25,7 @@ function Profile(props) {
   function handleSubmit(e) {
     e.preventDefault();
 
+    props.onEditSuccess();
   }
 
   return (

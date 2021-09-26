@@ -13,8 +13,7 @@ function AboutMe() {
           <p className="app__paragraph about-me__text">Я родился и живу в Саратове, закончил факультет экономики СГУ. У меня есть жена и дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить. С 2015 года работал в компании «СКБ Контур». После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной работы.</p>
           <ul className="about-me__links-list">
             <li className="about-me__links-item">
-              {/* TODO: поменять на telegram */}
-              <a href="https://github.com/sahvea" target="_blank" className="app__link about-me__link" rel="noreferrer">Facebook</a>
+              <a href="https://t.me/sahvea" target="_blank" className="app__link about-me__link" rel="noreferrer">Telegram</a>
             </li>
             <li className="about-me__links-item">
               <a href="https://github.com/sahvea" target="_blank" className="app__link about-me__link" rel="noreferrer">Github</a>

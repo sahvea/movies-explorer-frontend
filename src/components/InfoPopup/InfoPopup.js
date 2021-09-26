@@ -1,9 +1,15 @@
+import { useLocation } from 'react-router-dom';
+
 import './InfoPopup.css';
 
 function InfoPopup(props) {
-  const infoMessageText = props.onSuccess
+  const location = useLocation();
+
+  const infoMessageText = props.onSuccess && location.pathname !== '/profile'
     ? "Вы успешно зарегистрировались!"
-    : "Что-то пошло не так! Попробуйте ещё раз.";
+    : props.onSuccess && location.pathname === '/profile'
+    ? "Данные успешно обновлены!"
+    : "Что-то пошло не так! Попробуйте ещё раз."
 
   return (
     <div className={`popup ${props.isOpen ? "popup_opened" : ""}`}>

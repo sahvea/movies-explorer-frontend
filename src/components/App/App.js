@@ -18,7 +18,7 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(true);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isFormLoading, setIsFormLoading] = React.useState(false);
-  const [isRegistrationSuccess, setIsRegistrationSuccess] = React.useState(true);
+  const [isActionSuccess, setIsActionSuccess] = React.useState(true);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false);
   const [infoPopupError, setInfoPopupError] = React.useState('');
 
@@ -48,15 +48,15 @@ function App() {
     };
   }, []);
 
-  function handleAuthorizationSuccess() {
+  function handleActionSuccess() {
     setIsInfoPopupOpen(true);
-    setIsRegistrationSuccess(true);
+    setIsActionSuccess(true);
   }
 
-  function handleAuthorizationError() {
+  function handleActionError(message) {
     setIsInfoPopupOpen(true);
-    setIsRegistrationSuccess(false);
-    setInfoPopupError('Просто пример ошибки. Lorem ipsum dolor sit amet, consectetur adipiscing elit');
+    setIsActionSuccess(false);
+    setInfoPopupError(message);
   }
 
   function closePopups() {
@@ -76,20 +76,20 @@ function App() {
           <SavedMovies loggedIn={loggedIn} movies={savedMovies} isLoading={isLoading} />
         </Route>
         <Route path="/profile">
-          <Profile loggedIn={loggedIn} isFormLoading={isFormLoading} />
+          <Profile loggedIn={loggedIn} onEditSuccess={handleActionSuccess} onEditError={handleActionError} isFormLoading={isFormLoading} />
         </Route>
         <Route path="/signup">
-          <Register onRegistrationSuccess={handleAuthorizationSuccess} onRegistrationError={handleAuthorizationError} isFormLoading={isFormLoading}/>
+          <Register onRegistrationSuccess={handleActionSuccess} onRegistrationError={handleActionError} isFormLoading={isFormLoading}/>
         </Route>
         <Route path="/signin">
-          <Login onAuthenticationError={handleAuthorizationError} isFormLoading={isFormLoading}/>
+          <Login onAuthenticationError={handleActionError} isFormLoading={isFormLoading}/>
         </Route>
         <Route path="*">
           <NotFound />
         </Route>
       </Switch>
 
-      <InfoPopup isOpen={isInfoPopupOpen} onClose={closePopups} onSuccess={isRegistrationSuccess} errorMessage={infoPopupError} />
+      <InfoPopup isOpen={isInfoPopupOpen} onClose={closePopups} onSuccess={isActionSuccess} errorMessage={infoPopupError} />
     </>
   );
 }

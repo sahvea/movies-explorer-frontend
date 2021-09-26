@@ -55,10 +55,6 @@
   background-color: var(--bright-color);
 }
 
-.search__form-btn:focus-visible {
-  outline: -webkit-focus-ring-color auto 1px;
-}
-
 .search__checkbox {
   display: grid;
   grid-template-columns: 1fr 36px;

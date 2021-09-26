@@ -14,7 +14,7 @@ function Footer(props) {
             <a className="app__link footer__social-link" href="https://github.com/sahvea" target="_blank" rel="noreferrer">Github</a>
           </li>
           <li className="footer__social-list-item">
-            <a className="app__link footer__social-link" href="https://github.com/sahvea" target="_blank" rel="noreferrer">Facebook</a>
+            <a className="app__link footer__social-link" href="https://t.me/sahvea" target="_blank" rel="noreferrer">Telegram</a>
           </li>
         </ul>
       </div>

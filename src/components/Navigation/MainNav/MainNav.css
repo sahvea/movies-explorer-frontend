@@ -1,7 +1,7 @@
 .main-nav__menu {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
+  align-items: baseline;
   box-sizing: border-box;
 }
 
@@ -11,7 +11,7 @@
   list-style: none;
   display: flex;
   justify-content: center;
-  justify-items: center;
+  align-items: baseline;
 }
 
 .main-nav__list-item {
@@ -43,6 +43,10 @@
   color: var(--font-main-color);
   text-decoration: none;
   transition: .2s linear;
+}
+
+.main-nav__profile:active {
+  transform: scale(.95);
 }
 
 .main-nav__profile-icon-area {

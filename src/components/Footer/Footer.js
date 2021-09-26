@@ -2,7 +2,7 @@ import "./Footer.css";
 
 function Footer(props) {
   return (
-    <footer className={`footer app__section ${props.isLoading && window.innerWidth >= 1000 ? "footer_fixed" : ""}`}>
+    <footer className={`footer ${props.isLoading && window.innerWidth >= 1000 ? "footer_fixed" : ""}`}>
       <p className="footer__heading">Учебный проект Яндекс.Практикум х BeatFilm.</p>
       <div className="footer__wrap">
         <p className="footer__copyright">&copy; 2021</p>

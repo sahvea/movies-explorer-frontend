@@ -3,10 +3,10 @@ import './Techs.css';
 function Techs() {
   return (
     <section className="techs">
-      <div className="techs__container app__section">
-        <h2 className="app__section-title techs__section-title">Технологии</h2>
+      <div className="techs__container main__section">
+        <h2 className="main__section-title techs__section-title">Технологии</h2>
         <h3 className="techs__title">7 технологий</h3>
-        <p className="app__paragraph techs__paragraph">На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.</p>
+        <p className="main__paragraph techs__paragraph">На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.</p>
         <ul className="techs__list">
           <li>
             <p className="techs__skill">HTML</p>

@@ -1,5 +1,4 @@
 import { useLocation } from 'react-router-dom';
-
 import './InfoPopup.css';
 
 function InfoPopup(props) {

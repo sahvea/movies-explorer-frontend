@@ -48,25 +48,8 @@
   --rgb-input-border-color: 170, 170, 170;
 }
 
-.app__section {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 100px 70px;
-  box-sizing: border-box;
-}
-
-.app__section-title {
-  width: 100%;
-  margin: 0;
-  padding-bottom: 23px;
-  border-bottom: 1px solid var(--title-divider-color);
-  font-weight: 400;
-  font-size: 22px;
-  line-height: 1.2;
-  letter-spacing: -0.04em;
-}
-
 .app__link {
+  display: block;
   color: var(--font-main-color);
   text-decoration: none;
   transition: .3s ease-in-out;
@@ -77,8 +60,7 @@
 }
 
 .app__link:active {
-  display: block;
-  transform: scale(.9);
+  transform: scale(.95);
 }
 
 .app__button {
@@ -96,7 +78,7 @@
 }
 
 .app__button:active {
-  transform: scale(.9);
+  transform: scale(.95);
 }
 
 .app__button:focus-visible {
@@ -113,37 +95,4 @@
   margin: 0;
   padding: 0;
   border: none;
-}
-
-.app__paragraph {
-  margin: 0;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.4;
-}
-
-@media screen and (max-width: 1023px) {
-  .app__section {
-    padding: 90px 50px;
-  }
-
-  .app__paragraph {
-    font-size: 12px;
-    line-height: 1.5;
-  }
-}
-
-@media screen and (max-width: 575px) {
-  .app__section {
-    padding: 70px 18px;
-  }
-
-  .app__section-title {
-    padding-bottom: 28px;
-    font-size: 18px;
-  }
-
-  .app__paragraph {
-    font-size: 11px;
-  }
 }

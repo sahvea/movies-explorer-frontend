@@ -10,7 +10,7 @@ function Main(props) {
   return (
     <>
       <Header loggedIn={props.loggedIn} />
-      <main>
+      <main className="main">
         <Promo />
         <AboutProject />
         <Techs />

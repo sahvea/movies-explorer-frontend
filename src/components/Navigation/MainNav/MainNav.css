@@ -99,6 +99,7 @@
   }
 
   .main-nav_visible {
+    height: 100vh;
     visibility: visible;
     opacity: 1;
     z-index: 1;

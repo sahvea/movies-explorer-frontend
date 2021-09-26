@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { useHistory } from "react-router-dom";
-
 import Header from '../Header/Header';
 import AuthForm from '../AuthForm/AuthForm';
 

@@ -1,6 +1,6 @@
 .profile {
   max-width: 410px;
-  padding: 74px 30px 70px;
+  padding: 148px 30px 70px;
   margin: 0 auto;
 }
 
@@ -76,7 +76,7 @@
 
 @media screen and (max-width: 1023px) {
   .profile {
-    padding-top: 236px;
+    padding-top: 310px;
   }
 
   .profile__greeting {
@@ -94,7 +94,7 @@
 
 @media screen and (max-width: 575px) {
   .profile {
-    padding-top: 70px;
+    padding-top: 144px;
     padding-bottom: 40px;
     min-height: 460px;
   }

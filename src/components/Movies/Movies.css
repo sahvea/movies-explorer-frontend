@@ -1,7 +1,7 @@
 .movies {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 70px;
+  padding: 74px 70px 0;
   box-sizing: border-box;
 }
 
@@ -11,12 +11,14 @@
 
 @media screen and (max-width: 1023px) {
   .movies {
-    padding: 0 30px;
+    padding-left: 30px;
+    padding-right: 30px;
   }
 }
 
 @media screen and (max-width: 575px) {
   .movies {
-    padding: 0 10px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }

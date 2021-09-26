@@ -7,13 +7,11 @@ function MoviesCard(props) {
   const [savedMovie, setSavedMovie] = React.useState(false);
 
   const isMovieSaved = `${location.pathname === '/movies' && savedMovie ? "movie-card__button_saved" : ""}`
-
   const buttonClassName = `app__button movie-card__button ${
     location.pathname === '/movies'
       ? "movie-card__button_action_save"
       : "movie-card__button_action_delete"
   } ${isMovieSaved}`;
-
   const buttonLabel = location.pathname === '/movies' && !isMovieSaved
     ? "Сохранить"
     : "Удалить";

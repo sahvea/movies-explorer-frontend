@@ -1,10 +1,11 @@
 import React from 'react';
-
+import { useHistory } from "react-router-dom";
 import './Profile.css';
 import Header from '../Header/Header';
 import DotsLoader from '../DotsLoader/DotsLoader';
 
 function Profile(props) {
+  const history = useHistory();
   const currentUser = "Виталий";
   const currentUserEmail = "pochta@yandex.ru";
   const [name, setName] = React.useState(currentUser);
@@ -26,6 +27,10 @@ function Profile(props) {
     e.preventDefault();
 
     props.onEditSuccess();
+  }
+
+  function handleSignOut() {
+    history.push('/signup');
   }
 
   return (
@@ -50,7 +55,7 @@ function Profile(props) {
               </button>
             </fieldset>
           </form>
-          <button className="app__button profile__form-btn profile__signout" type="button">Выйти из аккаунта</button>
+          <button className="app__button profile__form-btn profile__signout" type="button" onClick={handleSignOut}>Выйти из аккаунта</button>
         </section>
       </main>
     </>

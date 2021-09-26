@@ -5,6 +5,7 @@ import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Register from '../Register/Register';
+import Login from '../Login/Login';
 import NotFound from '../NotFound/NotFound';
 
 import initialMovies from '../../utils/initialMovies';
@@ -30,6 +31,9 @@ function App() {
         </Route>
         <Route path="/signup">
           <Register />
+        </Route>
+        <Route path="/signin">
+          <Login />
         </Route>
         <Route path="*">
           <NotFound />

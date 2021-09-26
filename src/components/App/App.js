@@ -4,15 +4,17 @@ import './App.css';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
-import initialMovies from '../../utils/initialMovies';
-import savedMovies from '../../utils/savedMovies';
+import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
 
+import initialMovies from '../../utils/initialMovies';
+import savedMovies from '../../utils/savedMovies';
 
 function App() {
   // eslint-disable-next-line no-unused-vars
-  const [loggedIn, setLoggedIn] = React.useState(true);
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [isLoading, setIsLoading] = React.useState(false);
 
   return (
     <>
@@ -25,6 +27,9 @@ function App() {
         </Route>
         <Route path="/saved-movies">
           <SavedMovies loggedIn={loggedIn} movies={savedMovies} isLoading={isLoading} />
+        </Route>
+        <Route path="/signup">
+          <Register />
         </Route>
         <Route path="*">
           <NotFound />

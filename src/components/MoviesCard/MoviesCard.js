@@ -1,5 +1,4 @@
 import React from 'react';
-import { unmountComponentAtNode } from 'react-dom';
 import { useLocation } from 'react-router-dom';
 import './MoviesCard.css';
 

@@ -1,6 +1,6 @@
 import './AboutMe.css';
 import student from '../../../images/avatar-example.jpg';
-import Portfolio from './Portfolio/Portfolio';
+import Portfolio from '../Portfolio/Portfolio';
 
 function AboutMe() {
   return (

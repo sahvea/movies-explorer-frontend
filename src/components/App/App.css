@@ -46,6 +46,7 @@
   --rgb-font-main-color: 255, 255, 255;
   --rgb-bright-color: 61, 220, 132;
   --rgb-input-border-color: 170, 170, 170;
+  --rgb--main-elements-color: 49, 49, 49;
 }
 
 .app__link {

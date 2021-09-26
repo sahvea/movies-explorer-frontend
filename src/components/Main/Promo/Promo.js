@@ -1,6 +1,6 @@
 import './Promo.css';
 import AnchorLink from 'react-anchor-link-smooth-scroll'
-import WebLogo from './WebLogo/WebLogo';
+import WebLogo from '../WebLogo/WebLogo';
 
 function Promo() {
   return (

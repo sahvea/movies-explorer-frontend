@@ -31,3 +31,7 @@
   transform: translateX(16px);
   background-color: var(--checkbox-circle);
 }
+
+.filter-checkbox:focus-visible {
+  outline: -webkit-focus-ring-color auto 1px;
+}

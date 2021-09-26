@@ -35,7 +35,7 @@ function Profile(props) {
         <section className="profile">
           <form className="profile__form" name="profile-form" onSubmit={handleSubmit} >
           {/* noValidate */}
-            <fieldset className="profile__form-fieldset">
+            <fieldset className="profile__user-info">
               <legend className="profile__greeting">Привет, {currentUser}!</legend>
               <label className="profile__form-label">Имя
                 <input type="text" name="name" value={name} required className="profile__form-input" autoComplete="off" minLength="2" maxLength="30" onChange={handleNameInputChange} />

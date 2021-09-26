@@ -8,6 +8,9 @@
 }
 
 .search__film-info {
+  margin: 0;
+  padding: 0;
+  border: none;
   display: grid;
   grid-template-columns: 1fr 170px;
   gap: 40px;

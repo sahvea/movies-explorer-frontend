@@ -4,7 +4,7 @@
   padding: 0 30px 70px;
 }
 
-.auth__form-fieldset {
+.auth__user-info {
   margin: 0;
   padding: 0;
   border: none;
@@ -105,7 +105,7 @@
     min-height: 520px;
   }
 
-  .auth__form-fieldset {
+  .auth__user-info {
     height: 80vh;
   }
 

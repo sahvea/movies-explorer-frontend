@@ -91,9 +91,3 @@
   user-select: none;
   opacity: .7;
 }
-
-.app__form-fieldset {
-  margin: 0;
-  padding: 0;
-  border: none;
-}

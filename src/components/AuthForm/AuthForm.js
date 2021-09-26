@@ -19,7 +19,7 @@ function AuthForm(props) {
     <section className="auth">
       <form className="auth__form" name={props.name} onSubmit={props.onSubmit} >
       {/* noValidate */}
-        <fieldset className="auth__form-fieldset">
+        <fieldset className="auth__user-info">
           <legend className="auth__form-title">{props.title}</legend>
             {props.children}
           <button type="submit" name="submit" className="app__button auth__form-btn" disabled={props.isFormLoading || props.isSubmitDisabled ? true : ''}>

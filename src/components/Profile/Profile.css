@@ -4,7 +4,7 @@
   margin: 0 auto;
 }
 
-.profile__form-fieldset {
+.profile__user-info {
   margin: 0;
   padding: 0;
   border: none;
@@ -99,7 +99,7 @@
     min-height: 460px;
   }
 
-  .profile__form-fieldset {
+  .profile__user-info {
     height: 72vh;
     display: flex;
     flex-direction: column;

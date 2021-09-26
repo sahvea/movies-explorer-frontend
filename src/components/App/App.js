@@ -5,6 +5,7 @@ import './App.css';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
+import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import NotFound from '../NotFound/NotFound';
@@ -14,8 +15,9 @@ import initialMovies from '../../utils/initialMovies';
 import savedMovies from '../../utils/savedMovies';
 
 function App() {
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(true);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [isFormLoading, setIsFormLoading] = React.useState(false);
   const [isRegistrationSuccess, setIsRegistrationSuccess] = React.useState(true);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false);
   const [infoPopupError, setInfoPopupError] = React.useState('');
@@ -73,11 +75,14 @@ function App() {
         <Route path="/saved-movies">
           <SavedMovies loggedIn={loggedIn} movies={savedMovies} isLoading={isLoading} />
         </Route>
+        <Route path="/profile">
+          <Profile loggedIn={loggedIn} isFormLoading={isFormLoading} />
+        </Route>
         <Route path="/signup">
-          <Register onRegistrationSuccess={handleAuthorizationSuccess} onRegistrationError={handleAuthorizationError} />
+          <Register onRegistrationSuccess={handleAuthorizationSuccess} onRegistrationError={handleAuthorizationError} isFormLoading={isFormLoading}/>
         </Route>
         <Route path="/signin">
-          <Login onAuthenticationError={handleAuthorizationError} />
+          <Login onAuthenticationError={handleAuthorizationError} isFormLoading={isFormLoading}/>
         </Route>
         <Route path="*">
           <NotFound />

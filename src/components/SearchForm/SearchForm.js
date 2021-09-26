@@ -2,9 +2,14 @@ import './SearchForm.css';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 
 function SearchForm() {
+  function handleSubmit(e) {
+    e.preventDefault();
+
+  }
+
   return (
     <section className="search">
-      <form className="search__form" name="search-form">
+      <form className="search__form" name="search-form" onSubmit={handleSubmit} noValidate>
         <fieldset className="app__form-fieldset search__film-info">
           <div className="search__input-wrap">
             <input type="text" name="movie" className="search__form-input" placeholder="Фильм" required />

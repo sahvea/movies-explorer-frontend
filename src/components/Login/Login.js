@@ -7,6 +7,7 @@ function Login(props) {
   // eslint-disable-next-line no-unused-vars
   const [emailValidityError, setEmailValidityError] = React.useState('');
   const [passwordValidityError, setPasswordValidityError] = React.useState('');
+  const isSubmitDisabled = emailValidityError || passwordValidityError;
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -19,7 +20,7 @@ function Login(props) {
     <>
       <Header loggedIn={props.loggedIn} />
       <main>
-        <AuthForm name={'login-form'} title={'Рады видеть!'} buttonText={'Войти'} onSubmit={handleSubmit} >
+        <AuthForm name={'login-form'} title={'Рады видеть!'} buttonText={'Войти'} onSubmit={handleSubmit} isSubmitDisabled={isSubmitDisabled} isFormLoading={props.isFormLoading}>
           <label className="auth__form-label">E-mail
             <input type="email" name="email" required className={`auth__form-input ${emailValidityError ? "auth__form-input_type_error" : ""}`} autoComplete="on" />
             {emailValidityError && <span className="auth__form-error">{emailValidityError}</span>}

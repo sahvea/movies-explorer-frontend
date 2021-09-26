@@ -1,0 +1,120 @@
+.profile {
+  max-width: 410px;
+  padding: 74px 30px 70px;
+  margin: 0 auto;
+}
+
+.profile__form-fieldset {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.profile__greeting {
+  padding: 0 0 123px;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.profile__form-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 17px;
+  padding-bottom: 10px;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.2;
+  border-bottom: 1px solid var(--divider-color);
+}
+
+.profile__form-label:first-of-type {
+  margin-top: 0;
+}
+
+.profile__form-label:last-of-type {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.profile__form-input {
+  display: block;
+  padding: 0 0 6px;
+  text-align: right;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.2;
+  color: var(--font-main-color);
+  transition: .3s ease-in-out;
+}
+
+.profile__form-input:focus {
+  box-shadow: 0 1px var(--bright-color);
+}
+
+.profile__form-btn {
+  margin-top: 220px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.2;
+  color: var(--font-main-color);
+}
+
+.profile__signout {
+  margin-top: 16px;
+  color: var(--error-color);
+}
+
+@media screen and (max-width: 1023px) {
+  .profile {
+    padding-top: 236px;
+  }
+
+  .profile__greeting {
+    padding-bottom: 96px;
+  }
+
+  .profile__form-btn {
+    margin-top: 210px;
+  }
+
+  .profile__signout {
+    margin-top: 16px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .profile {
+    padding-top: 70px;
+    padding-bottom: 40px;
+    min-height: 460px;
+  }
+
+  .profile__form-fieldset {
+    height: 72vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .profile__greeting {
+    padding-bottom: 80px;
+  }
+
+  .profile__form-btn {
+    margin-top: auto;
+    font-size: 12px;
+  }
+
+  .profile__signout {
+    margin-top: 16px;
+  }
+}

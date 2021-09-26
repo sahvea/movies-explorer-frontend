@@ -93,6 +93,7 @@
 .app__button:disabled {
   pointer-events: none;
   user-select: none;
+  opacity: .7;
 }
 
 .app__form-fieldset {

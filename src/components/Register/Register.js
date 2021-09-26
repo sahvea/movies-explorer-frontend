@@ -10,6 +10,7 @@ function Register(props) {
   const [nameValidityError, setNameValidityError] = React.useState('');
   const [emailValidityError, setEmailValidityError] = React.useState('');
   const [passwordValidityError, setPasswordValidityError] = React.useState('');
+  const isSubmitDisabled = nameValidityError || emailValidityError || passwordValidityError;
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -22,7 +23,7 @@ function Register(props) {
     <>
       <Header loggedIn={props.loggedIn} />
       <main>
-        <AuthForm name={'register-form'} title={'Добро пожаловать!'} buttonText={'Зарегистрироваться'} onSubmit={handleSubmit}>
+        <AuthForm name={'register-form'} title={'Добро пожаловать!'} buttonText={'Зарегистрироваться'} onSubmit={handleSubmit} isSubmitDisabled={isSubmitDisabled} isFormLoading={props.isFormLoading}>
           <label className="auth__form-label">Имя
             <input type="text" name="name" required className={`auth__form-input ${nameValidityError ? "auth__form-input_type_error" : ""}`} autoComplete="off" minLength="2" maxLength="30" />
             {nameValidityError && <span className="auth__form-error">{nameValidityError}</span>}

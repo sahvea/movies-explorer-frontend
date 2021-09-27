@@ -17,8 +17,8 @@
 }
 
 .portfolio__links-item {
-  margin-top: 20px;
-  padding-top: 20px;
+  margin-top: 10px;
+  padding-top: 19px;
   border-top: 1px solid var(--divider-color);
 }
 
@@ -82,7 +82,12 @@
   }
 
   .portfolio__links-list {
-    margin-top: 40px;
+    margin-top: 44px;
+  }
+
+  .portfolio__links-item {
+    margin-top: 19px;
+    padding-top: 20px;
   }
 
   .portfolio__link {

@@ -15,7 +15,7 @@ import initialMovies from '../../utils/initialMovies';
 import savedMovies from '../../utils/savedMovies';
 
 function App() {
-  const [loggedIn, setLoggedIn] = React.useState(true);
+  const [loggedIn, setLoggedIn] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isFormLoading, setIsFormLoading] = React.useState(false);
   const [isActionSuccess, setIsActionSuccess] = React.useState(true);

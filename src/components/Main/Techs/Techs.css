@@ -3,7 +3,7 @@
 }
 
 .techs__title {
-  margin: 90px 0 0;
+  margin: 88px 0 0;
   font-weight: 400;
   font-size: 50px;
   line-height: 1.2;
@@ -68,7 +68,7 @@
 
 @media screen and (max-width: 1023px) {
   .techs__title {
-    margin-top: 80px;
+    margin-top: 78px;
   }
 
   .techs__paragraph {
@@ -109,7 +109,7 @@
   }
 
   .techs__title {
-    margin-top: 60px;
+    margin-top: 59px;
     font-size: 30px;
   }
 

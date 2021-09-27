@@ -80,12 +80,16 @@
   position: relative;
   width: 100%;
   object-fit: contain;
-  transition: .2s linear;
+  transition: .2s ease-in-out;
   z-index: 1;
 }
 
 .header__logo:hover {
   transform: scale(0.9);
+}
+
+.header__logo:active {
+  transform: scale(0.8);
 }
 
 .header__logo-svg {

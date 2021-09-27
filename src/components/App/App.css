@@ -79,7 +79,7 @@
 }
 
 .app__button:active {
-  transform: scale(.95);
+  transform: scale(.9);
 }
 
 .app__button:focus-visible {

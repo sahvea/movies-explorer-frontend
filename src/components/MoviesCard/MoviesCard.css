@@ -4,6 +4,7 @@
   width: fit-content;
   max-width: 364px;
   height: 271px;
+  overflow: hidden;
 }
 
 .movie-card__info-wrap {
@@ -83,6 +84,10 @@
 
 .movie-card__trailer-link:hover {
   filter: blur(1px) brightness(0.85);
+}
+
+.movie-card__trailer-link:active {
+  transform: scale(1.05);
 }
 
 .movie-card__trailer-link:hover::before {

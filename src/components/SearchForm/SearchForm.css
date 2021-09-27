@@ -75,7 +75,7 @@
   }
 
   .search__form {
-    padding-bottom: 55px;
+    padding-bottom: 52px;
   }
 
   .search__film-info {
@@ -95,7 +95,7 @@
 
 @media screen and (max-width: 575px) {
   .search__form {
-    padding-bottom: 45px;
+    padding-bottom: 41px;
   }
 
   .search__film-info {

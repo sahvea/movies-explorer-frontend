@@ -22,6 +22,10 @@
   margin-top: 0;
 }
 
+.main-nav__list-item:last-of-type {
+  margin-right: 0;
+}
+
 .main-nav__list-item_link-direction_main-page {
   display: none;
 }
@@ -51,7 +55,6 @@
 
 .main-nav__profile-icon-area {
   position: relative;
-  top: 2px;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -136,7 +139,7 @@
 
   .main-nav__list-item {
     margin-right: 0;
-    margin-top: 28px;
+    margin-top: 26px;
   }
 
   .main-nav__list-item_link-direction_main-page {
@@ -173,6 +176,13 @@
   }
 }
 
+@media screen and (max-width: 1023px) and (orientation: landscape) {
+  .main-nav__menu {
+    padding-top: 70px;
+    padding-bottom: 50px;
+  }
+}
+
 @media screen and (max-width: 575px) {
   .main-nav__menu {
     padding: 144px 10px 50px;
@@ -181,5 +191,12 @@
 
   .main-nav__list-item {
     margin-top: 24px;
+  }
+}
+
+@media screen and (max-width: 575px) and (orientation: landscape) {
+  .main-nav__menu {
+    padding-top: 60px;
+    padding-bottom: 50px;
   }
 }

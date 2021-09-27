@@ -116,6 +116,7 @@
     padding: 160px 90px 90px;
     width: 100vw;
     max-width: 520px;
+    min-width: 320px;
     height: 100vh;
     flex-direction: column;
     justify-content: space-between;

@@ -10,6 +10,7 @@ function Profile(props) {
   const currentUserEmail = "pochta@yandex.ru";
   const [name, setName] = React.useState(currentUser);
   const [email, setEmail] = React.useState(currentUserEmail);
+  const [isDisabled, setIsDisabled] = React.useState(true);
 
   function handleNameInputChange(e) {
     const nameInput = e.target;
@@ -23,10 +24,15 @@ function Profile(props) {
     setEmail(value);
   }
 
+  function handleEditBtnClick() {
+    setIsDisabled(false);
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
 
     props.onEditSuccess();
+    setIsDisabled(true);
   }
 
   function handleSignOut() {
@@ -38,24 +44,30 @@ function Profile(props) {
       <Header loggedIn={props.loggedIn} />
       <main>
         <section className="profile">
-          <form className="profile__form" name="profile-form" onSubmit={handleSubmit} >
-          {/* noValidate */}
+          <form className="profile__form" name="profile-form" onSubmit={handleSubmit} noValidate>
             <fieldset className="profile__user-info">
               <legend className="profile__greeting">Привет, {currentUser}!</legend>
               <label className="profile__form-label">Имя
-                <input type="text" name="name" value={name} required className="profile__form-input" autoComplete="off" minLength="2" maxLength="30" onChange={handleNameInputChange} />
+                <input type="text" name="name" value={name} required className="profile__form-input" autoComplete="off" minLength="2" maxLength="30" onChange={handleNameInputChange} disabled={isDisabled} ref={input => input && input.focus()} />
               </label>
               <label className="profile__form-label">E-mail
-                <input type="email" name="email" value={email} required className="profile__form-input" autoComplete="off" onChange={handleEmailInputChange} />
+                <input type="email" name="email" value={email} required className="profile__form-input" autoComplete="off" onChange={handleEmailInputChange} disabled={isDisabled} />
               </label>
 
-              <button type="submit" name="submit" className="app__button profile__form-btn" disabled={props.isFormLoading ? true : ''}>
-                {props.isFormLoading ? "Сохранение" : "Редактировать"}
-                {props.isFormLoading && (<DotsLoader />)}
-              </button>
+              {!isDisabled
+                && <button type="submit" name="submit" className="app__button profile__button profile__button_type_submit" disabled={props.isFormLoading ? true : ''}>
+                  {props.isFormLoading ? "Сохранение" : "Сохранить"}
+                  {props.isFormLoading && (<DotsLoader />)}
+                </button>
+              }
             </fieldset>
           </form>
-          <button className="app__button profile__form-btn profile__signout" type="button" onClick={handleSignOut}>Выйти из аккаунта</button>
+          {isDisabled &&
+            <>
+              <button type="button" className="app__button profile__button" onClick={handleEditBtnClick}>Редактировать</button>
+              <button type="button" className="app__button profile__button profile__button_type_signout" onClick={handleSignOut}>Выйти из аккаунта</button>
+            </>
+          }
         </section>
       </main>
     </>

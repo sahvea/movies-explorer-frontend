@@ -57,7 +57,7 @@
   box-shadow: 0 1px var(--bright-color);
 }
 
-.profile__form-btn {
+.profile__button {
   margin-top: 220px;
   width: 100%;
   display: flex;
@@ -69,7 +69,14 @@
   color: var(--font-main-color);
 }
 
-.profile__signout {
+.profile__button_type_submit {
+  padding: 15px;
+  background-color: var(--bright-color);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.profile__button_type_signout {
   margin-top: 16px;
   color: var(--error-color);
 }
@@ -83,11 +90,11 @@
     padding-bottom: 96px;
   }
 
-  .profile__form-btn {
+  .profile__button {
     margin-top: 210px;
   }
 
-  .profile__signout {
+  .profile__button_type_signout {
     margin-top: 16px;
   }
 }
@@ -100,7 +107,7 @@
   }
 
   .profile__user-info {
-    height: 72vh;
+    height: 70vh;
     display: flex;
     flex-direction: column;
   }
@@ -109,12 +116,12 @@
     padding-bottom: 80px;
   }
 
-  .profile__form-btn {
+  .profile__button {
     margin-top: auto;
     font-size: 12px;
   }
 
-  .profile__signout {
+  .profile__button_type_signout {
     margin-top: 16px;
   }
 }

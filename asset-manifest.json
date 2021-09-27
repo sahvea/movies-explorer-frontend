@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.css": "/movies-explorer-frontend/static/css/main.7e9b538e.chunk.css",
+    "main.js": "/movies-explorer-frontend/static/js/main.e55b9c04.chunk.js",
+    "main.js.map": "/movies-explorer-frontend/static/js/main.e55b9c04.chunk.js.map",
+    "runtime-main.js": "/movies-explorer-frontend/static/js/runtime-main.02fd3b7c.js",
+    "runtime-main.js.map": "/movies-explorer-frontend/static/js/runtime-main.02fd3b7c.js.map",
+    "static/js/2.ef984a8f.chunk.js": "/movies-explorer-frontend/static/js/2.ef984a8f.chunk.js",
+    "static/js/2.ef984a8f.chunk.js.map": "/movies-explorer-frontend/static/js/2.ef984a8f.chunk.js.map",
+    "static/js/3.3c5c3f9e.chunk.js": "/movies-explorer-frontend/static/js/3.3c5c3f9e.chunk.js",
+    "static/js/3.3c5c3f9e.chunk.js.map": "/movies-explorer-frontend/static/js/3.3c5c3f9e.chunk.js.map",
+    "index.html": "/movies-explorer-frontend/index.html",
+    "static/css/main.7e9b538e.chunk.css.map": "/movies-explorer-frontend/static/css/main.7e9b538e.chunk.css.map",
+    "static/js/2.ef984a8f.chunk.js.LICENSE.txt": "/movies-explorer-frontend/static/js/2.ef984a8f.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/movies-explorer-frontend/static/media/Inter-Regular.e148c4a1.woff",
+    "static/media/avatar-example.22bb3619.jpg": "/movies-explorer-frontend/static/media/avatar-example.22bb3619.jpg",
+    "static/media/MoviesCard.css": "/movies-explorer-frontend/static/media/save-icon.305e88ad.svg",
+    "static/media/movie-1.e1a9315f.png": "/movies-explorer-frontend/static/media/movie-1.e1a9315f.png",
+    "static/media/movie-10.d6672838.png": "/movies-explorer-frontend/static/media/movie-10.d6672838.png",
+    "static/media/movie-11.b6f1a2d9.png": "/movies-explorer-frontend/static/media/movie-11.b6f1a2d9.png",
+    "static/media/movie-12.3d079a71.png": "/movies-explorer-frontend/static/media/movie-12.3d079a71.png",
+    "static/media/movie-2.87968636.png": "/movies-explorer-frontend/static/media/movie-2.87968636.png",
+    "static/media/movie-3.a3d01b35.png": "/movies-explorer-frontend/static/media/movie-3.a3d01b35.png",
+    "static/media/movie-4.f2bae166.png": "/movies-explorer-frontend/static/media/movie-4.f2bae166.png",
+    "static/media/movie-5.f43c7000.png": "/movies-explorer-frontend/static/media/movie-5.f43c7000.png",
+    "static/media/movie-6.d01a134e.png": "/movies-explorer-frontend/static/media/movie-6.d01a134e.png",
+    "static/media/movie-7.34c70b06.png": "/movies-explorer-frontend/static/media/movie-7.34c70b06.png",
+    "static/media/movie-8.60d2954c.png": "/movies-explorer-frontend/static/media/movie-8.60d2954c.png",
+    "static/media/movie-9.61dca78c.png": "/movies-explorer-frontend/static/media/movie-9.61dca78c.png",
+    "static/media/SearchForm.css": "/movies-explorer-frontend/static/media/search-icon.d5966db7.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.02fd3b7c.js",
+    "static/js/2.ef984a8f.chunk.js",
+    "static/css/main.7e9b538e.chunk.css",
+    "static/js/main.e55b9c04.chunk.js"
+  ]
+}

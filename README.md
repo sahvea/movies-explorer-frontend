@@ -10,6 +10,7 @@
 * Gh-pages: https://sahvea.github.io/movies-explorer-frontend/
 * Домен: https://sahvea.diploma.nomoredomains.club/
 * Поддомен для API: https://api.sahvea.diploma.nomoredomains.club/
+* [Макет](https://www.figma.com/file/XV9NidOXI88yYJJ6YbFRc4/Diploma-final?node-id=891%3A3857)
 
 #### Планируемые улучшения проекта:
 - [ ] Улучшить анимацию для логотипа WEB. Если получится дополнить svg, то прописать изменение состояния отдельных элементов `path` при наведении курсора;

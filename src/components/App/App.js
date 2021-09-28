@@ -79,10 +79,10 @@ function App() {
           <Profile loggedIn={loggedIn} onEditSuccess={handleActionSuccess} onEditError={handleActionError} isFormLoading={isFormLoading} />
         </Route>
         <Route path="/signup">
-          <Register onRegistrationSuccess={handleActionSuccess} onRegistrationError={handleActionError} isFormLoading={isFormLoading}/>
+          <Register onRegistrationSuccess={handleActionSuccess} onRegistrationError={handleActionError} isFormLoading={isFormLoading} />
         </Route>
         <Route path="/signin">
-          <Login onAuthenticationError={handleActionError} isFormLoading={isFormLoading}/>
+          <Login onAuthenticationError={handleActionError} isFormLoading={isFormLoading} />
         </Route>
         <Route path="*">
           <NotFound />

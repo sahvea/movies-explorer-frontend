@@ -11,6 +11,7 @@
 * Домен: https://sahvea.diploma.nomoredomains.club/
 * Поддомен для API: https://api.sahvea.diploma.nomoredomains.club/
 * [Макет](https://www.figma.com/file/XV9NidOXI88yYJJ6YbFRc4/Diploma-final?node-id=891%3A3857)
+* [Чек-лист по верстке](https://github.com/sahvea/movies-explorer-frontend/pull/1#issuecomment-9289427177)
 
 #### Планируемые улучшения проекта:
 - [ ] Улучшить анимацию для логотипа WEB. Если получится дополнить svg, то прописать изменение состояния отдельных элементов `path` при наведении курсора;
@@ -20,4 +21,4 @@
 - [ ] Добавить кнопку 'наверх'. [Готовое решение](https://www.npmjs.com/package/react-scroll-up-button);
 - [ ] Реализовать возможность смены темы.
 
-## Количество баллов: ___
+## Количество баллов за верстку: 100

@@ -11,7 +11,9 @@ import Login from '../Login/Login';
 import NotFound from '../NotFound/NotFound';
 import InfoPopup from '../InfoPopup/InfoPopup';
 
-import initialMovies from '../../utils/initialMovies';
+import moviesApi from '../../utils/MoviesApi';
+
+// import initialMovies from '../../utils/initialMovies';
 import savedMovies from '../../utils/savedMovies';
 
 function App() {
@@ -21,6 +23,17 @@ function App() {
   const [isActionSuccess, setIsActionSuccess] = React.useState(true);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false);
   const [infoPopupError, setInfoPopupError] = React.useState('');
+  const [movies, setMovies] = React.useState([]);
+
+  React.useEffect(() => {
+    setIsLoading(true);
+    moviesApi.getMovies()
+      .then(movies => {
+        setMovies(movies);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false));
+  }, []);
 
   React.useEffect(() => {
     function handleEscClose(evt) {
@@ -70,7 +83,7 @@ function App() {
           <Main loggedIn={loggedIn} />
         </Route>
         <Route path="/movies">
-          <Movies loggedIn={loggedIn} movies={initialMovies} isLoading={isLoading} />
+          <Movies loggedIn={loggedIn} movies={movies} isLoading={isLoading} />
         </Route>
         <Route path="/saved-movies">
           <SavedMovies loggedIn={loggedIn} movies={savedMovies} isLoading={isLoading} />

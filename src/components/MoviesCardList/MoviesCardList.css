@@ -12,6 +12,10 @@
   justify-items: center;
 }
 
+.card-list__list-item {
+  width: 100%;
+}
+
 .card-list__more-btn {
   margin-top: 50px;
   width: 100%;

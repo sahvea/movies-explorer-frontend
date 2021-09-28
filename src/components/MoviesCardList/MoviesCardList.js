@@ -65,8 +65,8 @@ function MoviesCardList(props) {
     :
     <section className="card-list">
       <ul className="card-list__list">
-      {cardsToShow.map((movie, index) => (
-        <li className="card-list__list-item" key={index}>
+      {cardsToShow.map((movie) => (
+        <li className="card-list__list-item" key={movie.id} >
           <MoviesCard movie={movie} />
         </li>
         ))}

@@ -1,10 +1,12 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import './MoviesCard.css';
+import { apiUrl } from '../../utils/constants';
 
 function MoviesCard(props) {
   const location = useLocation();
   const [savedMovie, setSavedMovie] = React.useState(false);
+  const movieDuration = timeConvert(props.movie.duration);
 
   const isMovieSaved = `${location.pathname === '/movies' && savedMovie ? "movie-card__button_saved" : ""}`
   const buttonClassName = `app__button movie-card__button ${
@@ -35,15 +37,25 @@ function MoviesCard(props) {
     }
   }
 
+  function timeConvert(num) {
+    const hours = Math.floor(num / 60);
+    const minutes = num % 60;
+    return hours + 'ч ' + minutes + 'м';
+  }
+
+
+  // console.log(props.movie.image.url);
+  // console.log(`https://api.nomoreparties.co${props.movie.image.url}`);
+
   return (
     <article className="movie-card">
       <div className="movie-card__info-wrap">
-        <p className="movie-card__title">{props.movie.nameRu}</p>
-        <p className="movie-card__duration">{props.movie.duration}</p>
+        <p className="movie-card__title">{props.movie.nameRU}</p>
+        <p className="movie-card__duration">{movieDuration}</p>
         <button className={buttonClassName} aria-label={buttonLabel} title={buttonLabel} onClick={handleBtnClick}></button>
       </div>
       <a className="movie-card__trailer-link" href={props.movie.trailerLink} target="_blank" rel="noreferrer">
-        <img className="movie-card__image" src={props.movie.image} alt={props.movie.nameRu} />
+        <img className="movie-card__image" src={`${apiUrl}${props.movie.image.url}`} alt={props.movie.nameRU} />
       </a>
     </article>
   );

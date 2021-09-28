@@ -1,0 +1,24 @@
+.movies {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 74px 70px 0;
+  box-sizing: border-box;
+}
+
+.movies_position_saved {
+  padding-bottom: 60px;
+}
+
+@media screen and (max-width: 1023px) {
+  .movies {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .movies {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}

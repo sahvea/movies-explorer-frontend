@@ -1,0 +1,93 @@
+.app {
+  font-family: 'Inter', Arial, sans-serif;
+  color: var(--font-main-color);
+  min-width: 320px;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: var(--bg-main-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+}
+
+.app_theme_dark {
+  /* -переменные- */
+    /* фон */
+  --bg-main-color: #202020;
+  --bg-accent-color: #272727;
+  --bg-landing-color: #073042;
+    /* шрифты */
+  --font-main-color: #fff;
+  --font-accent-color: #000;
+  --font-transp-color: #8b8b8b;
+    /* карточки */
+  --card-bg-color: #222;
+    /* элементы */
+  --landing-elements-color: #303030;
+  --main-elements-color: #313131;
+  --title-divider-color: #dadada;
+  --divider-color: #424242;
+  --divider-color-light: #e5e5e5;
+  --input-border-color: #aaa;
+  --more-bnt-color: #2f2f2f;
+    /* checkbox */
+  --checkbox-bg: #3ddc84;
+  --checkbox-bg-disabled: #343434;
+  --checkbox-circle: #fff;
+  --checkbox-circle-disabled: #a0a0a0;
+    /* акцентные цвета */
+  --bright-color: #3ddc84;
+  --bright-color-darker: #17806e;
+  --bright-color-lighter: #68d4c6;
+  --error-color: #cf252c;
+    /* rgb */
+  --rgb-font-main-color: 255, 255, 255;
+  --rgb-bright-color: 61, 220, 132;
+  --rgb-input-border-color: 170, 170, 170;
+  --rgb--main-elements-color: 49, 49, 49;
+}
+
+.app__link {
+  display: block;
+  color: var(--font-main-color);
+  text-decoration: none;
+  transition: .3s ease-in-out;
+}
+
+.app__link:hover {
+  opacity: .7;
+}
+
+.app__link:active {
+  transform: scale(.95);
+}
+
+.app__button {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  outline: 0;
+  transition: .3s ease-in-out;
+}
+
+.app__button:hover {
+  opacity: .8;
+}
+
+.app__button:active {
+  transform: scale(.9);
+}
+
+.app__button:focus-visible {
+  outline: -webkit-focus-ring-color auto 1px;
+}
+
+.app__button:disabled {
+  pointer-events: none;
+  user-select: none;
+  opacity: .7;
+}

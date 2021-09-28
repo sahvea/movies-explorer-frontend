@@ -1,0 +1,123 @@
+.movie-card {
+  background-color: var(--card-bg-color);
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, .08);
+  width: fit-content;
+  max-width: 364px;
+  height: 271px;
+  overflow: hidden;
+}
+
+.movie-card__info-wrap {
+  padding: 14px;
+  display: grid;
+  grid-template-columns: 1fr 30px;
+  column-gap: 25px;
+  align-items: center;
+}
+
+.movie-card__title {
+  grid-column: 1;
+  margin: 0;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.movie-card__duration {
+  grid-column: 1;
+  margin: 9px 0 0;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.2;
+  color: var(--font-transp-color);
+}
+
+.movie-card__button {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  width: 30px;
+  height: 30px;
+  border-radius: 36px;
+  background-color: var(--main-elements-color);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.movie-card__button_action_save {
+  background-image: url('../../images/icons/save-icon.svg');
+  background-size: 10px 13px;
+
+}
+
+.movie-card__button_saved {
+  background-color: var(--bright-color);
+  background-image: url('../../images/icons/save-icon-active.svg');
+}
+
+.movie-card__button_action_delete {
+  background-image: url('../../images/icons/delete-icon.svg');
+  background-size: 8px;
+}
+
+.movie-card__trailer-link {
+  position: relative;
+  display: block;
+  transition: .3s linear;
+}
+
+.movie-card__trailer-link::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-15px, -40px);
+  margin: 0 auto;
+  border: 40px solid transparent;
+  border-left: 40px solid rgba(0, 0, 0, .7);
+  transition: .3s linear;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.movie-card__trailer-link:hover {
+  filter: blur(1px) brightness(0.85);
+}
+
+.movie-card__trailer-link:active {
+  transform: scale(1.05);
+}
+
+.movie-card__trailer-link:hover::before {
+  visibility: visible;
+  opacity: 1;
+}
+
+.movie-card__image {
+  width: 100%;
+  height: 203px;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 1023px) {
+  .movie-card {
+    max-width: 339px;
+    height: 258px;
+  }
+
+  .movie-card__image {
+    height: 190px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .movie-card {
+    height: 236px;
+  }
+
+  .movie-card__image {
+    height: 168px;
+  }
+}

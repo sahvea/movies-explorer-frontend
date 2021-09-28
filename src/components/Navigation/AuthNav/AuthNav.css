@@ -1,0 +1,34 @@
+.auth-nav__list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.auth-nav__link {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.auth-nav__link_type_btn {
+  margin-left: 30px;
+  display: inline-block;
+  padding: 8px 20px;
+  background-color: var(--bright-color);
+  border-radius: 3px;
+  color: var(--font-accent-color);
+}
+
+@media screen and (max-width: 575px) {
+  .auth-nav__link {
+    font-size: 10px;
+  }
+
+  .auth-nav__link_type_btn {
+    margin-left: 14px;
+    padding: 5px 12px;
+  }
+}

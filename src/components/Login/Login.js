@@ -24,7 +24,7 @@ function Login(props) {
             <input type="email" name="email" required
               autoComplete="off"
               className={`auth__form-input ${errors.email ? "auth__form-input_type_error" : ""}`}
-              value={values.email}
+              value={values.email || ''}
               onChange={handleChange}
             />
             {errors.email && <span className="auth__form-error">{errors.email}</span>}
@@ -34,7 +34,7 @@ function Login(props) {
               minLength="6"
               autoComplete="off"
               className={`auth__form-input ${errors.password ? "auth__form-input_type_error" : ""}`}
-              value={values.password}
+              value={values.password || ''}
               onChange={handleChange}
             />
             {errors.password && <span className="auth__form-error">{errors.password}</span>}

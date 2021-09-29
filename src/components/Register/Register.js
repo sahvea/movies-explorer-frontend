@@ -29,7 +29,7 @@ function Register(props) {
               minLength="2"
               maxLength="30"
               className={`auth__form-input ${errors.name ? "auth__form-input_type_error" : ""}`}
-              value={values.name}
+              value={values.name || ''}
               onChange={handleChange}
             />
             {errors.name && <span className="auth__form-error">{errors.name}</span>}
@@ -38,7 +38,7 @@ function Register(props) {
             <input type="email" name="email" required
               autoComplete="off"
               className={`auth__form-input ${errors.email ? "auth__form-input_type_error" : ""}`}
-              value={values.email}
+              value={values.email || ''}
               onChange={handleChange}
             />
             {errors.email && <span className="auth__form-error">{errors.email}</span>}
@@ -48,7 +48,7 @@ function Register(props) {
               autoComplete="off"
               minLength="6"
               className={`auth__form-input ${errors.password ? "auth__form-input_type_error" : ""}`}
-              value={values.password}
+              value={values.password || ''}
               onChange={handleChange}
             />
             {errors.password && <span className="auth__form-error">{errors.password}</span>}

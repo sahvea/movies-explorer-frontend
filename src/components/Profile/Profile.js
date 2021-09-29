@@ -44,7 +44,7 @@ function Profile(props) {
                   minLength="2"
                   maxLength="30"
                   className="profile__form-input"
-                  value={values.name}
+                  value={values.name || ''}
                   onChange={handleChange}
                   ref={input => input && input.focus()}
                 />
@@ -53,7 +53,7 @@ function Profile(props) {
                 <input type="email" name="email" required
                   autoComplete="off"
                   className="profile__form-input"
-                  value={values.email}
+                  value={values.email || ''}
                   onChange={handleChange}
                 />
               </label>

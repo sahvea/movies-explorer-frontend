@@ -1,11 +1,9 @@
 import React from 'react';
-import { useHistory } from "react-router-dom";
 import Header from '../Header/Header';
 import AuthForm from '../AuthForm/AuthForm';
 import { useFormValidation } from '../../hooks/useFormValidation';
 
 function Register(props) {
-  const history = useHistory();
   const { values, errors, isValid, handleChange } = useFormValidation({
     name: '', email: '', password: ''
   });
@@ -14,8 +12,7 @@ function Register(props) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    props.onRegistrationSuccess();
-    history.push('/signin');
+    props.onRegistration();
   }
 
   return (

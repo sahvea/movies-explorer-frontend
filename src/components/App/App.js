@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import './App.css';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -12,11 +12,14 @@ import NotFound from '../NotFound/NotFound';
 import InfoPopup from '../InfoPopup/InfoPopup';
 
 import moviesApi from '../../utils/MoviesApi';
+import mainApi from '../../utils/MainApi';
+import authApi from '../../utils/AuthApi';
 
 // import initialMovies from '../../utils/initialMovies';
 import savedMovies from '../../utils/savedMovies';
 
 function App() {
+  const history = useHistory();
   const [loggedIn, setLoggedIn] = React.useState(true);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isFormLoading, setIsFormLoading] = React.useState(false);
@@ -24,6 +27,7 @@ function App() {
   const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false);
   const [infoPopupError, setInfoPopupError] = React.useState('');
   const [movies, setMovies] = React.useState([]);
+  // const [savedMovies, setSavedMovies] = React.useState([]);
 
   React.useEffect(() => {
     setIsLoading(true);
@@ -33,6 +37,15 @@ function App() {
       })
       .catch((err) => console.log(err))
       .finally(() => setIsLoading(false));
+
+      // mainApi.getMovies()
+      //   .then(movies => {
+      //     /* TODO: сначала настпроить currentUser */
+      //     // const savedMoviesArray = movies.filter(movie => movie.owner === currentUser._id);
+      //     setSavedMovies(movies);
+      //   })
+      //   .catch((err) => console.log(err));
+
   }, []);
 
   React.useEffect(() => {
@@ -60,6 +73,19 @@ function App() {
       document.removeEventListener('click', handleOverlayClose);
     };
   }, []);
+
+  function handleRegistration(name, email, password) {
+    authApi.register(name, email, password)
+      .then(res => {
+        if (res) {
+          handleActionSuccess();
+          history.push('/signin');
+        }
+      })
+      .catch(err => {
+        handleActionError(err);
+      });
+  }
 
   function handleActionSuccess() {
     setIsInfoPopupOpen(true);
@@ -92,7 +118,7 @@ function App() {
           <Profile loggedIn={loggedIn} onEditSuccess={handleActionSuccess} onEditError={handleActionError} isFormLoading={isFormLoading} />
         </Route>
         <Route path="/signup">
-          <Register onRegistrationSuccess={handleActionSuccess} onRegistrationError={handleActionError} isFormLoading={isFormLoading} />
+          <Register onRegistration={handleRegistration} onRegistrationSuccess={handleActionSuccess} onRegistrationError={handleActionError} isFormLoading={isFormLoading} />
         </Route>
         <Route path="/signin">
           <Login onAuthenticationError={handleActionError} isFormLoading={isFormLoading} />

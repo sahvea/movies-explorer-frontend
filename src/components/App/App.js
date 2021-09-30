@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import './App.css';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -14,12 +14,14 @@ import InfoPopup from '../InfoPopup/InfoPopup';
 import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 import authApi from '../../utils/AuthApi';
+import { codeStatuses, errorMessages } from '../../utils/constants';
 
 // import initialMovies from '../../utils/initialMovies';
 import savedMovies from '../../utils/savedMovies';
 
 function App() {
   const history = useHistory();
+  const location = useLocation();
   const [loggedIn, setLoggedIn] = React.useState(true);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isFormLoading, setIsFormLoading] = React.useState(false);
@@ -74,8 +76,9 @@ function App() {
     };
   }, []);
 
-  function handleRegistration(name, email, password) {
-    authApi.register(name, email, password)
+  function handleRegistration(email, password, name) {
+    setIsFormLoading(true);
+    authApi.register(email, password, name)
       .then(res => {
         if (res) {
           handleActionSuccess();
@@ -83,8 +86,19 @@ function App() {
         }
       })
       .catch(err => {
-        handleActionError(err);
-      });
+        checkErrorStatus(err);
+      })
+      .finally(() => setIsFormLoading(false));
+  }
+
+  function checkErrorStatus(errorStatus) {
+    if (location.pathname === '/signup') {
+      if (errorStatus === codeStatuses.conflictErr) {
+        handleActionError(errorMessages.emailConflict);
+      } else {
+        handleActionError(errorMessages.registratioError);
+      }
+    }
   }
 
   function handleActionSuccess() {
@@ -118,7 +132,7 @@ function App() {
           <Profile loggedIn={loggedIn} onEditSuccess={handleActionSuccess} onEditError={handleActionError} isFormLoading={isFormLoading} />
         </Route>
         <Route path="/signup">
-          <Register onRegistration={handleRegistration} onRegistrationSuccess={handleActionSuccess} onRegistrationError={handleActionError} isFormLoading={isFormLoading} />
+          <Register onRegistration={handleRegistration} isFormLoading={isFormLoading} />
         </Route>
         <Route path="/signin">
           <Login onAuthenticationError={handleActionError} isFormLoading={isFormLoading} />

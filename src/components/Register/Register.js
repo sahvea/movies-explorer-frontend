@@ -12,7 +12,7 @@ function Register(props) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    props.onRegistration();
+    props.onRegistration(values.email, values.password, values.name);
   }
 
   return (
@@ -37,6 +37,7 @@ function Register(props) {
               className={`auth__form-input ${errors.email ? "auth__form-input_type_error" : ""}`}
               value={values.email || ''}
               onChange={handleChange}
+              pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"
             />
             {errors.email && <span className="auth__form-error">{errors.email}</span>}
           </label>

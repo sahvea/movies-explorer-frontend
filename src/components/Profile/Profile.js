@@ -55,6 +55,7 @@ function Profile(props) {
                   className="profile__form-input"
                   value={values.email || ''}
                   onChange={handleChange}
+                  pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"
                 />
               </label>
 

@@ -26,6 +26,7 @@ function Login(props) {
               className={`auth__form-input ${errors.email ? "auth__form-input_type_error" : ""}`}
               value={values.email || ''}
               onChange={handleChange}
+              pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"
             />
             {errors.email && <span className="auth__form-error">{errors.email}</span>}
           </label>

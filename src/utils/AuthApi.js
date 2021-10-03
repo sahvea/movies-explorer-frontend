@@ -1,9 +1,10 @@
 import { mainApiBaseUrl } from './constants.js';
 
 class AuthApi {
-  constructor({ baseUrl, headers }) {
+  constructor({ baseUrl, headers, credentials }) {
     this._baseUrl = baseUrl;
     this._headers = headers;
+    this._credentials = credentials;
   }
 
   _checkResponse(res) {
@@ -17,27 +18,26 @@ class AuthApi {
     return fetch(`${this._baseUrl}/signup`, {
       method: 'POST',
       headers: this._headers,
-      // credentials: 'include',
+      credentials: this._credentials,
       body: JSON.stringify({ email, password, name })
     })
-      .then((res) => this._checkResponse(res));
+    .then((res) => this._checkResponse(res));
   };
 
   login(email, password) {
     return fetch(`${this._baseUrl}/signin`, {
       method: 'POST',
       headers: this._headers,
-      // credentials: 'include',
+      credentials: this._credentials,
       body: JSON.stringify({ email, password }),
     })
-      .then((res) => this._checkResponse(res));
+    .then((res) => this._checkResponse(res));
   }
 
   checkToken() {
     return fetch(`${this._baseUrl}/users/me`, {
-      method: 'GET',
       headers: this._headers,
-      // credentials: 'include',
+      credentials: this._credentials,
     })
     .then((res) => this._checkResponse(res));
   }
@@ -45,7 +45,7 @@ class AuthApi {
   logout() {
     return fetch(`${this._baseUrl}/signout`, {
       method: 'DELETE',
-      // credentials: 'include',
+      credentials: this._credentials,
     })
     .then((res) => this._checkResponse(res));
   }
@@ -55,7 +55,8 @@ const authApi = new AuthApi({
   baseUrl: mainApiBaseUrl,
   headers: {
     'Content-Type': 'application/json'
-  }
+  },
+  credentials: 'include'
 });
 
 export default authApi;

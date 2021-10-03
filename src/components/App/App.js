@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import './App.css';
@@ -12,11 +11,10 @@ import NotFound from '../NotFound/NotFound';
 import InfoPopup from '../InfoPopup/InfoPopup';
 
 import moviesApi from '../../utils/MoviesApi';
-import mainApi from '../../utils/MainApi';
+// import mainApi from '../../utils/MainApi';
 import authApi from '../../utils/AuthApi';
 import { codeStatuses, errorMessages } from '../../utils/constants';
 
-// import initialMovies from '../../utils/initialMovies';
 import savedMovies from '../../utils/savedMovies';
 
 function App() {
@@ -29,16 +27,23 @@ function App() {
   const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false);
   const [infoPopupError, setInfoPopupError] = React.useState('');
   const [movies, setMovies] = React.useState([]);
+  const [currentUser, setCurrentUser] = React.useState({
+    name: '',
+    email: ''
+  });
+
   // const [savedMovies, setSavedMovies] = React.useState([]);
 
   React.useEffect(() => {
-    setIsLoading(true);
-    moviesApi.getMovies()
+    if (loggedIn) {
+      setIsLoading(true);
+      moviesApi.getMovies()
       .then(movies => {
         setMovies(movies);
       })
       .catch((err) => console.log(err))
       .finally(() => setIsLoading(false));
+    }
 
       // mainApi.getMovies()
       //   .then(movies => {
@@ -48,7 +53,24 @@ function App() {
       //   })
       //   .catch((err) => console.log(err));
 
+  }, [loggedIn]);
+
+  const handleTokenCheck = React.useCallback(() => {
+    authApi.checkToken()
+      .then((res) => {
+        setLoggedIn(true);
+        setCurrentUser({
+          name: res.name,
+          email: res.email
+        });
+      })
+      .catch((err) => console.log(err));
   }, []);
+
+
+  React.useEffect(() => {
+    handleTokenCheck();
+  }, [handleTokenCheck])
 
   React.useEffect(() => {
     function handleEscClose(evt) {
@@ -85,10 +107,28 @@ function App() {
           history.push('/signin');
         }
       })
-      .catch(err => {
-        checkErrorStatus(err);
-      })
+      .catch(err => checkErrorStatus(err))
       .finally(() => setIsFormLoading(false));
+  }
+
+  function handleLogin(email, password) {
+    setIsFormLoading(true);
+    authApi.login(email, password)
+      .then(() => {
+        handleTokenCheck();
+        history.push('/movies');
+      })
+      .catch(err => checkErrorStatus(err))
+      .finally(() => setIsFormLoading(false));
+  }
+
+  function handleLogout() {
+    authApi.logout()
+      .then(() => {
+        setLoggedIn(false);
+        history.push('/signin');
+      })
+      .catch(err => console.log(err));
   }
 
   function checkErrorStatus(errorStatus) {
@@ -97,6 +137,13 @@ function App() {
         handleActionError(errorMessages.emailConflict);
       } else {
         handleActionError(errorMessages.registratioError);
+      }
+    }
+    if (location.pathname === '/signin') {
+      if (errorStatus === codeStatuses.unauthorizedErr) {
+        handleActionError(errorMessages.authorizationError);
+      } else {
+        handleActionError(errorMessages.authServerError);
       }
     }
   }
@@ -129,13 +176,13 @@ function App() {
           <SavedMovies loggedIn={loggedIn} movies={savedMovies} isLoading={isLoading} />
         </Route>
         <Route path="/profile">
-          <Profile loggedIn={loggedIn} onEditSuccess={handleActionSuccess} onEditError={handleActionError} isFormLoading={isFormLoading} />
+          <Profile onLogout={handleLogout} loggedIn={loggedIn} currentUser={currentUser} isFormLoading={isFormLoading} />
         </Route>
         <Route path="/signup">
           <Register onRegistration={handleRegistration} isFormLoading={isFormLoading} />
         </Route>
         <Route path="/signin">
-          <Login onAuthenticationError={handleActionError} isFormLoading={isFormLoading} />
+          <Login onLogin={handleLogin} isFormLoading={isFormLoading} />
         </Route>
         <Route path="*">
           <NotFound />

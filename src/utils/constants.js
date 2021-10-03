@@ -15,6 +15,8 @@ const codeStatuses = {
 const errorMessages = {
   emailConflict: 'Пользователь с таким email уже существует.',
   registratioError: 'При регистрации пользователя произошла ошибка.',
+  authorizationError: 'Вы ввели неправильный логин или пароль.',
+  authServerError: 'При авторизации произошла ошибка. Токен не передан или передан не в том формате.',
 };
 
 export { apiUrl, moviesApiBaseUrl, mainApiBaseUrl, codeStatuses, errorMessages };

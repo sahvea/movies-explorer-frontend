@@ -5,11 +5,11 @@ import Navigation from '../Navigation/Navigation';
 
 function Header(props) {
   const location = useLocation();
-  const [isFixed, setIsFixed] = React.useState(false);
+  const [isHidden, setIsHidden] = React.useState(false);
   const [mobMenu, setMobMenu] = React.useState(false);
 
   const headerClassName = `header
-    ${isFixed ? "header_fixed" : ""}
+    ${isHidden ? "header_hidden" : ""}
     ${location.pathname === '/' ? "header_position_main-page" : ""}
     ${( location.pathname === '/signup' || location.pathname === '/signin' )
       ? "header_static"
@@ -22,7 +22,7 @@ function Header(props) {
   React.useEffect(() => {
     let current = 0;
     const checkScroll = () => {
-      setIsFixed(window.pageYOffset < current && window.pageYOffset > 30);
+      setIsHidden(window.pageYOffset > current);
       current = window.pageYOffset;
     };
 

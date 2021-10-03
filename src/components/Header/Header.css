@@ -1,16 +1,17 @@
 .header {
   min-width: 320px;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 2;
+  background-color: var(--bg-main-color);
+  transform: translateY(0);
   transition: .3s ease-in-out;
 }
 
-.header_fixed {
-  position: fixed;
-  background-color: var(--bg-main-color);
+.header_hidden {
+  transform: translateY(-100%);
 }
 
 .header_static {

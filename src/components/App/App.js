@@ -13,7 +13,7 @@ import NotFound from '../NotFound/NotFound';
 import InfoPopup from '../InfoPopup/InfoPopup';
 
 import moviesApi from '../../utils/MoviesApi';
-// import mainApi from '../../utils/MainApi';
+import mainApi from '../../utils/MainApi';
 import authApi from '../../utils/AuthApi';
 import { codeStatuses, errorMessages } from '../../utils/constants';
 
@@ -25,6 +25,7 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isFormLoading, setIsFormLoading] = React.useState(false);
+  const [isNewDataValid, setIsNewDataValid] = React.useState(true);
   const [isActionSuccess, setIsActionSuccess] = React.useState(true);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false);
   const [infoPopupError, setInfoPopupError] = React.useState('');
@@ -38,7 +39,7 @@ function App() {
   // const [savedMovies, setSavedMovies] = React.useState([]);
 
   const handleTokenCheck = React.useCallback(() => {
-    authApi.getCurrentUser()
+    mainApi.getUserInfo()
       .then((res) => {
         setCurrentUser({
           name: res.name,
@@ -52,7 +53,7 @@ function App() {
 
   React.useEffect(() => {
     if (loggedIn) {
-      // handleTokenCheck();
+      handleTokenCheck();
 
       setIsLoading(true);
       moviesApi.getMovies()
@@ -108,9 +109,9 @@ function App() {
     authApi.register(email, password, name)
       .then(res => {
         if (res) {
-          handleLogin(email, password);
           handleActionSuccess();
-          history.push('/movies');
+          handleLogin(email, password);
+          // history.push('/movies');
         }
       })
       .catch(err => checkErrorStatus(err))
@@ -121,7 +122,8 @@ function App() {
     setIsFormLoading(true);
     authApi.login(email, password)
       .then(() => {
-        handleTokenCheck();
+        // handleTokenCheck();
+        setLoggedIn(true);
         history.push('/movies');
       })
       .catch(err => checkErrorStatus(err))
@@ -137,7 +139,29 @@ function App() {
       .catch(err => console.log(err));
   }
 
+  function handleUpdateUser(email, name) {
+    setIsFormLoading(true);
+    mainApi.updateUserInfo({ email, name })
+      .then((data) => {
+        setCurrentUser({
+          name: data.name,
+          email: data.email
+        });
+        handleActionSuccess();
+        setIsNewDataValid(true);
+      })
+      .catch(err => {
+        checkErrorStatus(err);
+        setIsNewDataValid(false);
+      })
+      .finally(() => setIsFormLoading(false));
+  }
+
   function checkErrorStatus(errorStatus) {
+    if (errorStatus === codeStatuses.internalServerErr) {
+      handleActionError(errorMessages.serverError);
+      return;
+    }
     if (location.pathname === '/signup') {
       if (errorStatus === codeStatuses.conflictErr) {
         handleActionError(errorMessages.emailConflict);
@@ -150,6 +174,13 @@ function App() {
         handleActionError(errorMessages.authorizationError);
       } else {
         handleActionError(errorMessages.authServerError);
+      }
+    }
+    if (location.pathname === '/profile') {
+      if (errorStatus === codeStatuses.conflictErr) {
+        handleActionError(errorMessages.emailConflict);
+      } else {
+        handleActionError(errorMessages.updateProfileError);
       }
     }
   }
@@ -175,15 +206,20 @@ function App() {
         <Route exact path="/">
           <Main loggedIn={loggedIn} />
         </Route>
-        <ProtectedRoute path="/movies" component={Movies} loggedIn={loggedIn}
+        <ProtectedRoute path="/movies" component={Movies}
+          loggedIn={loggedIn}
           movies={movies}
           isLoading={isLoading}
         />
-        <ProtectedRoute path="/saved-movies" component={SavedMovies} loggedIn={loggedIn}
+        <ProtectedRoute path="/saved-movies" component={SavedMovies}
+          loggedIn={loggedIn}
           movies={savedMovies}
           isLoading={isLoading}
         />
-        <ProtectedRoute path="/profile" component={Profile} loggedIn={loggedIn}
+        <ProtectedRoute path="/profile" component={Profile}
+          loggedIn={loggedIn}
+          onUpdateUser={handleUpdateUser}
+          isNewDataValid={isNewDataValid}
           onSignOut={handleLogout}
           isFormLoading={isFormLoading}
         />

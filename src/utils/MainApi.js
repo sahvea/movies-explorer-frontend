@@ -14,6 +14,27 @@ class MainApi {
     return Promise.reject(res.status);
   }
 
+  getUserInfo() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: this._headers,
+      credentials: this._credentials,
+    })
+    .then((res) => this._checkResponse(res));
+  }
+
+  updateUserInfo({ email, name }) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      credentials: this._credentials,
+      body: JSON.stringify({
+        name: `${name}`,
+        email: `${email}`
+      })
+    })
+    .then((res) => this._checkResponse(res));
+  }
+
   getMovies() {
     return fetch(`${this._baseUrl}/movies`, {
       headers: this._headers,

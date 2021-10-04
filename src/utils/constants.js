@@ -17,6 +17,8 @@ const errorMessages = {
   registratioError: 'При регистрации пользователя произошла ошибка.',
   authorizationError: 'Вы ввели неправильный логин или пароль.',
   authServerError: 'При авторизации произошла ошибка. Токен не передан или передан не в том формате.',
+  updateProfileError: 'При обновлении профиля произошла ошибка.',
+  serverError: 'На сервере произошла ошибка.',
 };
 
 export { apiUrl, moviesApiBaseUrl, mainApiBaseUrl, codeStatuses, errorMessages };

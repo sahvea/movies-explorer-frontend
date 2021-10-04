@@ -34,14 +34,6 @@ class AuthApi {
     .then((res) => this._checkResponse(res));
   }
 
-  getCurrentUser() {
-    return fetch(`${this._baseUrl}/users/me`, {
-      headers: this._headers,
-      credentials: this._credentials,
-    })
-    .then((res) => this._checkResponse(res));
-  }
-
   logout() {
     return fetch(`${this._baseUrl}/signout`, {
       method: 'DELETE',

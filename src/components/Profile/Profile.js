@@ -12,7 +12,13 @@ function Profile(props) {
   const { values, isValid, handleChange } = useFormValidation({
     name: currentUser.name, email: currentUser.email
   });
-  const isSubmitDisabled = values.name === '' || values.email === '' || !isValid;
+  const isSubmitDisabled = values.name === '' || values.email === ''
+    || ( values.name === currentUser.name && values.email === currentUser.email )
+    || !isValid;
+
+  React.useEffect(() => {
+    setFormIsDisabled(props.isNewDataValid);
+  }, [props.isNewDataValid])
 
   function handleEditBtnClick() {
     setFormIsDisabled(false);
@@ -26,7 +32,8 @@ function Profile(props) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    setFormIsDisabled(true);
+    props.onUpdateUser(values.email, values.name);
+    setFormIsDisabled(props.isNewDataValid);
   }
 
   function handleSignOut() {

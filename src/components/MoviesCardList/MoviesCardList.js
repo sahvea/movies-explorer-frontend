@@ -67,7 +67,7 @@ function MoviesCardList(props) {
       <ul className="card-list__list">
       {cardsToShow.map((movie) => (
         <li className="card-list__list-item" key={movie.id} >
-          <MoviesCard movie={movie} />
+          <MoviesCard movie={movie} onMovieSave={props.onMovieSave} />
         </li>
         ))}
       </ul>

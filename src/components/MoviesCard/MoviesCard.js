@@ -18,6 +18,20 @@ function MoviesCard(props) {
     ? "Сохранить"
     : "Удалить";
 
+  const newMovie = {
+    country: props.movie.country,
+    director: props.movie.director,
+    duration: props.movie.duration,
+    year: props.movie.year,
+    description: props.movie.description,
+    image: `${apiUrl}${props.movie.image.url}`,
+    trailer: props.movie.trailerLink,
+    thumbnail: `${apiUrl}${props.movie.image.formats.thumbnail.url}`,
+    movieId: props.movie.id,
+    nameRU: props.movie.nameRU,
+    nameEN: props.movie.nameEN
+  }
+
   React.useEffect(() => {
     if (location.pathname === '/movies' && props.movie.saved) {
       setSavedMovie(true);
@@ -26,7 +40,7 @@ function MoviesCard(props) {
 
   function handleBtnClick(e) {
     if (location.pathname === '/movies' && !savedMovie) {
-      setSavedMovie(true);
+      handleSaveBntClick();
     } else {
       setSavedMovie(false);
     }
@@ -37,15 +51,18 @@ function MoviesCard(props) {
     }
   }
 
+  function handleSaveBntClick() {
+    // console.log(newMovie.thumbnail);
+    props.onMovieSave(newMovie);
+    setSavedMovie(true);
+  }
+
   function timeConvert(num) {
     const hours = Math.floor(num / 60);
     const minutes = num % 60;
     return hours + 'ч ' + minutes + 'м';
   }
 
-
-  // console.log(props.movie.image.url);
-  // console.log(`https://api.nomoreparties.co${props.movie.image.url}`);
 
   return (
     <article className="movie-card">

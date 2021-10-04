@@ -17,7 +17,7 @@ import mainApi from '../../utils/MainApi';
 import authApi from '../../utils/AuthApi';
 import { codeStatuses, errorMessages } from '../../utils/constants';
 
-import savedMovies from '../../utils/savedMovies';
+// import savedMovies from '../../utils/savedMovies';
 
 function App() {
   const history = useHistory();
@@ -30,13 +30,13 @@ function App() {
   const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false);
   const [infoPopupError, setInfoPopupError] = React.useState('');
   const [movies, setMovies] = React.useState([]);
+  const [savedMovies, setSavedMovies] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({
     name: '',
     email: '',
     _id: ''
   });
 
-  // const [savedMovies, setSavedMovies] = React.useState([]);
 
   const handleTokenCheck = React.useCallback(() => {
     mainApi.getUserInfo()
@@ -62,17 +62,17 @@ function App() {
         })
         .catch((err) => console.log(err))
         .finally(() => setIsLoading(false));
+
+      mainApi.getMovies()
+        .then(movies => {
+          const savedMoviesArray = movies.filter(movie => movie.owner === currentUser._id);
+          setSavedMovies(savedMoviesArray);
+        })
+        .catch((err) => console.log(err))
+        .finally(() => setIsLoading(false));
     }
 
-      // mainApi.getMovies()
-      //   .then(movies => {
-      //     /* TODO: сначала настпроить currentUser */
-      //     // const savedMoviesArray = movies.filter(movie => movie.owner === currentUser._id);
-      //     setSavedMovies(movies);
-      //   })
-      //   .catch((err) => console.log(err));
-
-  }, [loggedIn, handleTokenCheck]);
+  }, [loggedIn, handleTokenCheck, currentUser._id]);
 
   // React.useEffect(() => {
   //   handleTokenCheck();
@@ -133,6 +133,7 @@ function App() {
     authApi.logout()
       .then(() => {
         setLoggedIn(false);
+        setCurrentUser({});
         history.push('/');
       })
       .catch(err => console.log(err));
@@ -154,6 +155,15 @@ function App() {
         setIsNewDataValid(false);
       })
       .finally(() => setIsFormLoading(false));
+  }
+
+  function handleMovieSave(movie) {
+
+    mainApi.createMovie(movie)
+      .then(({ movieData }) => {
+        setSavedMovies([...savedMovies, movieData]);
+      })
+      .catch((err) => console.log(err));
   }
 
   function checkErrorStatus(errorStatus) {
@@ -208,6 +218,7 @@ function App() {
         <ProtectedRoute path="/movies" component={Movies}
           loggedIn={loggedIn}
           movies={movies}
+          onMovieSave={handleMovieSave}
           isLoading={isLoading}
         />
         <ProtectedRoute path="/saved-movies" component={SavedMovies}

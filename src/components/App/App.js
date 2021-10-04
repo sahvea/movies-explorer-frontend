@@ -111,7 +111,6 @@ function App() {
         if (res) {
           handleActionSuccess();
           handleLogin(email, password);
-          // history.push('/movies');
         }
       })
       .catch(err => checkErrorStatus(err))

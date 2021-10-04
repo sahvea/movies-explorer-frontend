@@ -5,11 +5,13 @@ import Header from '../Header/Header';
 import DotsLoader from '../DotsLoader/DotsLoader';
 import { useFormValidation } from '../../hooks/useFormValidation';
 
+// test@test-email.ru
+
 function Profile(props) {
   const [isFormDisabled, setFormIsDisabled] = React.useState(true);
   const currentUser = React.useContext(CurrentUserContext);
   const inputRef = React.useRef(null);
-  const { values, isValid, handleChange } = useFormValidation({
+  const { values, errors, isValid, handleChange } = useFormValidation({
     name: currentUser.name, email: currentUser.email
   });
   const isSubmitDisabled = values.name === '' || values.email === ''
@@ -53,20 +55,23 @@ function Profile(props) {
                   autoComplete="off"
                   minLength="2"
                   maxLength="30"
-                  className="profile__form-input"
+                  className={`profile__form-input ${errors.name ? "profile__form-input_type_error" : ""}`}
                   value={values.name}
                   onChange={handleChange}
                   ref={inputRef}
                 />
+                {errors.name && <span className="profile__form-error">{errors.name}</span>}
               </label>
               <label className="profile__form-label">E-mail
                 <input type="email" name="email" required
                   autoComplete="off"
-                  className="profile__form-input"
+                  className={`profile__form-input ${errors.email ? "profile__form-input_type_error" : ""}`}
                   value={values.email}
                   onChange={handleChange}
                   pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"
                 />
+                {errors.email && <span className="profile__form-error">{errors.email}</span>}
+
               </label>
 
               {!isFormDisabled

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import './App.css';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -107,8 +108,9 @@ function App() {
     authApi.register(email, password, name)
       .then(res => {
         if (res) {
+          handleLogin(email, password);
           handleActionSuccess();
-          history.push('/signin');
+          history.push('/movies');
         }
       })
       .catch(err => checkErrorStatus(err))
@@ -173,15 +175,18 @@ function App() {
         <Route exact path="/">
           <Main loggedIn={loggedIn} />
         </Route>
-        <Route path="/movies">
-          <Movies loggedIn={loggedIn} movies={movies} isLoading={isLoading} />
-        </Route>
-        <Route path="/saved-movies">
-          <SavedMovies loggedIn={loggedIn} movies={savedMovies} isLoading={isLoading} />
-        </Route>
-        <Route path="/profile">
-          <Profile onLogout={handleLogout} loggedIn={loggedIn} isFormLoading={isFormLoading} />
-        </Route>
+        <ProtectedRoute path="/movies" component={Movies} loggedIn={loggedIn}
+          movies={movies}
+          isLoading={isLoading}
+        />
+        <ProtectedRoute path="/saved-movies" component={SavedMovies} loggedIn={loggedIn}
+          movies={savedMovies}
+          isLoading={isLoading}
+        />
+        <ProtectedRoute path="/profile" component={Profile} loggedIn={loggedIn}
+          onSignOut={handleLogout}
+          isFormLoading={isFormLoading}
+        />
         <Route path="/signup">
           <Register onRegistration={handleRegistration} isFormLoading={isFormLoading} />
         </Route>

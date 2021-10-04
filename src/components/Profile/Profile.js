@@ -30,7 +30,7 @@ function Profile(props) {
   }
 
   function handleSignOut() {
-    props.onLogout();
+    props.onSignOut();
   }
 
   return (

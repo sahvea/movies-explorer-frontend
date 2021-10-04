@@ -34,7 +34,7 @@ class AuthApi {
     .then((res) => this._checkResponse(res));
   }
 
-  checkToken() {
+  getCurrentUser() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
       credentials: this._credentials,

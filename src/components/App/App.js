@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import './App.css';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -20,7 +21,7 @@ import savedMovies from '../../utils/savedMovies';
 function App() {
   const history = useHistory();
   const location = useLocation();
-  const [loggedIn, setLoggedIn] = React.useState(true);
+  const [loggedIn, setLoggedIn] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isFormLoading, setIsFormLoading] = React.useState(false);
   const [isActionSuccess, setIsActionSuccess] = React.useState(true);
@@ -29,20 +30,36 @@ function App() {
   const [movies, setMovies] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({
     name: '',
-    email: ''
+    email: '',
+    _id: ''
   });
 
   // const [savedMovies, setSavedMovies] = React.useState([]);
 
+  const handleTokenCheck = React.useCallback(() => {
+    authApi.getCurrentUser()
+      .then((res) => {
+        setCurrentUser({
+          name: res.name,
+          email: res.email,
+          _id: res._id
+        });
+        setLoggedIn(true);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   React.useEffect(() => {
     if (loggedIn) {
+      // handleTokenCheck();
+
       setIsLoading(true);
       moviesApi.getMovies()
-      .then(movies => {
-        setMovies(movies);
-      })
-      .catch((err) => console.log(err))
-      .finally(() => setIsLoading(false));
+        .then(movies => {
+          setMovies(movies);
+        })
+        .catch((err) => console.log(err))
+        .finally(() => setIsLoading(false));
     }
 
       // mainApi.getMovies()
@@ -53,24 +70,11 @@ function App() {
       //   })
       //   .catch((err) => console.log(err));
 
-  }, [loggedIn]);
+  }, [loggedIn, handleTokenCheck]);
 
-  const handleTokenCheck = React.useCallback(() => {
-    authApi.checkToken()
-      .then((res) => {
-        setLoggedIn(true);
-        setCurrentUser({
-          name: res.name,
-          email: res.email
-        });
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-
-  React.useEffect(() => {
-    handleTokenCheck();
-  }, [handleTokenCheck])
+  // React.useEffect(() => {
+  //   handleTokenCheck();
+  // }, [handleTokenCheck])
 
   React.useEffect(() => {
     function handleEscClose(evt) {
@@ -126,7 +130,7 @@ function App() {
     authApi.logout()
       .then(() => {
         setLoggedIn(false);
-        history.push('/signin');
+        history.push('/');
       })
       .catch(err => console.log(err));
   }
@@ -164,7 +168,7 @@ function App() {
   }
 
   return (
-    <>
+    <CurrentUserContext.Provider value={currentUser}>
       <Switch>
         <Route exact path="/">
           <Main loggedIn={loggedIn} />
@@ -176,7 +180,7 @@ function App() {
           <SavedMovies loggedIn={loggedIn} movies={savedMovies} isLoading={isLoading} />
         </Route>
         <Route path="/profile">
-          <Profile onLogout={handleLogout} loggedIn={loggedIn} currentUser={currentUser} isFormLoading={isFormLoading} />
+          <Profile onLogout={handleLogout} loggedIn={loggedIn} isFormLoading={isFormLoading} />
         </Route>
         <Route path="/signup">
           <Register onRegistration={handleRegistration} isFormLoading={isFormLoading} />
@@ -190,7 +194,7 @@ function App() {
       </Switch>
 
       <InfoPopup isOpen={isInfoPopupOpen} onClose={closePopups} onSuccess={isActionSuccess} errorMessage={infoPopupError} />
-    </>
+    </CurrentUserContext.Provider>
   );
 }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import './Profile.css';
 import Header from '../Header/Header';
 import DotsLoader from '../DotsLoader/DotsLoader';
@@ -6,11 +7,10 @@ import { useFormValidation } from '../../hooks/useFormValidation';
 
 function Profile(props) {
   const [isFormDisabled, setFormIsDisabled] = React.useState(true);
+  const currentUser = React.useContext(CurrentUserContext);
   const inputRef = React.useRef(null);
-  const userName = props.currentUser.name;
-  const userEmail = props.currentUser.email;
   const { values, isValid, handleChange } = useFormValidation({
-    name: userName, email: userEmail
+    name: currentUser.name, email: currentUser.email
   });
   const isSubmitDisabled = values.name === '' || values.email === '' || !isValid;
 
@@ -26,7 +26,6 @@ function Profile(props) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    props.onEditSuccess();
     setFormIsDisabled(true);
   }
 
@@ -41,14 +40,14 @@ function Profile(props) {
         <section className="profile">
           <form name="profile-form" className="profile__form" onSubmit={handleSubmit} noValidate>
             <fieldset className="profile__user-info" disabled={props.isFormLoading || isFormDisabled}>
-              <legend className="profile__greeting">Привет, {userName}!</legend>
+              <legend className="profile__greeting">Привет, {currentUser.name}!</legend>
               <label className="profile__form-label">Имя
                 <input type="text" name="name" required
                   autoComplete="off"
                   minLength="2"
                   maxLength="30"
                   className="profile__form-input"
-                  value={values.name || userName}
+                  value={values.name}
                   onChange={handleChange}
                   ref={inputRef}
                 />
@@ -57,7 +56,7 @@ function Profile(props) {
                 <input type="email" name="email" required
                   autoComplete="off"
                   className="profile__form-input"
-                  value={values.email || userEmail}
+                  value={values.email}
                   onChange={handleChange}
                   pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"
                 />

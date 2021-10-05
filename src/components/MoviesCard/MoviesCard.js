@@ -1,23 +1,14 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+// import CurrentUserContext from '../../contexts/CurrentUserContext';
 import './MoviesCard.css';
 import { apiUrl } from '../../utils/constants';
 
 function MoviesCard(props) {
+  // const currentUser = React.useContext(CurrentUserContext);
   const location = useLocation();
   const [savedMovie, setSavedMovie] = React.useState(false);
   const movieDuration = timeConvert(props.movie.duration);
-
-  const isMovieSaved = `${location.pathname === '/movies' && savedMovie ? "movie-card__button_saved" : ""}`
-  const buttonClassName = `app__button movie-card__button ${
-    location.pathname === '/movies'
-      ? "movie-card__button_action_save"
-      : "movie-card__button_action_delete"
-  } ${isMovieSaved}`;
-  const buttonLabel = location.pathname === '/movies' && !isMovieSaved
-    ? "Сохранить"
-    : "Удалить";
-
   const newMovie = {
     country: props.movie.country,
     director: props.movie.director,
@@ -29,33 +20,51 @@ function MoviesCard(props) {
     thumbnail: `${apiUrl}${props.movie.image.formats.thumbnail.url}`,
     movieId: props.movie.id,
     nameRU: props.movie.nameRU,
-    nameEN: props.movie.nameEN
+    nameEN: props.movie.nameEN,
+    // _id: props.movie._id,
   }
 
-  React.useEffect(() => {
-    if (location.pathname === '/movies' && props.movie.saved) {
-      setSavedMovie(true);
-    }
-  }, [setSavedMovie, location, props]);
+  const isMovieSaved = `${location.pathname === '/movies' && savedMovie ? "movie-card__button_saved" : ""}`
+  const buttonClassName = `app__button movie-card__button ${
+    location.pathname === '/movies'
+      ? "movie-card__button_action_save"
+      : "movie-card__button_action_delete"
+  } ${isMovieSaved}`;
+  const buttonLabel = location.pathname === '/movies' && !isMovieSaved
+    ? "Сохранить"
+    : "Удалить";
+
+  // React.useEffect(() => {
+  //   if (location.pathname === '/movies' && props.movie.saved) {
+  //     setSavedMovie(true);
+  //   }
+  // }, [setSavedMovie, location, props]);
 
   function handleBtnClick(e) {
-    if (location.pathname === '/movies' && !savedMovie) {
-      handleSaveBntClick();
+    if (!savedMovie) {
+      handleSaveClick();
     } else {
-      setSavedMovie(false);
+      handleDeleteClick();
     }
 
-    if (location.pathname === '/saved-movies') {
-      const card = e.target.closest('.card-list__list-item');
-      card.remove();
-    }
+    // if (location.pathname === '/saved-movies') {
+    //   const card = e.target.closest('.card-list__list-item');
+    //   card.remove();
+    // }
   }
 
-  function handleSaveBntClick() {
-    // console.log(newMovie.thumbnail);
+  function handleSaveClick() {
     props.onMovieSave(newMovie);
     setSavedMovie(true);
   }
+
+  function handleDeleteClick() {
+    props.onMovieDelete(newMovie);
+    setSavedMovie(false);
+    // console.log(newMovie._id);
+  }
+
+
 
   function timeConvert(num) {
     const hours = Math.floor(num / 60);

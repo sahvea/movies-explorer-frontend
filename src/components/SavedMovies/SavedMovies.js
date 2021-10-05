@@ -10,7 +10,11 @@ function SavedMovies(props) {
       <Header loggedIn={props.loggedIn} />
       <main className="movies movies_position_saved">
         <SearchForm />
-        <MoviesCardList movies={props.movies} isLoading={props.isLoading}/>
+        <MoviesCardList
+          movies={props.movies}
+          onMovieDelete={props.onMovieDelete}
+          isLoading={props.isLoading}
+        />
       </main>
       <Footer isLoading={props.isLoading}/>
     </>

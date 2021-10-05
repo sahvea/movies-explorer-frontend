@@ -31,11 +31,7 @@ function App() {
   const [infoPopupError, setInfoPopupError] = React.useState('');
   const [movies, setMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
-  const [currentUser, setCurrentUser] = React.useState({
-    name: '',
-    email: '',
-    _id: ''
-  });
+  const [currentUser, setCurrentUser] = React.useState({});
 
 
   const handleTokenCheck = React.useCallback(() => {
@@ -53,12 +49,13 @@ function App() {
 
   React.useEffect(() => {
     if (loggedIn) {
-      handleTokenCheck();
+      // handleTokenCheck();
 
       setIsLoading(true);
       moviesApi.getMovies()
         .then(movies => {
           setMovies(movies);
+          // console.log(movies);
         })
         .catch((err) => console.log(err))
         .finally(() => setIsLoading(false));
@@ -67,12 +64,13 @@ function App() {
         .then(movies => {
           const savedMoviesArray = movies.filter(movie => movie.owner === currentUser._id);
           setSavedMovies(savedMoviesArray);
+          // console.log(savedMovies);
         })
         .catch((err) => console.log(err))
         .finally(() => setIsLoading(false));
     }
 
-  }, [loggedIn, handleTokenCheck, currentUser._id]);
+  }, [currentUser._id, loggedIn]);
 
   // React.useEffect(() => {
   //   handleTokenCheck();
@@ -121,7 +119,7 @@ function App() {
     setIsFormLoading(true);
     authApi.login(email, password)
       .then(() => {
-        // handleTokenCheck();
+        handleTokenCheck();
         setLoggedIn(true);
         history.push('/movies');
       })
@@ -158,10 +156,27 @@ function App() {
   }
 
   function handleMovieSave(movie) {
-
     mainApi.createMovie(movie)
-      .then(({ movieData }) => {
-        setSavedMovies([...savedMovies, movieData]);
+      .then((newMovie) => {
+        setSavedMovies([newMovie, ...savedMovies]);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function handleMovieDelete(movie) {
+    const movieToDelete = movie.id
+      ? savedMovies.find((m) => m.movieId === String(movie.id))
+      : movie;
+
+    console.log(movie);
+
+    mainApi.deleteMovie(movieToDelete._id)
+      .then(() => {
+        setSavedMovies(
+          savedMovies.filter((m) => movie.id
+            ? m.movieid !== String(movie.id)
+            : m._id !== movie._id)
+        );
       })
       .catch((err) => console.log(err));
   }
@@ -219,11 +234,13 @@ function App() {
           loggedIn={loggedIn}
           movies={movies}
           onMovieSave={handleMovieSave}
+          onMovieDelete={handleMovieDelete}
           isLoading={isLoading}
         />
         <ProtectedRoute path="/saved-movies" component={SavedMovies}
           loggedIn={loggedIn}
           movies={savedMovies}
+          onMovieDelete={handleMovieDelete}
           isLoading={isLoading}
         />
         <ProtectedRoute path="/profile" component={Profile}

@@ -74,6 +74,14 @@ class MainApi {
     })
     .then((res) => this._checkResponse(res));
   }
+
+  // changeMovieStatus(movie, movieId, isSaved) {
+  //   if (isSaved) {
+  //     return this.deleteMovie(movieId);
+  //   } else {
+  //     return this.createMovie(movie);
+  //   }
+  // }
 }
 
 const mainApi = new MainApi({

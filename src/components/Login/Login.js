@@ -22,7 +22,7 @@ function Login(props) {
         <AuthForm name={'login-form'} title={'Рады видеть!'} buttonText={'Войти'} onSubmit={handleSubmit} isSubmitDisabled={isSubmitDisabled} isFormLoading={props.isFormLoading}>
           <label className="auth__form-label">E-mail
             <input type="email" name="email" required
-              autoComplete="off"
+              autoComplete="on"
               className={`auth__form-input ${errors.email ? "auth__form-input_type_error" : ""}`}
               value={values.email || ''}
               onChange={handleChange}

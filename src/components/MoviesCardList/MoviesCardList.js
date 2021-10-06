@@ -69,6 +69,7 @@ function MoviesCardList(props) {
         <li className="card-list__list-item" key={movie.id} >
           <MoviesCard
             movie={movie}
+            savedMovies={props.savedMovies}
             onMovieSave={props.onMovieSave}
             onMovieDelete={props.onMovieDelete}
           />

@@ -12,6 +12,7 @@ function Movies(props) {
         <SearchForm />
         <MoviesCardList
           movies={props.movies}
+          savedMovies={props.savedMovies}
           onMovieSave={props.onMovieSave}
           onMovieDelete={props.onMovieDelete}
           isLoading={props.isLoading}

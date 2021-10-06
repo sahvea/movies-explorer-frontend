@@ -57,7 +57,6 @@ class MainApi {
         image: movie.image,
         trailer: movie.trailer,
         thumbnail: movie.thumbnail,
-        // owner: movie.owner,
         movieId: movie.movieId,
         nameRU: movie.nameRU,
         nameEN: movie.nameEN,
@@ -74,14 +73,6 @@ class MainApi {
     })
     .then((res) => this._checkResponse(res));
   }
-
-  // changeMovieStatus(movie, movieId, isSaved) {
-  //   if (isSaved) {
-  //     return this.deleteMovie(movieId);
-  //   } else {
-  //     return this.createMovie(movie);
-  //   }
-  // }
 }
 
 const mainApi = new MainApi({

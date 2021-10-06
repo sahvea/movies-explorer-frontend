@@ -15,9 +15,7 @@ import InfoPopup from '../InfoPopup/InfoPopup';
 import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 import authApi from '../../utils/AuthApi';
-import { codeStatuses, errorMessages } from '../../utils/constants';
-
-// import savedMovies from '../../utils/savedMovies';
+import { codeStatuses, errorMessages, apiUrl } from '../../utils/constants';
 
 function App() {
   const history = useHistory();
@@ -33,29 +31,19 @@ function App() {
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({});
 
-
-  const handleTokenCheck = React.useCallback(() => {
-    mainApi.getUserInfo()
-      .then((res) => {
-        setCurrentUser({
-          name: res.name,
-          email: res.email,
-          _id: res._id
-        });
-        setLoggedIn(true);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
   React.useEffect(() => {
     if (loggedIn) {
-      // handleTokenCheck();
-
       setIsLoading(true);
       moviesApi.getMovies()
         .then(movies => {
-          setMovies(movies);
-          // console.log(movies);
+          const movieList = movies.map(movie => ({
+            ...movie,
+            trailer: movie.trailerLink,
+            image: `${apiUrl}${movie.image.url}`,
+            thumbnail: `${apiUrl}${movie.image.formats.thumbnail.url}`,
+            movieId: movie.id,
+          }));
+          setMovies(movieList);
         })
         .catch((err) => console.log(err))
         .finally(() => setIsLoading(false));
@@ -64,17 +52,12 @@ function App() {
         .then(movies => {
           const savedMoviesArray = movies.filter(movie => movie.owner === currentUser._id);
           setSavedMovies(savedMoviesArray);
-          // console.log(savedMovies);
         })
         .catch((err) => console.log(err))
         .finally(() => setIsLoading(false));
     }
 
   }, [currentUser._id, loggedIn]);
-
-  // React.useEffect(() => {
-  //   handleTokenCheck();
-  // }, [handleTokenCheck])
 
   React.useEffect(() => {
     function handleEscClose(evt) {
@@ -101,6 +84,28 @@ function App() {
       document.removeEventListener('click', handleOverlayClose);
     };
   }, []);
+
+
+  /* ---------------------------------------------- */
+  /* -= регистрация, авторизация, аутентификация =- */
+  /* ---------------------------------------------- */
+
+  const handleTokenCheck = React.useCallback(() => {
+    mainApi.getUserInfo()
+      .then((res) => {
+        setCurrentUser({
+          name: res.name,
+          email: res.email,
+          _id: res._id
+        });
+        setLoggedIn(true);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  React.useEffect(() => {
+    handleTokenCheck();
+  }, [handleTokenCheck])
 
   function handleRegistration(email, password, name) {
     setIsFormLoading(true);
@@ -155,6 +160,11 @@ function App() {
       .finally(() => setIsFormLoading(false));
   }
 
+
+  /* -------------------------------- */
+  /* -= сохранение/удаление фильма =- */
+  /* -------------------------------- */
+
   function handleMovieSave(movie) {
     mainApi.createMovie(movie)
       .then((newMovie) => {
@@ -164,22 +174,19 @@ function App() {
   }
 
   function handleMovieDelete(movie) {
-    const movieToDelete = movie.id
-      ? savedMovies.find((m) => m.movieId === String(movie.id))
-      : movie;
-
-    console.log(movie);
+    const movieToDelete = savedMovies.find((m) => m.movieId === movie.id);
 
     mainApi.deleteMovie(movieToDelete._id)
       .then(() => {
-        setSavedMovies(
-          savedMovies.filter((m) => movie.id
-            ? m.movieid !== String(movie.id)
-            : m._id !== movie._id)
-        );
+        setSavedMovies(savedMovies.filter((m) => m._id !== movieToDelete._id));
       })
       .catch((err) => console.log(err));
   }
+
+
+  /* ---------------------- */
+  /* -= обработка ошибок =- */
+  /* ---------------------- */
 
   function checkErrorStatus(errorStatus) {
     if (errorStatus === codeStatuses.internalServerErr) {
@@ -192,6 +199,7 @@ function App() {
       } else {
         handleActionError(errorMessages.registratioError);
       }
+      return;
     }
     if (location.pathname === '/signin') {
       if (errorStatus === codeStatuses.unauthorizedErr) {
@@ -199,6 +207,7 @@ function App() {
       } else {
         handleActionError(errorMessages.authServerError);
       }
+      return;
     }
     if (location.pathname === '/profile') {
       if (errorStatus === codeStatuses.conflictErr) {
@@ -206,7 +215,9 @@ function App() {
       } else {
         handleActionError(errorMessages.updateProfileError);
       }
+      return;
     }
+    handleActionError(errorMessages.serverError);
   }
 
   function handleActionSuccess() {
@@ -233,6 +244,7 @@ function App() {
         <ProtectedRoute path="/movies" component={Movies}
           loggedIn={loggedIn}
           movies={movies}
+          savedMovies={savedMovies}
           onMovieSave={handleMovieSave}
           onMovieDelete={handleMovieDelete}
           isLoading={isLoading}
@@ -240,6 +252,7 @@ function App() {
         <ProtectedRoute path="/saved-movies" component={SavedMovies}
           loggedIn={loggedIn}
           movies={savedMovies}
+          savedMovies={savedMovies}
           onMovieDelete={handleMovieDelete}
           isLoading={isLoading}
         />

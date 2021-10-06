@@ -80,6 +80,10 @@
   color: var(--font-main-color);
 }
 
+.auth__form-btn:active {
+  transform: scale(.95);
+}
+
 .auth__redirection {
   margin-top: 16px;
   display: flex;

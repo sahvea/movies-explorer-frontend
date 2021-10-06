@@ -1,11 +1,11 @@
-/* eslint-disable no-useless-escape */
+
 const apiUrl = 'https://api.nomoreparties.co';
 const moviesApiBaseUrl = 'https://api.nomoreparties.co/beatfilm-movies';
 const mainApiBaseUrl = 'https://api.sahvea.diploma.nomoredomains.club';
 
 const patterns = {
-  name: '^[a-zA-Zа-яА-ЯЁё\s\-]+$',
-  email: '^[^@\s]+@[^@\s]+\.[^@\s]+$',
+  name: '^[a-zA-Zа-яА-ЯЁё\\s\\-]+$',
+  email: '^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$',
 };
 
 const codeStatuses = {

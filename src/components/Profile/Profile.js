@@ -23,12 +23,12 @@ function Profile(props) {
 
   function handleEditBtnClick() {
     setFormIsDisabled(false);
-    inputRef.current.focus();
+    window.setTimeout(setFocus, 50);
   }
 
-  // React.useEffect(() => {
-  //   inputRef.current.focus();
-  // }, [])
+  const setFocus = React.useCallback(() => {
+    inputRef.current.focus();
+  }, []);
 
   function handleSubmit(e) {
     e.preventDefault();

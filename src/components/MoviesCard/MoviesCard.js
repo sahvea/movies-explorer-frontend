@@ -6,20 +6,21 @@ import './MoviesCard.css';
 function MoviesCard(props) {
   const currentUser = React.useContext(CurrentUserContext);
   const location = useLocation();
-  const [savedMovie, setSavedMovie] = React.useState(false);
-  const movieDuration = timeConvert(props.movie.duration);
+  const [isActiveClass, setActiveClass] = React.useState(false);
 
-  const isMovieSaved = `${location.pathname === '/movies' && savedMovie ? "movie-card__button_saved" : ""}`
+  const movieDuration = timeConvert(props.movie.duration);
+  const isMovieSaved = `${location.pathname === '/movies' && isActiveClass
+    ? "movie-card__button_saved"
+    : ""
+  }`
   const buttonClassName = `app__button movie-card__button ${
     location.pathname === '/movies'
       ? "movie-card__button_action_save"
       : "movie-card__button_action_delete"
-  } ${location.pathname === '/movies' && savedMovie ? "movie-card__button_saved" : ""}`;
+  } ${isMovieSaved}`;
   const buttonLabel = location.pathname === '/movies' && !isMovieSaved
     ? "Сохранить"
     : "Удалить";
-
-  const SM = props.savedMovies.some((m) => m.movieId === props.movie.movieId && m.owner === currentUser._id);
 
   // React.useEffect(() => {
   //   const savedMoviesList = props.savedMovies.some((m) => {
@@ -31,9 +32,9 @@ function MoviesCard(props) {
   //   }
   // }, [setSavedMovie, location, props, currentUser._id]);
 
-  function handleBtnClick(e) {
+  function handleBtnClick() {
     if (location.pathname === '/movies') {
-      if (!savedMovie) {
+      if (!isActiveClass) {
         handleSaveClick();
       } else {
         handleDeleteClick();
@@ -42,22 +43,25 @@ function MoviesCard(props) {
       handleDeleteClick();
     }
 
-    // if (location.pathname === '/saved-movies') {
-    //   const card = e.target.closest('.card-list__list-item');
-    //   card.remove();
-    // }
+    checkIsMovieSaved(props.movie);
   }
 
   function handleSaveClick() {
     props.onMovieSave(props.movie);
-    setSavedMovie(true);
   }
 
   function handleDeleteClick() {
     props.onMovieDelete(props.movie);
-    setSavedMovie(false);
   }
 
+  function checkIsMovieSaved(movie) {
+    const savedMovie = props.savedMovies.some((m) => m.movieId === movie.movieId && m.owner === currentUser._id);
+    if (!savedMovie) {
+      setActiveClass(true);
+    } else {
+      setActiveClass(false);
+    }
+  }
 
 
   function timeConvert(num) {

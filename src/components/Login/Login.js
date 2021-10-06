@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../Header/Header';
 import AuthForm from '../AuthForm/AuthForm';
 import { useFormValidation } from '../../hooks/useFormValidation';
+import { patterns } from '../../utils/constants';
 
 function Login(props) {
   const { values, errors, isValid, handleChange } = useFormValidation({
@@ -26,7 +27,7 @@ function Login(props) {
               className={`auth__form-input ${errors.email ? "auth__form-input_type_error" : ""}`}
               value={values.email || ''}
               onChange={handleChange}
-              pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"
+              pattern={patterns.email}
             />
             {errors.email && <span className="auth__form-error">{errors.email}</span>}
           </label>

@@ -4,8 +4,7 @@ import './Profile.css';
 import Header from '../Header/Header';
 import DotsLoader from '../DotsLoader/DotsLoader';
 import { useFormValidation } from '../../hooks/useFormValidation';
-
-// test@test-email.ru
+import { patterns } from '../../utils/constants';
 
 function Profile(props) {
   const [isFormDisabled, setFormIsDisabled] = React.useState(true);
@@ -59,6 +58,7 @@ function Profile(props) {
                   value={values.name}
                   onChange={handleChange}
                   ref={inputRef}
+                  pattern={patterns.name}
                 />
                 {errors.name && <span className="profile__form-error">{errors.name}</span>}
               </label>
@@ -68,7 +68,7 @@ function Profile(props) {
                   className={`profile__form-input ${errors.email ? "profile__form-input_type_error" : ""}`}
                   value={values.email}
                   onChange={handleChange}
-                  pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"
+                  pattern={patterns.email}
                 />
                 {errors.email && <span className="profile__form-error">{errors.email}</span>}
 

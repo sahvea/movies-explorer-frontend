@@ -1,6 +1,12 @@
+/* eslint-disable no-useless-escape */
 const apiUrl = 'https://api.nomoreparties.co';
 const moviesApiBaseUrl = 'https://api.nomoreparties.co/beatfilm-movies';
 const mainApiBaseUrl = 'https://api.sahvea.diploma.nomoredomains.club';
+
+const patterns = {
+  name: '^[a-zA-Zа-яА-ЯЁё\s\-]+$',
+  email: '^[^@\s]+@[^@\s]+\.[^@\s]+$',
+};
 
 const codeStatuses = {
   badRequestErr: 400,
@@ -21,4 +27,4 @@ const errorMessages = {
   serverError: 'На сервере произошла ошибка.',
 };
 
-export { apiUrl, moviesApiBaseUrl, mainApiBaseUrl, codeStatuses, errorMessages };
+export { apiUrl, moviesApiBaseUrl, mainApiBaseUrl, patterns, codeStatuses, errorMessages };

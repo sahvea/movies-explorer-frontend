@@ -34,8 +34,12 @@ function App() {
   React.useEffect(() => {
     if (loggedIn) {
       setIsLoading(true);
-      moviesApi.getMovies()
-        .then(movies => {
+
+      Promise.all([
+        moviesApi.getMovies(),
+        mainApi.getMovies()
+      ])
+        .then(([movies, localMovies]) => {
           const movieList = movies.map(movie => ({
             ...movie,
             trailer: movie.trailerLink,
@@ -44,17 +48,35 @@ function App() {
             movieId: movie.id,
           }));
           setMovies(movieList);
-        })
-        .catch((err) => console.log(err))
-        .finally(() => setIsLoading(false));
 
-      mainApi.getMovies()
-        .then(movies => {
-          const savedMoviesArray = movies.filter(movie => movie.owner === currentUser._id);
+          const savedMoviesArray = localMovies.filter(movie => movie.owner === currentUser._id);
           setSavedMovies(savedMoviesArray);
         })
         .catch((err) => console.log(err))
         .finally(() => setIsLoading(false));
+
+      // moviesApi.getMovies()
+      //   .then(movies => {
+      //     const movieList = movies.map(movie => ({
+      //       ...movie,
+      //       trailer: movie.trailerLink,
+      //       image: `${apiUrl}${movie.image.url}`,
+      //       thumbnail: `${apiUrl}${movie.image.formats.thumbnail.url}`,
+      //       movieId: movie.id,
+      //     }));
+      //     setMovies(movieList);
+      //   })
+      //   .catch((err) => console.log(err))
+      //   .finally(() => setIsLoading(false));
+
+      // mainApi.getMovies()
+      //   .then(movies => {
+      //     const savedMoviesArray = movies.filter(movie => movie.owner === currentUser._id);
+      //     setSavedMovies(savedMoviesArray);
+      //     // localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+      //   })
+      //   .catch((err) => console.log(err))
+      //   .finally(() => setIsLoading(false));
     }
 
   }, [currentUser._id, loggedIn]);

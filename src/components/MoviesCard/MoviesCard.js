@@ -1,15 +1,14 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import CurrentUserContext from '../../contexts/CurrentUserContext';
 import './MoviesCard.css';
 
 function MoviesCard(props) {
-  const currentUser = React.useContext(CurrentUserContext);
   const location = useLocation();
-  const [isActiveClass, setActiveClass] = React.useState(false);
+  const [isMovieSaved, setIsMovieSaved] = React.useState(props.savedMovies.some((m) => m.movieId === props.movie.movieId));
+  localStorage.setItem('savedMovies', JSON.stringify(props.savedMovies));
 
   const movieDuration = timeConvert(props.movie.duration);
-  const isMovieSaved = `${location.pathname === '/movies' && isActiveClass
+  const movieBtnSavedClass = `${location.pathname === '/movies' && isMovieSaved
     ? "movie-card__button_saved"
     : ""
   }`
@@ -17,52 +16,43 @@ function MoviesCard(props) {
     location.pathname === '/movies'
       ? "movie-card__button_action_save"
       : "movie-card__button_action_delete"
-  } ${isMovieSaved}`;
-  const buttonLabel = location.pathname === '/movies' && !isMovieSaved
-    ? "Сохранить"
-    : "Удалить";
+  } ${movieBtnSavedClass}`;
+  const buttonLabel = isMovieSaved ? "Удалить" : "Сохранить";
 
   // React.useEffect(() => {
   //   const savedMoviesList = props.savedMovies.some((m) => {
-  //     return m.movieId === props.movie.movieId && m.owner === currentUser._id;
+  //     return m.movieId === props.movie.movieId;
   //   });
 
   //   if (location.pathname === '/movies' && savedMoviesList) {
-  //     setSavedMovie(true);
+  //     setIsMovieSaved(true);
   //   }
-  // }, [setSavedMovie, location, props, currentUser._id]);
+  // }, [location, props]);
+
+  React.useEffect(() => {
+    const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
+    return savedMovies && savedMovies.some((m) => m.movieId === props.movie.movieId)
+      ? setIsMovieSaved(true)
+      : setIsMovieSaved(false);
+  }, [props.movie.movieId]);
 
   function handleBtnClick() {
-    if (location.pathname === '/movies') {
-      if (!isActiveClass) {
-        handleSaveClick();
-      } else {
-        handleDeleteClick();
-      }
-    } else {
+    if (isMovieSaved) {
       handleDeleteClick();
+    } else {
+      handleSaveClick();
     }
-
-    checkIsMovieSaved(props.movie);
   }
 
   function handleSaveClick() {
     props.onMovieSave(props.movie);
+    setIsMovieSaved(true);
   }
 
   function handleDeleteClick() {
     props.onMovieDelete(props.movie);
+    setIsMovieSaved(false);
   }
-
-  function checkIsMovieSaved(movie) {
-    const savedMovie = props.savedMovies.some((m) => m.movieId === movie.movieId && m.owner === currentUser._id);
-    if (!savedMovie) {
-      setActiveClass(true);
-    } else {
-      setActiveClass(false);
-    }
-  }
-
 
   function timeConvert(num) {
     const hours = Math.floor(num / 60);

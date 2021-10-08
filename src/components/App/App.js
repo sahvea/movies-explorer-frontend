@@ -15,7 +15,8 @@ import InfoPopup from '../InfoPopup/InfoPopup';
 import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 import authApi from '../../utils/AuthApi';
-import { codeStatuses, errorMessages, apiUrl } from '../../utils/constants';
+import { codeStatuses, errorMessages, infoMessages, apiUrl } from '../../utils/constants';
+import { filterMovies } from '../../utils/utils';
 
 function App() {
   const history = useHistory();
@@ -27,9 +28,12 @@ function App() {
   const [isActionSuccess, setIsActionSuccess] = React.useState(true);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false);
   const [infoPopupError, setInfoPopupError] = React.useState('');
+  const [currentUser, setCurrentUser] = React.useState({});
   const [movies, setMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
-  const [currentUser, setCurrentUser] = React.useState({});
+  const [searchedMovies, setSearchedMovies] = React.useState([]);
+  const [searchedSavedMovies, setSearchedSavedMovies] = React.useState([]);
+  const [searchResponse, setSearchResponse] = React.useState('');
 
   React.useEffect(() => {
     if (loggedIn) {
@@ -183,6 +187,39 @@ function App() {
   }
 
 
+  /* ------------------ */
+  /* -= поиск фильма =- */
+  /* ------------------ */
+
+  function searchMovies(keyword, isChecked) {
+    setIsLoading(true);
+
+    try {
+      const filteredMovies = filterMovies(movies, keyword, isChecked);
+      setSearchedMovies(filteredMovies);
+      localStorage.setItem('searchedMovies', JSON.stringify(filteredMovies));
+    } catch {
+      setSearchResponse(errorMessages.moviesSearchError);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  function searchSavedMovies(keyword, isChecked) {
+    setIsLoading(true);
+
+    try {
+      const filteredMovies = filterMovies(savedMovies, keyword, isChecked);
+      setSearchedSavedMovies(filteredMovies);
+    } catch (err) {
+      setSearchResponse(errorMessages.moviesSearchError);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+
+
   /* -------------------------------- */
   /* -= сохранение/удаление фильма =- */
   /* -------------------------------- */
@@ -265,17 +302,21 @@ function App() {
         </Route>
         <ProtectedRoute path="/movies" component={Movies}
           loggedIn={loggedIn}
-          movies={movies}
+          movies={searchedMovies}
           savedMovies={savedMovies}
           onMovieSave={handleMovieSave}
           onMovieDelete={handleMovieDelete}
+          searchMovies={searchMovies}
+          searchResponse={searchResponse}
           isLoading={isLoading}
         />
         <ProtectedRoute path="/saved-movies" component={SavedMovies}
           loggedIn={loggedIn}
           movies={savedMovies}
-          savedMovies={savedMovies}
+          savedMovies={searchedSavedMovies}
           onMovieDelete={handleMovieDelete}
+          searchMovies={searchSavedMovies}
+          searchResponse={searchResponse}
           isLoading={isLoading}
         />
         <ProtectedRoute path="/profile" component={Profile}

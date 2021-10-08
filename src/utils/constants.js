@@ -25,6 +25,11 @@ const errorMessages = {
   authServerError: 'При авторизации произошла ошибка. Токен не передан или передан не в том формате.',
   updateProfileError: 'При обновлении профиля произошла ошибка.',
   serverError: 'На сервере произошла ошибка.',
+  moviesSearchError: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.',
 };
 
-export { apiUrl, moviesApiBaseUrl, mainApiBaseUrl, patterns, codeStatuses, errorMessages };
+const infoMessages = {
+  moviesNotFound: 'Ничего не найдено.',
+}
+
+export { apiUrl, moviesApiBaseUrl, mainApiBaseUrl, patterns, codeStatuses, errorMessages, infoMessages };

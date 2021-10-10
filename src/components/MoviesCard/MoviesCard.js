@@ -1,13 +1,14 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import './MoviesCard.css';
+import { convertTime } from '../../utils/utils';
 
 function MoviesCard(props) {
   const location = useLocation();
   const [isMovieSaved, setIsMovieSaved] = React.useState(props.savedMovies.some((m) => m.movieId === props.movie.movieId));
   localStorage.setItem('savedMovies', JSON.stringify(props.savedMovies));
 
-  const movieDuration = timeConvert(props.movie.duration);
+  const movieDuration = convertTime(props.movie.duration);
   const movieBtnSavedClass = `${location.pathname === '/movies' && isMovieSaved
     ? "movie-card__button_saved"
     : ""
@@ -18,16 +19,6 @@ function MoviesCard(props) {
       : "movie-card__button_action_delete"
   } ${movieBtnSavedClass}`;
   const buttonLabel = isMovieSaved ? "Удалить" : "Сохранить";
-
-  // React.useEffect(() => {
-  //   const savedMoviesList = props.savedMovies.some((m) => {
-  //     return m.movieId === props.movie.movieId;
-  //   });
-
-  //   if (location.pathname === '/movies' && savedMoviesList) {
-  //     setIsMovieSaved(true);
-  //   }
-  // }, [location, props]);
 
   React.useEffect(() => {
     const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
@@ -52,12 +43,6 @@ function MoviesCard(props) {
   function handleDeleteClick() {
     props.onMovieDelete(props.movie);
     setIsMovieSaved(false);
-  }
-
-  function timeConvert(num) {
-    const hours = Math.floor(num / 60);
-    const minutes = num % 60;
-    return hours + 'ч ' + minutes + 'м';
   }
 
   return (

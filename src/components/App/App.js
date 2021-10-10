@@ -15,7 +15,7 @@ import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 import authApi from '../../utils/AuthApi';
 import { codeStatuses, errorMessages } from '../../utils/constants';
-import { renderMovies, filterMovies } from '../../utils/utils';
+import { parseMovies, filterMovies } from '../../utils/utils';
 
 function App() {
   const history = useHistory();
@@ -32,12 +32,13 @@ function App() {
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [searchedMovies, setSearchedMovies] = React.useState([]);
 
+
   const getInitialMovies = React.useCallback(() => {
     setIsLoading(true);
 
     moviesApi.getMovies()
       .then(movies => {
-        const movieList = renderMovies(movies);
+        const movieList = parseMovies(movies);
         setMovies(movieList);
       })
       .catch(err => {

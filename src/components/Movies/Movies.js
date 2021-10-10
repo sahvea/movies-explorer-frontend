@@ -26,9 +26,7 @@ function Movies(props) {
           savedMovies={props.savedMovies}
           onMovieSave={props.onMovieSave}
           onMovieDelete={props.onMovieDelete}
-          // searchResponse={props.searchResponse}
           isLoading={props.isLoading}
-          // isFormLoading={props.isFormLoading}
         />
       </main>
       <Footer isLoading={props.isLoading}/>

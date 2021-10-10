@@ -1,4 +1,4 @@
-import { apiUrl } from "./constants";
+import { apiUrl } from './constants' ;
 
 export function parseMovies(movies) {
   return movies.map(movie => ({
@@ -29,9 +29,7 @@ export function filterMovies(movies, keyword) {
 
 export function filterShortMovies(movies) {
   const maxMovieDuration = 40;
-
   const shortMoviesArray = movies.filter(movie => movie.duration <= maxMovieDuration);
-
   return shortMoviesArray;
 }
 
@@ -39,5 +37,4 @@ export function convertTime(num) {
   const hours = Math.floor(num / 60);
   const minutes = num % 60;
   return hours ? `${hours}ч ${minutes}м` : `${minutes}м`;
-
 }

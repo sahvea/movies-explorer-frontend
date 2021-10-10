@@ -1,17 +1,28 @@
+import React from 'react';
 import '../Movies/Movies.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import { filterShortMovies } from '../../utils/utils';
 
 function SavedMovies(props) {
+  const [shortMovies, setShortMovies] = React.useState([]);
+  const [isChecked, setIsChecked] = React.useState(false);
+
+  React.useEffect(() => {
+    if (isChecked) {
+      setShortMovies(filterShortMovies(props.movies));
+    }
+  }, [isChecked, props]);
+
   return (
     <>
       <Header loggedIn={props.loggedIn} />
       <main className="movies movies_position_saved">
-        <SearchForm />
+        <SearchForm onMoviesSearch={props.onMoviesSearch} setIsChecked={setIsChecked} isLoading={props.isLoading} />
         <MoviesCardList
-          movies={props.movies}
+          movies={isChecked ? shortMovies : props.movies}
           savedMovies={props.savedMovies}
           onMovieDelete={props.onMovieDelete}
           isLoading={props.isLoading}

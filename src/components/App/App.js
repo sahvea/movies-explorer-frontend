@@ -31,6 +31,7 @@ function App() {
   const [movies, setMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [searchedMovies, setSearchedMovies] = React.useState([]);
+  const [searchedSavedMovies, setSearchedSavedMovies] = React.useState([]);
 
 
   const getInitialMovies = React.useCallback(() => {
@@ -48,16 +49,6 @@ function App() {
       .finally(() => setIsLoading(false));
   }, []);
 
-  function getUserMovies() {
-    mainApi.getMovies()
-      .then(movies => {
-        const savedMoviesArray = movies.filter(movie => movie.owner === currentUser._id);
-        setSavedMovies(savedMoviesArray);
-        // localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-      })
-      .catch((err) => console.log(err));
-  }
-
   React.useEffect(() => {
     if (loggedIn) {
       const searchResult = JSON.parse(localStorage.getItem('searchResult'));
@@ -68,8 +59,17 @@ function App() {
       else {
         getInitialMovies();
       }
+
+      mainApi.getMovies()
+        .then(movies => {
+          const userMovies = movies.filter(movie => movie.owner === currentUser._id);
+          setSavedMovies(userMovies);
+          setSearchedSavedMovies(userMovies);
+          // localStorage.setItem('savedMovies', JSON.stringify(userMovies));
+        })
+        .catch(err => console.log(err));
     }
-  }, [getInitialMovies, loggedIn]);
+  }, [currentUser._id, getInitialMovies, loggedIn]);
 
 
   /* =--- регистрация, авторизация, аутентификация ---= */
@@ -122,8 +122,9 @@ function App() {
         localStorage.removeItem('searchResult');
         setCurrentUser({});
         setMovies([]);
-        setSearchedMovies([]);
         setSavedMovies([]);
+        setSearchedMovies([]);
+        setSearchedSavedMovies([]);
         setLoggedIn(false);
         history.push('/');
       })
@@ -153,14 +154,12 @@ function App() {
 
   function handleSearchMovies(keyword) {
     getInitialMovies();
-    setTimeout(() => setIsLoading(false), 1000);
     setSearchedMovies(filterMovies(movies, keyword));
     localStorage.setItem('searchResult', JSON.stringify(filterMovies(movies, keyword)));
   }
 
   function handleSearchSavedMovies(keyword) {
-      setTimeout(() => setIsLoading(false), 2000);
-      setSavedMovies(filterMovies(savedMovies, keyword));
+    setSearchedSavedMovies(filterMovies(savedMovies, keyword));
   }
 
 
@@ -168,20 +167,23 @@ function App() {
 
   function handleMovieSave(movie) {
     mainApi.createMovie(movie)
-      .then((newMovie) => {
+      .then(newMovie => {
         setSavedMovies([newMovie, ...savedMovies]);
+        setSearchedSavedMovies([newMovie, ...savedMovies])
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
   }
 
   function handleMovieDelete(movie) {
-    const movieToDelete = savedMovies.find((m) => m.movieId === movie.id);
+    const movieToDelete = savedMovies.find(m => m.movieId === movie.movieId);
 
     mainApi.deleteMovie(movieToDelete._id)
       .then(() => {
-        setSavedMovies(savedMovies.filter((m) => m._id !== movieToDelete._id));
+        const filtedMovies = savedMovies.filter(m => m._id !== movieToDelete._id);
+        setSavedMovies(filtedMovies);
+        setSearchedSavedMovies(filtedMovies);
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
   }
 
 
@@ -277,7 +279,7 @@ function App() {
         />
         <ProtectedRoute path="/saved-movies" component={SavedMovies}
           loggedIn={loggedIn}
-          movies={savedMovies}
+          movies={searchedSavedMovies}
           savedMovies={savedMovies}
           onMovieDelete={handleMovieDelete}
           onMoviesSearch={handleSearchSavedMovies}

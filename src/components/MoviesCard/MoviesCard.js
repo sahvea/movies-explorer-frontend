@@ -5,8 +5,9 @@ import { convertTime } from '../../utils/utils';
 
 function MoviesCard(props) {
   const location = useLocation();
-  const [isMovieSaved, setIsMovieSaved] = React.useState(props.savedMovies.some((m) => m.movieId === props.movie.movieId));
-  localStorage.setItem('savedMovies', JSON.stringify(props.savedMovies));
+  const [isMovieSaved, setIsMovieSaved] = React.useState(false);
+
+  // localStorage.setItem('savedMovies', JSON.stringify(props.savedMovies));
 
   const movieDuration = convertTime(props.movie.duration);
   const movieBtnSavedClass = `${location.pathname === '/movies' && isMovieSaved
@@ -21,18 +22,19 @@ function MoviesCard(props) {
   const buttonLabel = isMovieSaved ? "Удалить" : "Сохранить";
 
   React.useEffect(() => {
-    const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
-    return savedMovies && savedMovies.some((m) => m.movieId === props.movie.movieId)
-      ? setIsMovieSaved(true)
-      : setIsMovieSaved(false);
-  }, [props.movie.movieId]);
+    // const movies = JSON.parse(localStorage.getItem('movies'));
+
+    if (props.savedMovies.some(m => m.movieId === props.movie.movieId)) {
+      setIsMovieSaved(true);
+    }
+
+    // return savedMovies && savedMovies.some(m => m.movieId === props.movie.movieId)
+    //   ? setIsMovieSaved(true)
+    //   : setIsMovieSaved(false);
+  }, [props.movie.movieId, props.savedMovies]);
 
   function handleBtnClick() {
-    if (isMovieSaved) {
-      handleDeleteClick();
-    } else {
-      handleSaveClick();
-    }
+    isMovieSaved ? handleDeleteClick() : handleSaveClick();
   }
 
   function handleSaveClick() {

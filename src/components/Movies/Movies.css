@@ -9,6 +9,13 @@
   padding-bottom: 60px;
 }
 
+.movies__search-message {
+  margin: 50px 0;
+  text-align: center;
+  font-size: 14px;
+  color: var(--font-main-color);
+}
+
 @media screen and (max-width: 1023px) {
   .movies {
     padding-left: 30px;

@@ -11,12 +11,11 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import NotFound from '../NotFound/NotFound';
 import InfoPopup from '../InfoPopup/InfoPopup';
-
 import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 import authApi from '../../utils/AuthApi';
-import { codeStatuses, errorMessages, infoMessages, apiUrl } from '../../utils/constants';
-import { filterMovies } from '../../utils/utils';
+import { codeStatuses, errorMessages } from '../../utils/constants';
+import { renderMovies, filterMovies } from '../../utils/utils';
 
 function App() {
   const history = useHistory();
@@ -32,93 +31,51 @@ function App() {
   const [movies, setMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [searchedMovies, setSearchedMovies] = React.useState([]);
-  const [searchedSavedMovies, setSearchedSavedMovies] = React.useState([]);
-  const [searchResponse, setSearchResponse] = React.useState('');
+
+  const getInitialMovies = React.useCallback(() => {
+    setIsLoading(true);
+
+    moviesApi.getMovies()
+      .then(movies => {
+        const movieList = renderMovies(movies);
+        setMovies(movieList);
+      })
+      .catch(err => {
+        console.log(err);
+        handleActionError(errorMessages.moviesSearchError);
+      })
+      .finally(() => setIsLoading(false));
+  }, []);
+
+  function getUserMovies() {
+    mainApi.getMovies()
+      .then(movies => {
+        const savedMoviesArray = movies.filter(movie => movie.owner === currentUser._id);
+        setSavedMovies(savedMoviesArray);
+        // localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+      })
+      .catch((err) => console.log(err));
+  }
 
   React.useEffect(() => {
     if (loggedIn) {
-      setIsLoading(true);
+      const searchResult = JSON.parse(localStorage.getItem('searchResult'));
 
-      Promise.all([
-        moviesApi.getMovies(),
-        mainApi.getMovies()
-      ])
-        .then(([movies, localMovies]) => {
-          const movieList = movies.map(movie => ({
-            ...movie,
-            trailer: movie.trailerLink,
-            image: `${apiUrl}${movie.image.url}`,
-            thumbnail: `${apiUrl}${movie.image.formats.thumbnail.url}`,
-            movieId: movie.id,
-          }));
-          setMovies(movieList);
-
-          const savedMoviesArray = localMovies.filter(movie => movie.owner === currentUser._id);
-          setSavedMovies(savedMoviesArray);
-        })
-        .catch((err) => console.log(err))
-        .finally(() => setIsLoading(false));
-
-      // moviesApi.getMovies()
-      //   .then(movies => {
-      //     const movieList = movies.map(movie => ({
-      //       ...movie,
-      //       trailer: movie.trailerLink,
-      //       image: `${apiUrl}${movie.image.url}`,
-      //       thumbnail: `${apiUrl}${movie.image.formats.thumbnail.url}`,
-      //       movieId: movie.id,
-      //     }));
-      //     setMovies(movieList);
-      //   })
-      //   .catch((err) => console.log(err))
-      //   .finally(() => setIsLoading(false));
-
-      // mainApi.getMovies()
-      //   .then(movies => {
-      //     const savedMoviesArray = movies.filter(movie => movie.owner === currentUser._id);
-      //     setSavedMovies(savedMoviesArray);
-      //     // localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-      //   })
-      //   .catch((err) => console.log(err))
-      //   .finally(() => setIsLoading(false));
-    }
-
-  }, [currentUser._id, loggedIn]);
-
-  React.useEffect(() => {
-    function handleEscClose(evt) {
-      if (evt.key === 'Escape') {
-        closePopups();
+      if (searchResult) {
+        setSearchedMovies(searchResult);
+      }
+      else {
+        getInitialMovies();
       }
     }
-    document.addEventListener('keydown', handleEscClose);
-
-    return () => {
-      document.removeEventListener('keydown', handleEscClose);
-    };
-  }, []);
-
-  React.useEffect(() => {
-    function handleOverlayClose(evt) {
-      if (evt.target.classList.contains('popup_opened')) {
-        closePopups();
-      }
-    }
-    document.addEventListener('click', handleOverlayClose);
-
-    return () => {
-      document.removeEventListener('click', handleOverlayClose);
-    };
-  }, []);
+  }, [getInitialMovies, loggedIn]);
 
 
-  /* ---------------------------------------------- */
-  /* -= регистрация, авторизация, аутентификация =- */
-  /* ---------------------------------------------- */
+  /* =--- регистрация, авторизация, аутентификация ---= */
 
   const handleTokenCheck = React.useCallback(() => {
     mainApi.getUserInfo()
-      .then((res) => {
+      .then(res => {
         setCurrentUser({
           name: res.name,
           email: res.email,
@@ -126,7 +83,7 @@ function App() {
         });
         setLoggedIn(true);
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
   }, []);
 
   React.useEffect(() => {
@@ -161,8 +118,12 @@ function App() {
   function handleLogout() {
     authApi.logout()
       .then(() => {
-        setLoggedIn(false);
+        localStorage.removeItem('searchResult');
         setCurrentUser({});
+        setMovies([]);
+        setSearchedMovies([]);
+        setSavedMovies([]);
+        setLoggedIn(false);
         history.push('/');
       })
       .catch(err => console.log(err));
@@ -187,42 +148,22 @@ function App() {
   }
 
 
-  /* ------------------ */
-  /* -= поиск фильма =- */
-  /* ------------------ */
+  /* =--- поиск фильма ---= */
 
-  function searchMovies(keyword, isChecked) {
-    setIsLoading(true);
-
-    try {
-      const filteredMovies = filterMovies(movies, keyword, isChecked);
-      setSearchedMovies(filteredMovies);
-      localStorage.setItem('searchedMovies', JSON.stringify(filteredMovies));
-    } catch {
-      setSearchResponse(errorMessages.moviesSearchError);
-    } finally {
-      setIsLoading(false);
-    }
+  function handleSearchMovies(keyword) {
+    getInitialMovies();
+    setTimeout(() => setIsLoading(false), 1000);
+    setSearchedMovies(filterMovies(movies, keyword));
+    localStorage.setItem('searchResult', JSON.stringify(filterMovies(movies, keyword)));
   }
 
-  function searchSavedMovies(keyword, isChecked) {
-    setIsLoading(true);
-
-    try {
-      const filteredMovies = filterMovies(savedMovies, keyword, isChecked);
-      setSearchedSavedMovies(filteredMovies);
-    } catch (err) {
-      setSearchResponse(errorMessages.moviesSearchError);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  function handleSearchSavedMovies(keyword) {
+      setTimeout(() => setIsLoading(false), 2000);
+      setSavedMovies(filterMovies(savedMovies, keyword));
+  }
 
 
-
-  /* -------------------------------- */
-  /* -= сохранение/удаление фильма =- */
-  /* -------------------------------- */
+  /* =--- сохранение/удаление фильма ---= */
 
   function handleMovieSave(movie) {
     mainApi.createMovie(movie)
@@ -243,9 +184,7 @@ function App() {
   }
 
 
-  /* ---------------------- */
-  /* -= обработка ошибок =- */
-  /* ---------------------- */
+  /* =--- обработка ошибок ---= */
 
   function checkErrorStatus(errorStatus) {
     if (errorStatus === codeStatuses.internalServerErr) {
@@ -294,6 +233,32 @@ function App() {
     setIsInfoPopupOpen(false);
   }
 
+  React.useEffect(() => {
+    function handleEscClose(evt) {
+      if (evt.key === 'Escape') {
+        closePopups();
+      }
+    }
+    document.addEventListener('keydown', handleEscClose);
+
+    return () => {
+      document.removeEventListener('keydown', handleEscClose);
+    };
+  }, []);
+
+  React.useEffect(() => {
+    function handleOverlayClose(evt) {
+      if (evt.target.classList.contains('popup_opened')) {
+        closePopups();
+      }
+    }
+    document.addEventListener('click', handleOverlayClose);
+
+    return () => {
+      document.removeEventListener('click', handleOverlayClose);
+    };
+  }, []);
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Switch>
@@ -306,17 +271,15 @@ function App() {
           savedMovies={savedMovies}
           onMovieSave={handleMovieSave}
           onMovieDelete={handleMovieDelete}
-          searchMovies={searchMovies}
-          searchResponse={searchResponse}
+          onMoviesSearch={handleSearchMovies}
           isLoading={isLoading}
         />
         <ProtectedRoute path="/saved-movies" component={SavedMovies}
           loggedIn={loggedIn}
           movies={savedMovies}
-          savedMovies={searchedSavedMovies}
+          savedMovies={savedMovies}
           onMovieDelete={handleMovieDelete}
-          searchMovies={searchSavedMovies}
-          searchResponse={searchResponse}
+          onMoviesSearch={handleSearchSavedMovies}
           isLoading={isLoading}
         />
         <ProtectedRoute path="/profile" component={Profile}

@@ -1,4 +1,4 @@
-import { mainApiBaseUrl } from './constants.js';
+import { mainApiBaseUrl, movieDataOptions } from './constants.js';
 
 class MainApi {
   constructor({ baseUrl, headers, credentials }) {
@@ -49,17 +49,17 @@ class MainApi {
       headers: this._headers,
       credentials: this._credentials,
       body: JSON.stringify({
-        country: movie.country,
-        director: movie.director,
-        duration: movie.duration,
-        year: movie.year,
-        description: movie.description,
-        image: movie.image,
-        trailer: movie.trailer,
-        thumbnail: movie.thumbnail,
+        country: movie.country || movieDataOptions.noData,
+        director: movie.director || movieDataOptions.noData,
+        duration: movie.duration || movieDataOptions.noDuration,
+        year: movie.year || movieDataOptions.noData,
+        description: movie.description || movieDataOptions.noData,
+        image: movie.image || movieDataOptions.noImg,
+        trailer: movie.trailer || movieDataOptions.noTrailer,
+        thumbnail: movie.thumbnail || movieDataOptions.noImg,
         movieId: movie.movieId,
-        nameRU: movie.nameRU,
-        nameEN: movie.nameEN,
+        nameRU: movie.nameRU || movieDataOptions.noData,
+        nameEN: movie.nameEN || movieDataOptions.noData,
       })
     })
     .then((res) => this._checkResponse(res));

@@ -1,11 +1,17 @@
-import { apiUrl } from './constants' ;
+import { apiUrl, movieDataOptions } from './constants' ;
 
 export function parseMovies(movies) {
   return movies.map(movie => ({
-    ...movie,
-    trailer: movie.trailerLink,
-    image: `${apiUrl}${movie.image.url}`,
-    thumbnail: `${apiUrl}${movie.image.formats.thumbnail.url}`,
+    country: movie.country || movieDataOptions.noData,
+    director: movie.director || movieDataOptions.noData,
+    duration: movie.duration || movieDataOptions.noDuration,
+    year: movie.year || movieDataOptions.noData,
+    description: movie.description || movieDataOptions.noData,
+    image: `${apiUrl}${movie.image.url}` || movieDataOptions.noImg,
+    trailer: movie.trailerLink || movieDataOptions.noTrailer,
+    thumbnail: `${apiUrl}${movie.image.formats.thumbnail.url}` || movieDataOptions.noImg,
+    nameRU: movie.nameRU || movieDataOptions.noData,
+    nameEN: movie.nameEN || movieDataOptions.noData,
     movieId: movie.id,
   }));
 }

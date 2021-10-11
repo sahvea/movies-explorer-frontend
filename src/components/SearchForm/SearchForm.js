@@ -27,6 +27,7 @@ function SearchForm(props) {
         <fieldset className="search__film-info" disabled={props.isLoading}>
           <div className="search__input-wrap">
             <input type="search" name="movie" required
+              autoComplete="off"
               className="search__form-input"
               placeholder="Фильм"
               onChange={handleChange}

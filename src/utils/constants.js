@@ -30,7 +30,9 @@ export const errorMessages = {
 };
 
 export const infoMessages = {
-  moviesNotFound: 'Ничего не найдено.',
+  registrationSuccess: 'Вы успешно зарегистрировались!',
+  updatingDataSuccess: 'Данные успешно обновлены!',
+  error: 'Что-то пошло не так! Попробуйте ещё раз.',
 }
 
 export const movieDataOptions = {

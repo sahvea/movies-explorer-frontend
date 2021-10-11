@@ -120,6 +120,7 @@ function App() {
     authApi.logout()
       .then(() => {
         localStorage.removeItem('searchResult');
+        localStorage.removeItem('searchResult');
         setCurrentUser({});
         setMovies([]);
         setSavedMovies([]);
@@ -170,6 +171,7 @@ function App() {
       .then(newMovie => {
         setSavedMovies([newMovie, ...savedMovies]);
         setSearchedSavedMovies([newMovie, ...savedMovies])
+        localStorage.setItem(`${movie.movieId}`, JSON.stringify(true));
       })
       .catch(err => console.log(err));
   }
@@ -182,6 +184,7 @@ function App() {
         const filtedMovies = savedMovies.filter(m => m._id !== movieToDelete._id);
         setSavedMovies(filtedMovies);
         setSearchedSavedMovies(filtedMovies);
+        localStorage.removeItem(`${movie.movieId}`);
       })
       .catch(err => console.log(err));
   }

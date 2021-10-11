@@ -21,17 +21,26 @@ function MoviesCard(props) {
   } ${movieBtnSavedClass}`;
   const buttonLabel = isMovieSaved ? "Удалить" : "Сохранить";
 
-  React.useEffect(() => {
-    // const movies = JSON.parse(localStorage.getItem('movies'));
+  // const userMovies = JSON.parse(localStorage.getItem('savedMovies'));
 
-    if (props.savedMovies.some(m => m.movieId === props.movie.movieId)) {
+  // React.useEffect(() => {
+
+  //   // console.log(userMovies);
+  //   if (props.savedMovies.some(m => m.movieId === props.movie.movieId)) {
+  //     setIsMovieSaved(true);
+  //   }
+
+  //   // return savedMovies && savedMovies.some(m => m.movieId === props.movie.movieId)
+  //   //   ? setIsMovieSaved(true)
+  //   //   : setIsMovieSaved(false);
+  // }, [props.movie.movieId, props.savedMovies]);
+
+  React.useEffect(() => {
+    const movie = JSON.parse(localStorage.getItem(`${props.movie.movieId}`));
+    if (movie) {
       setIsMovieSaved(true);
     }
-
-    // return savedMovies && savedMovies.some(m => m.movieId === props.movie.movieId)
-    //   ? setIsMovieSaved(true)
-    //   : setIsMovieSaved(false);
-  }, [props.movie.movieId, props.savedMovies]);
+  }, [props.movie.movieId]);
 
   function handleBtnClick() {
     isMovieSaved ? handleDeleteClick() : handleSaveClick();

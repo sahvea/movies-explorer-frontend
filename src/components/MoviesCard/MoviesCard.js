@@ -36,10 +36,14 @@ function MoviesCard(props) {
   // }, [props.movie.movieId, props.savedMovies]);
 
   React.useEffect(() => {
-    const movie = JSON.parse(localStorage.getItem(`${props.movie.movieId}`));
-    if (movie) {
-      setIsMovieSaved(true);
+    const userMovies = JSON.parse(localStorage.getItem('savedMovies'));
+    if (userMovies) {
+      const filteredUserMovies = userMovies.some(m => m.movieId === props.movie.movieId);
+      if (filteredUserMovies) {
+        setIsMovieSaved(true);
+      }
     }
+
   }, [props.movie.movieId]);
 
   function handleBtnClick() {

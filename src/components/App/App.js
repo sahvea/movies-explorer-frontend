@@ -120,7 +120,7 @@ function App() {
     authApi.logout()
       .then(() => {
         localStorage.removeItem('searchResult');
-        localStorage.removeItem('searchResult');
+        localStorage.removeItem('savedMovies');
         setCurrentUser({});
         setMovies([]);
         setSavedMovies([]);
@@ -171,7 +171,8 @@ function App() {
       .then(newMovie => {
         setSavedMovies([newMovie, ...savedMovies]);
         setSearchedSavedMovies([newMovie, ...savedMovies])
-        localStorage.setItem(`${movie.movieId}`, JSON.stringify(true));
+        // localStorage.setItem(`${movie.movieId}`, JSON.stringify(true));
+        localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
       })
       .catch(err => console.log(err));
   }
@@ -184,7 +185,13 @@ function App() {
         const filtedMovies = savedMovies.filter(m => m._id !== movieToDelete._id);
         setSavedMovies(filtedMovies);
         setSearchedSavedMovies(filtedMovies);
-        localStorage.removeItem(`${movie.movieId}`);
+        // localStorage.removeItem(`${movie.movieId}`);
+        let userMovies = JSON.parse(localStorage.getItem('savedMovies'));
+        userMovies = userMovies.filter(m => m._id !== movieToDelete._id);
+        localStorage.setItem('savedMovies', JSON.stringify(userMovies));
+        // if (items.length === 0) {
+        //   localStorage.removeItem("item");
+        // }
       })
       .catch(err => console.log(err));
   }

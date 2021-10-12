@@ -110,6 +110,7 @@
   }
 
   .auth__user-info {
+    min-height: 490px;
     height: 80vh;
   }
 

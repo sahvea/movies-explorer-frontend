@@ -20,16 +20,18 @@ function Header(props) {
       : ""}`;
 
   React.useEffect(() => {
-    let current = 0;
-    const checkScroll = () => {
-      setIsHidden(window.pageYOffset > current);
-      current = window.pageYOffset;
-    };
+    if (location.pathname !== '/signup' && location.pathname !== '/signin') {
+      let current = 0;
+      const checkScroll = () => {
+        setIsHidden(window.pageYOffset > current);
+        current = window.pageYOffset;
+      };
 
-    document.addEventListener('scroll', checkScroll);
+      document.addEventListener('scroll', checkScroll);
 
-    return () => document.removeEventListener('scroll', checkScroll);
-  }, []);
+      return () => document.removeEventListener('scroll', checkScroll);
+    }
+  }, [location.pathname]);
 
   function handleBurgerClick() {
     setMobMenu(!mobMenu);

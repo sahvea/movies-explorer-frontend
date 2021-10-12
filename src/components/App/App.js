@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, useHistory, useLocation, Redirect } from 'react-router-dom';
+import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import './App.css';
@@ -88,9 +88,16 @@ function App() {
         });
         setLoggedIn(true);
 
-        history.push(location.pathname);
+        if (location.pathname === '/signin' || location.pathname === '/signup') {
+          history.push('/movies');
+        } else {
+          history.push(location.pathname);
+        }
       })
-      .catch(err => { console.log(err); });
+      .catch(err => {
+        console.log(err);
+        history.push('/');
+      });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [history]);
 
@@ -313,16 +320,10 @@ function App() {
           isFormLoading={isFormLoading}
         />
         <Route path="/signup">
-          {!loggedIn
-            ? <Register onRegistration={handleRegistration} isFormLoading={isFormLoading} />
-            : <Redirect to="/" />
-          }
+          <Register onRegistration={handleRegistration} isFormLoading={isFormLoading} />
         </Route>
         <Route path="/signin">
-          {!loggedIn
-            ? <Login onLogin={handleLogin} isFormLoading={isFormLoading} />
-            : <Redirect to="/" />
-          }
+          <Login onLogin={handleLogin} isFormLoading={isFormLoading} />
         </Route>
         <Route path="*">
           <NotFound />

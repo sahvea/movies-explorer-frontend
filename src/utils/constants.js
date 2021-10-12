@@ -1,8 +1,8 @@
 import notFoundImg from '../images/img-not-found.jpg';
 
-export const apiUrl = 'https://api.nomoreparties.co';
-export const moviesApiBaseUrl = 'https://api.nomoreparties.co/beatfilm-movies';
-export const mainApiBaseUrl = 'https://api.sahvea.diploma.nomoredomains.club';
+export const API_URL = 'https://api.nomoreparties.co';
+export const MOVIES_API_URL = 'https://api.nomoreparties.co/beatfilm-movies';
+export const MAIN_API_URL = 'https://api.sahvea.diploma.nomoredomains.club';
 
 export const patterns = {
   name: '^[a-zA-Zа-яА-ЯЁё\\s\\-]+$',

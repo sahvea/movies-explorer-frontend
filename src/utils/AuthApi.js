@@ -1,4 +1,4 @@
-import { mainApiBaseUrl } from './constants.js';
+import { MAIN_API_URL } from './constants.js';
 
 class AuthApi {
   constructor({ baseUrl, headers, credentials }) {
@@ -44,7 +44,7 @@ class AuthApi {
 }
 
 const authApi = new AuthApi({
-  baseUrl: mainApiBaseUrl,
+  baseUrl: MAIN_API_URL,
   headers: {
     'Content-Type': 'application/json'
   },

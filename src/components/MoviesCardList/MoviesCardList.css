@@ -5,7 +5,7 @@
 .card-list__list {
   padding: 0 0 30px;
   margin: 0 auto;
-  width: fit-content;
+  width: 100%;
   list-style: none;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -15,6 +15,8 @@
 
 .card-list__list-item {
   width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .card-list__more-btn {

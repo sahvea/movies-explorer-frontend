@@ -23,7 +23,6 @@ function Movies(props) {
         <SearchForm onMoviesSearch={props.onMoviesSearch} setIsChecked={setIsChecked} isLoading={props.isLoading} />
         <MoviesCardList
           movies={isChecked ? shortMovies : props.movies}
-          // savedMovies={props.savedMovies}
           onMovieSave={props.onMovieSave}
           onMovieDelete={props.onMovieDelete}
           isLoading={props.isLoading}

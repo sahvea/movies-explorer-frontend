@@ -1,4 +1,4 @@
-import { apiUrl, movieDataOptions } from './constants' ;
+import { API_URL, movieDataOptions } from './constants' ;
 
 export function parseMovies(movies) {
   return movies.map(movie => ({
@@ -7,9 +7,9 @@ export function parseMovies(movies) {
     duration: movie.duration || movieDataOptions.noDuration,
     year: movie.year || movieDataOptions.noData,
     description: movie.description || movieDataOptions.noData,
-    image: `${apiUrl}${movie.image.url}` || movieDataOptions.noImg,
+    image: `${API_URL}${movie.image.url}` || movieDataOptions.noImg,
     trailer: movie.trailerLink || movieDataOptions.noTrailer,
-    thumbnail: `${apiUrl}${movie.image.formats.thumbnail.url}` || movieDataOptions.noImg,
+    thumbnail: `${API_URL}${movie.image.formats.thumbnail.url}` || movieDataOptions.noImg,
     nameRU: movie.nameRU || movieDataOptions.noData,
     nameEN: movie.nameEN || movieDataOptions.noData,
     movieId: movie.id,

@@ -1,4 +1,4 @@
-import { mainApiBaseUrl, movieDataOptions } from './constants.js';
+import { MAIN_API_URL, movieDataOptions } from './constants.js';
 
 class MainApi {
   constructor({ baseUrl, headers, credentials }) {
@@ -76,7 +76,7 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  baseUrl: mainApiBaseUrl,
+  baseUrl: MAIN_API_URL,
   headers: {
     'Content-Type': 'application/json'
   },

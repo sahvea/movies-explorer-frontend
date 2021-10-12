@@ -20,11 +20,6 @@ function MoviesCard(props) {
   } ${movieBtnSavedClass}`;
 
   React.useEffect(() => {
-    const userMovies = JSON.parse(localStorage.getItem('savedMovies'));
-    if (userMovies && userMovies.some(m => m.movieId === props.movie.movieId)) {
-      setIsMovieSaved(true);
-    }
-
     const userMovie = JSON.parse(localStorage.getItem(`${props.movie.movieId}`));
     if (userMovie) {
       setIsMovieSaved(true);

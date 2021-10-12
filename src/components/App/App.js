@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
+import { Route, Switch, useHistory, useLocation, Redirect } from 'react-router-dom';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import './App.css';
@@ -62,10 +62,14 @@ function App() {
 
       mainApi.getMovies()
         .then(movies => {
-          const userMovies = movies.filter(movie => movie.owner === currentUser._id);
+          const userMovies = movies.filter(movie => {
+            const userMovie = movie.owner === currentUser._id;
+            localStorage.setItem(`${userMovie.movieId}`, JSON.stringify(true));
+            return userMovie;
+          });
           setSavedMovies(userMovies);
           setSearchedSavedMovies(userMovies);
-          // localStorage.setItem('savedMovies', JSON.stringify(userMovies));
+          localStorage.setItem('savedMovies', JSON.stringify(userMovies));
         })
         .catch(err => console.log(err));
     }
@@ -83,9 +87,12 @@ function App() {
           _id: res._id
         });
         setLoggedIn(true);
+
+        history.push(location.pathname);
       })
-      .catch(err => console.log(err));
-  }, []);
+      .catch(err => { console.log(err); });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [history]);
 
   React.useEffect(() => {
     handleTokenCheck();
@@ -119,8 +126,9 @@ function App() {
   function handleLogout() {
     authApi.logout()
       .then(() => {
-        localStorage.removeItem('searchResult');
-        localStorage.removeItem('savedMovies');
+        localStorage.clear();
+        // localStorage.removeItem('searchResult');
+        // localStorage.removeItem('savedMovies');
         setCurrentUser({});
         setMovies([]);
         setSavedMovies([]);
@@ -171,8 +179,11 @@ function App() {
       .then(newMovie => {
         setSavedMovies([newMovie, ...savedMovies]);
         setSearchedSavedMovies([newMovie, ...savedMovies])
-        // localStorage.setItem(`${movie.movieId}`, JSON.stringify(true));
-        localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+        localStorage.setItem(`${movie.movieId}`, JSON.stringify(true));
+
+        const userMovies = JSON.parse(localStorage.getItem('savedMovies'));
+        userMovies.push(newMovie);
+        localStorage.setItem('savedMovies', JSON.stringify(userMovies));
       })
       .catch(err => console.log(err));
   }
@@ -185,13 +196,12 @@ function App() {
         const filtedMovies = savedMovies.filter(m => m._id !== movieToDelete._id);
         setSavedMovies(filtedMovies);
         setSearchedSavedMovies(filtedMovies);
-        // localStorage.removeItem(`${movie.movieId}`);
+
+        localStorage.removeItem(`${movie.movieId}`);
+
         let userMovies = JSON.parse(localStorage.getItem('savedMovies'));
         userMovies = userMovies.filter(m => m._id !== movieToDelete._id);
         localStorage.setItem('savedMovies', JSON.stringify(userMovies));
-        // if (items.length === 0) {
-        //   localStorage.removeItem("item");
-        // }
       })
       .catch(err => console.log(err));
   }
@@ -281,7 +291,7 @@ function App() {
         <ProtectedRoute path="/movies" component={Movies}
           loggedIn={loggedIn}
           movies={searchedMovies}
-          savedMovies={savedMovies}
+          // savedMovies={savedMovies}
           onMovieSave={handleMovieSave}
           onMovieDelete={handleMovieDelete}
           onMoviesSearch={handleSearchMovies}
@@ -290,7 +300,7 @@ function App() {
         <ProtectedRoute path="/saved-movies" component={SavedMovies}
           loggedIn={loggedIn}
           movies={searchedSavedMovies}
-          savedMovies={savedMovies}
+          // savedMovies={savedMovies}
           onMovieDelete={handleMovieDelete}
           onMoviesSearch={handleSearchSavedMovies}
           isLoading={isLoading}
@@ -303,10 +313,16 @@ function App() {
           isFormLoading={isFormLoading}
         />
         <Route path="/signup">
-          <Register onRegistration={handleRegistration} isFormLoading={isFormLoading} />
+          {!loggedIn
+            ? <Register onRegistration={handleRegistration} isFormLoading={isFormLoading} />
+            : <Redirect to="/" />
+          }
         </Route>
         <Route path="/signin">
-          <Login onLogin={handleLogin} isFormLoading={isFormLoading} />
+          {!loggedIn
+            ? <Login onLogin={handleLogin} isFormLoading={isFormLoading} />
+            : <Redirect to="/" />
+          }
         </Route>
         <Route path="*">
           <NotFound />

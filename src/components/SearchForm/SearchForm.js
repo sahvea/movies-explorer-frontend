@@ -1,6 +1,6 @@
 import React from 'react';
 import './SearchForm.css';
-import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
+import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import { useFormValidation } from '../../hooks/useFormValidation';
 
 function SearchForm(props) {
@@ -38,6 +38,7 @@ function SearchForm(props) {
           <FilterCheckbox
             labelClass={'search__checkbox'}
             labelText={'Короткометражки'}
+            checkboxName={'short'}
             isChecked={isShortMovie}
             onCheckboxChange={handleCheckboxClick}
           />

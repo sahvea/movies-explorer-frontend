@@ -49,6 +49,43 @@
   --rgb--main-elements-color: 49, 49, 49;
 }
 
+.app_theme_light {
+  /* -переменные- */
+    /* фон */
+  --bg-main-color: #fafafa;
+  --bg-accent-color: #f5f5f5;
+  --bg-landing-color: #dddee3;
+    /* шрифты */
+  --font-main-color: #000;
+  --font-accent-color: #fff;
+  --font-transp-color: #a0a0a0;
+    /* карточки */
+  --card-bg-color: #f5f5f5;
+    /* элементы */
+  --landing-elements-color: #e8e8e8;
+  --main-elements-color: #f9f9f9;
+  --title-divider-color: #000;
+  --divider-color: #e8e8e8;
+  --divider-color-light: #e8e8e8;
+  --input-border-color: #aaa;
+  --more-bnt-color: #f9f9f9;
+    /* checkbox */
+  --checkbox-bg: #3ddc84;
+  --checkbox-bg-disabled: #ebebeb;
+  --checkbox-circle: #fff;
+  --checkbox-circle-disabled: #f5f5f5;
+    /* акцентные цвета */
+  --bright-color: #3456f3;
+  --bright-color-darker: #1c2c7c;
+  --bright-color-lighter: #576fdb;
+  --error-color: #cf252c;
+    /* rgb */
+  --rgb-font-main-color: 0, 0, 0;
+  --rgb-bright-color: 52, 86, 243;
+  --rgb-input-border-color: 170, 170, 170;
+  --rgb--main-elements-color: 249, 249, 249;
+}
+
 .app__link {
   display: block;
   color: var(--font-main-color);

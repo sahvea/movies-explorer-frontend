@@ -30,7 +30,11 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [movies, setMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
-  const [searchedMovies, setSearchedMovies] = React.useState([]);
+  const [searchedMovies, setSearchedMovies] = React.useState(
+    localStorage.getItem('searchResult')
+      ? JSON.parse(localStorage.getItem('searchResult'))
+      : []
+  );
   const [searchedSavedMovies, setSearchedSavedMovies] = React.useState([]);
 
 
@@ -51,14 +55,7 @@ function App() {
 
   React.useEffect(() => {
     if (loggedIn) {
-      const searchResult = JSON.parse(localStorage.getItem('searchResult'));
-
-      if (searchResult) {
-        setSearchedMovies(searchResult);
-      }
-      else {
-        getInitialMovies();
-      }
+      getInitialMovies();
 
       mainApi.getMovies()
         .then(movies => {
@@ -196,7 +193,7 @@ function App() {
   }
 
   function handleMovieDelete(movie) {
-    const movieToDelete = savedMovies.find(m => m.movieId === movie.movieId);
+    const movieToDelete = savedMovies.filter(m => m.movieId === movie.movieId || m.data?.movieId === movie.id)[0];
 
     mainApi.deleteMovie(movieToDelete._id)
       .then(() => {

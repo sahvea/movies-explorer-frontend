@@ -58,8 +58,26 @@
 }
 
 .movie-card__button_action_delete {
-  background-image: url('../../images/icons/delete-icon.svg');
-  background-size: 8px;
+  position: relative;
+}
+
+.movie-card__button_action_delete::before,
+.movie-card__button_action_delete::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 1px;
+  background-color: var(--font-main-color);
+}
+
+.movie-card__button_action_delete::before {
+  transform: translate(-50%) rotate(45deg);
+}
+
+.movie-card__button_action_delete::after {
+  transform: translate(-50%) rotate(-45deg);
 }
 
 .movie-card__trailer-link {

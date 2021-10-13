@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
+import ThemeContext from '../../contexts/ThemeContext';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import './App.css';
@@ -36,6 +37,7 @@ function App() {
       : []
   );
   const [searchedSavedMovies, setSearchedSavedMovies] = React.useState([]);
+  const [themeLight, setThemeLight] = React.useState(false);
 
 
   const getInitialMovies = React.useCallback(() => {
@@ -283,46 +285,51 @@ function App() {
   }, []);
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
-      <Switch>
-        <Route exact path="/">
-          <Main loggedIn={loggedIn} />
-        </Route>
-        <ProtectedRoute path="/movies" component={Movies}
-          loggedIn={loggedIn}
-          movies={searchedMovies}
-          onMovieSave={handleMovieSave}
-          onMovieDelete={handleMovieDelete}
-          onMoviesSearch={handleSearchMovies}
-          isLoading={isLoading}
-        />
-        <ProtectedRoute path="/saved-movies" component={SavedMovies}
-          loggedIn={loggedIn}
-          movies={searchedSavedMovies}
-          onMovieDelete={handleMovieDelete}
-          onMoviesSearch={handleSearchSavedMovies}
-          isLoading={isLoading}
-        />
-        <ProtectedRoute path="/profile" component={Profile}
-          loggedIn={loggedIn}
-          onUpdateUser={handleUpdateUser}
-          isNewDataValid={isNewDataValid}
-          onSignOut={handleLogout}
-          isFormLoading={isFormLoading}
-        />
-        <Route path="/signup">
-          <Register onRegistration={handleRegistration} isFormLoading={isFormLoading} />
-        </Route>
-        <Route path="/signin">
-          <Login onLogin={handleLogin} isFormLoading={isFormLoading} />
-        </Route>
-        <Route path="*">
-          <NotFound />
-        </Route>
-      </Switch>
+    <ThemeContext.Provider value={themeLight}>
+      <CurrentUserContext.Provider value={currentUser}>
+        <Switch>
+          <Route exact path="/">
+            <Main loggedIn={loggedIn} onThemeChange={setThemeLight} />
+          </Route>
+          <ProtectedRoute path="/movies" component={Movies}
+            loggedIn={loggedIn}
+            movies={searchedMovies}
+            onMovieSave={handleMovieSave}
+            onMovieDelete={handleMovieDelete}
+            onMoviesSearch={handleSearchMovies}
+            isLoading={isLoading}
+            onThemeChange={setThemeLight}
+          />
+          <ProtectedRoute path="/saved-movies" component={SavedMovies}
+            loggedIn={loggedIn}
+            movies={searchedSavedMovies}
+            onMovieDelete={handleMovieDelete}
+            onMoviesSearch={handleSearchSavedMovies}
+            isLoading={isLoading}
+            onThemeChange={setThemeLight}
+            />
+          <ProtectedRoute path="/profile" component={Profile}
+            loggedIn={loggedIn}
+            onUpdateUser={handleUpdateUser}
+            isNewDataValid={isNewDataValid}
+            onSignOut={handleLogout}
+            isFormLoading={isFormLoading}
+            onThemeChange={setThemeLight}
+          />
+          <Route path="/signup">
+            <Register onRegistration={handleRegistration} isFormLoading={isFormLoading} />
+          </Route>
+          <Route path="/signin">
+            <Login onLogin={handleLogin} isFormLoading={isFormLoading} />
+          </Route>
+          <Route path="*">
+            <NotFound />
+          </Route>
+        </Switch>
 
-      <InfoPopup isOpen={isInfoPopupOpen} onClose={closePopups} onSuccess={isActionSuccess} errorMessage={infoPopupError} />
-    </CurrentUserContext.Provider>
+        <InfoPopup isOpen={isInfoPopupOpen} onClose={closePopups} onSuccess={isActionSuccess} errorMessage={infoPopupError} />
+      </CurrentUserContext.Provider>
+    </ThemeContext.Provider>
   );
 }
 

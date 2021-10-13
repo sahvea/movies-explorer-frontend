@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import ThemeContext from '../../contexts/ThemeContext';
 import './Header.css'
 import Navigation from '../Navigation/Navigation';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
@@ -8,7 +9,7 @@ function Header(props) {
   const location = useLocation();
   const [isHidden, setIsHidden] = React.useState(false);
   const [mobMenu, setMobMenu] = React.useState(false);
-  const [isThemeLight, setIsThemeLight] = React.useState(false);
+  const themeLight = React.useContext(ThemeContext);
 
   const headerClassName = `header
     ${isHidden ? "header_hidden" : ""}
@@ -44,11 +45,11 @@ function Header(props) {
   }
 
   function handleThemeChange() {
-    setIsThemeLight(!isThemeLight);
+    props.onThemeChange(!themeLight)
   }
 
   React.useEffect(() => {
-    toggleTheme(isThemeLight);
+    toggleTheme(themeLight);
    }
  );
 
@@ -60,13 +61,15 @@ function Header(props) {
             <path className="header__logo-svg" fillRule="evenodd" clipRule="evenodd" d="M19 38c10.493 0 19-8.507 19-19S29.493 0 19 0 0 8.507 0 19s8.507 19 19 19Zm0-9.5a9.5 9.5 0 1 0 0-19 9.5 9.5 0 0 0 0 19Z"/>
           </svg>
         </Link>
-        <FilterCheckbox
-          labelClass={'header__checkbox'}
-          labelText={'Светлая тема'}
-          checkboxName={'theme'}
-          isChecked={isThemeLight}
-          onCheckboxChange={handleThemeChange}
-        />
+        {(location.pathname !== '/signup' && location.pathname !== '/signin') &&
+          <FilterCheckbox
+            labelClass={'header__checkbox'}
+            labelText={'Светлая тема'}
+            checkboxName={'theme'}
+            isChecked={themeLight}
+            onCheckboxChange={handleThemeChange}
+          />
+        }
         <Navigation mobMenu={mobMenu} handleBurgerClick={handleBurgerClick} loggedIn={props.loggedIn} />
       </div>
     </header>

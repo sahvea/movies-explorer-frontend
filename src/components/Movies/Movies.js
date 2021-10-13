@@ -18,7 +18,7 @@ function Movies(props) {
 
   return (
     <>
-      <Header loggedIn={props.loggedIn} />
+      <Header loggedIn={props.loggedIn} onThemeChange={props.onThemeChange} />
       <main className="movies">
         <SearchForm onMoviesSearch={props.onMoviesSearch} setIsChecked={setIsChecked} isLoading={props.isLoading} />
         <MoviesCardList

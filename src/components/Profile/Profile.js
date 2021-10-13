@@ -43,7 +43,7 @@ function Profile(props) {
 
   return (
     <>
-      <Header loggedIn={props.loggedIn} />
+      <Header loggedIn={props.loggedIn} onThemeChange={props.onThemeChange} />
       <main>
         <section className="profile">
           <form name="profile-form" className="profile__form" onSubmit={handleSubmit} noValidate>

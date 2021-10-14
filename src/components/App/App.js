@@ -40,39 +40,30 @@ function App() {
   const [themeLight, setThemeLight] = React.useState(false);
 
 
-  const getInitialMovies = React.useCallback(() => {
-    setIsLoading(true);
-
-    moviesApi.getMovies()
-      .then(movies => {
-        const movieList = parseMovies(movies);
-        setMovies(movieList);
-      })
-      .catch(err => {
-        console.log(err);
-        handleActionError(errorMessages.moviesSearchError);
-      })
-      .finally(() => setIsLoading(false));
-  }, []);
-
   React.useEffect(() => {
     if (loggedIn) {
-      getInitialMovies();
+      setIsLoading(true);
 
-      mainApi.getMovies()
-        .then(movies => {
-          let userMovies = movies.filter(movie => {
+      Promise.all([
+        moviesApi.getMovies(),
+        mainApi.getMovies()
+      ])
+        .then(([initialMovies, userMovies]) => {
+          const initialMoviesList = parseMovies(initialMovies);
+          setMovies(initialMoviesList);
+
+          let userMoviesList = userMovies.filter(movie => {
             const userMovie = movie.owner === currentUser._id;
             localStorage.setItem(`${movie.movieId}`, JSON.stringify(true));
             return userMovie;
           });
-          userMovies = userMovies.sort((a, b) => a.movieId - b.movieId);
-          setSavedMovies(userMovies);
-          setSearchedSavedMovies(userMovies);
+          setSavedMovies(userMoviesList);
+          setSearchedSavedMovies(userMoviesList);
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log(err))
+        .finally(() => setIsLoading(false));
     }
-  }, [currentUser._id, getInitialMovies, loggedIn]);
+  }, [currentUser._id, loggedIn]);
 
 
   /* =--- регистрация, авторизация, аутентификация ---= */
@@ -121,7 +112,7 @@ function App() {
     setIsFormLoading(true);
     authApi.login(email, password)
       .then(() => {
-        handleTokenCheck();
+        // handleTokenCheck();
         setLoggedIn(true);
         history.push('/movies');
       })
@@ -170,7 +161,6 @@ function App() {
   /* =--- поиск фильма ---= */
 
   function handleSearchMovies(keyword) {
-    getInitialMovies();
     setSearchedMovies(filterMovies(movies, keyword));
 
     localStorage.setItem('searchResult', JSON.stringify(filterMovies(movies, keyword)));

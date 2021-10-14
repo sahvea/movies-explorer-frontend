@@ -50,8 +50,7 @@ function Header(props) {
 
   React.useEffect(() => {
     toggleTheme(themeLight);
-   }
- );
+  });
 
   return (
     <header className={headerClassName}>

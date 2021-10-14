@@ -54,7 +54,8 @@
     /* фон */
   --bg-main-color: #fafafa;
   --bg-accent-color: #f5f5f5;
-  --bg-landing-color: #dfd0ac;
+  /* --bg-landing-color: #dfd0ac; */
+  --bg-landing-color: #ffd97d;
     /* шрифты */
   --font-main-color: #000;
   --font-accent-color: #fff;

@@ -1,4 +1,4 @@
-import { API_URL, movieDataOptions } from './constants' ;
+import { API_URL, movieDataOptions, MAX_MOVIE_DURATION } from './constants' ;
 
 export function parseMovies(movies) {
   return movies.map(movie => ({
@@ -34,8 +34,7 @@ export function filterMovies(movies, keyword) {
 }
 
 export function filterShortMovies(movies) {
-  const maxMovieDuration = 40;
-  const shortMoviesArray = movies.filter(movie => movie.duration <= maxMovieDuration);
+  const shortMoviesArray = movies.filter(movie => movie.duration <= MAX_MOVIE_DURATION);
   return shortMoviesArray;
 }
 

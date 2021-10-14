@@ -4,6 +4,8 @@ export const API_URL = 'https://api.nomoreparties.co';
 export const MOVIES_API_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 export const MAIN_API_URL = 'https://api.sahvea.diploma.nomoredomains.club';
 
+export const MAX_MOVIE_DURATION = 40;
+
 export const patterns = {
   name: '^[a-zA-Zа-яА-ЯЁё\\s\\-]+$',
   email: '^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$',

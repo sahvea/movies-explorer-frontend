@@ -52,7 +52,7 @@
 .app_theme_light {
   /* -переменные- */
     /* фон */
-  --bg-main-color: #fafafa;
+  --bg-main-color: #fff;
   --bg-accent-color: #f5f5f5;
   /* --bg-landing-color: #dfd0ac; */
   --bg-landing-color: #ffd97d;

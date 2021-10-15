@@ -27,7 +27,18 @@ function MoviesCard(props) {
   }, [props.movie.movieId]);
 
   function handleBtnClick() {
-    isMovieSaved ? handleDeleteClick() : handleSaveClick();
+    if (location.pathname === '/movies') {
+      if (isMovieSaved) {
+        const movieId = props.savedMovies.filter(m => m.movieId === props.movie.movieId
+          || m.data?.movieId === props.movie.id)[0];
+
+        handleDeleteClick(movieId._id);
+      } else {
+        handleSaveClick();
+      }
+    } else {
+      handleDeleteClick(props.movie._id)
+    }
   }
 
   function handleSaveClick() {
@@ -35,8 +46,8 @@ function MoviesCard(props) {
     setIsMovieSaved(true);
   }
 
-  function handleDeleteClick() {
-    props.onMovieDelete(props.movie);
+  function handleDeleteClick(movieId) {
+    props.onMovieDelete(movieId, props.movie);
     setIsMovieSaved(false);
   }
 

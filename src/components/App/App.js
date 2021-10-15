@@ -190,12 +190,10 @@ function App() {
       .catch(err => console.log(err));
   }
 
-  function handleMovieDelete(movie) {
-    const movieToDelete = savedMovies.filter(m => m.movieId === movie.movieId || m.data?.movieId === movie.id)[0];
-
-    mainApi.deleteMovie(movieToDelete._id)
+  function handleMovieDelete(movieId, movie) {
+    mainApi.deleteMovie(movieId)
       .then(() => {
-        const filtedMovies = savedMovies.filter(m => m._id !== movieToDelete._id);
+        const filtedMovies = savedMovies.filter(m => m._id !== movieId);
         setSavedMovies(filtedMovies);
         setSearchedSavedMovies(filtedMovies);
 
@@ -290,6 +288,7 @@ function App() {
           <ProtectedRoute path="/movies" component={Movies}
             loggedIn={loggedIn}
             movies={searchedMovies}
+            savedMovies={savedMovies}
             onMovieSave={handleMovieSave}
             onMovieDelete={handleMovieDelete}
             onMoviesSearch={handleSearchMovies}
@@ -301,6 +300,7 @@ function App() {
           <ProtectedRoute path="/saved-movies" component={Movies}
             loggedIn={loggedIn}
             movies={searchedSavedMovies}
+            savedMovies={savedMovies}
             onMovieDelete={handleMovieDelete}
             onMoviesSearch={handleSearchSavedMovies}
             isSearched={isSavedSearched}

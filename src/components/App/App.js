@@ -6,7 +6,6 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import './App.css';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
-import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
@@ -24,6 +23,7 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isFormLoading, setIsFormLoading] = React.useState(false);
+  const [isSearched, setIsSearched] = React.useState(false);
   const [isNewDataValid, setIsNewDataValid] = React.useState(true);
   const [isActionSuccess, setIsActionSuccess] = React.useState(true);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false);
@@ -32,9 +32,7 @@ function App() {
   const [movies, setMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [searchedMovies, setSearchedMovies] = React.useState(
-    localStorage.getItem('searchResult')
-      ? JSON.parse(localStorage.getItem('searchResult'))
-      : []
+    JSON.parse(localStorage.getItem('searchResult')) || []
   );
   const [searchedSavedMovies, setSearchedSavedMovies] = React.useState([]);
   const [themeLight, setThemeLight] = React.useState(false);
@@ -63,7 +61,8 @@ function App() {
         .catch(err => console.log(err))
         .finally(() => setIsLoading(false));
     }
-  }, [currentUser._id, loggedIn]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loggedIn]);
 
 
   /* =--- регистрация, авторизация, аутентификация ---= */
@@ -99,10 +98,8 @@ function App() {
     setIsFormLoading(true);
     authApi.register(email, password, name)
       .then(res => {
-        if (res) {
-          handleActionSuccess();
-          handleLogin(email, password);
-        }
+        handleActionSuccess();
+        handleLogin(email, password);
       })
       .catch(err => checkErrorStatus(err))
       .finally(() => setIsFormLoading(false));
@@ -112,7 +109,7 @@ function App() {
     setIsFormLoading(true);
     authApi.login(email, password)
       .then(() => {
-        // handleTokenCheck();
+        handleTokenCheck();
         setLoggedIn(true);
         history.push('/movies');
       })
@@ -161,9 +158,12 @@ function App() {
   /* =--- поиск фильма ---= */
 
   function handleSearchMovies(keyword) {
-    setSearchedMovies(filterMovies(movies, keyword));
+    const filteredMovies = filterMovies(movies, keyword);
 
-    localStorage.setItem('searchResult', JSON.stringify(filterMovies(movies, keyword)));
+    setSearchedMovies(filteredMovies);
+    localStorage.setItem('searchResult', JSON.stringify(filteredMovies));
+
+    setIsSearched(true);
   }
 
   function handleSearchSavedMovies(keyword) {
@@ -287,14 +287,16 @@ function App() {
             onMovieSave={handleMovieSave}
             onMovieDelete={handleMovieDelete}
             onMoviesSearch={handleSearchMovies}
+            isSearched={isSearched}
             isLoading={isLoading}
             onThemeChange={setThemeLight}
           />
-          <ProtectedRoute path="/saved-movies" component={SavedMovies}
+          <ProtectedRoute path="/saved-movies" component={Movies}
             loggedIn={loggedIn}
             movies={searchedSavedMovies}
             onMovieDelete={handleMovieDelete}
             onMoviesSearch={handleSearchSavedMovies}
+            isSearched={isSearched}
             isLoading={isLoading}
             onThemeChange={setThemeLight}
             />

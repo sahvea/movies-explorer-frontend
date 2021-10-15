@@ -62,9 +62,10 @@ function Header(props) {
         </Link>
         {(location.pathname !== '/signup' && location.pathname !== '/signin') &&
           <FilterCheckbox
-            labelClass={'header__checkbox'}
-            labelText={'Светлая тема'}
-            checkboxName={'theme'}
+            labelClass="header__checkbox-label"
+            labelText="Светлая тема"
+            checkboxClass="filter-checkbox_position_header"
+            checkboxName="theme"
             isChecked={themeLight}
             onCheckboxChange={handleThemeChange}
           />

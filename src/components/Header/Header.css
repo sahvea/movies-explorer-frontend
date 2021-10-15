@@ -98,12 +98,12 @@
   fill: var(--bright-color);
 }
 
-.header__checkbox {
+.header__checkbox-label {
   margin-left: 30px;
   margin-right: auto;
   display: grid;
   grid-template-columns: 1fr 36px;
-  gap: 14px;
+  gap: 10px;
   align-items: center;
   font-weight: 400;
   font-size: 13px;
@@ -141,7 +141,7 @@
     justify-content: center;
   }
 
-  .header__checkbox {
+  .header__checkbox-label {
     font-size: 11px;
   }
 }

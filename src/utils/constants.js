@@ -14,19 +14,19 @@ export const patterns = {
 export const windowSizes = {
   desktop: 1023,
   mobile: 480,
-}
+};
 
 export const cardsNumbers = {
   desktop: 12,
   tablet: 8,
   mobile: 5,
-}
+};
 
 export const nextCardsNumbers = {
   desktop: 3,
   tablet: 2,
   mobile: 1,
-}
+};
 
 export const codeStatuses = {
   badRequestErr: 400,
@@ -52,11 +52,14 @@ export const infoMessages = {
   registrationSuccess: 'Вы успешно зарегистрировались!',
   updatingDataSuccess: 'Данные успешно обновлены!',
   error: 'Что-то пошло не так! Попробуйте ещё раз.',
-}
+  searchResponseEmpty: 'Введите запрос.',
+  searchResponseNotFound: 'Ничего не найдено.',
+  searchResponseNoSavedMovies: 'Нет сохраненных фильмов.',
+};
 
 export const movieDataOptions = {
   noData: 'Данные отсутствуют',
   noDuration: 0,
   noTrailer: 'https://youtube.com',
   noImg: {notFoundImg},
-}
+};

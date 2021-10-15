@@ -50,9 +50,6 @@ function MoviesCardList(props) {
       <Preloader />
     :
     <section className="card-list">
-      {props.movies.length === 0
-        ? <p className="movies__search-message">Ничего не найдено.</p>
-        :
       <ul className="card-list__list">
         {cardsToShow.map(movie => (
           <li className="card-list__list-item" key={movie.movieId || movie._id}>
@@ -63,7 +60,7 @@ function MoviesCardList(props) {
             />
           </li>
         ))}
-      </ul>}
+      </ul>
       {location.pathname === '/movies' && props.movies.length > cardsToShow.length &&
         <button className="app__button card-list__more-btn" onClick={handleShowMoreCards} type="button">Ещё</button>
       }

@@ -165,6 +165,7 @@ function App() {
     localStorage.setItem('searchResult', JSON.stringify(filteredMovies));
 
     setIsSearched(true);
+    setTimeout(() => setIsLoading(false), 1000);
   }
 
   function handleSearchSavedMovies(keyword) {
@@ -172,6 +173,7 @@ function App() {
 
     setSearchedSavedMovies(filteredSavedMovies);
     setIsSavedSearched(true);
+    setTimeout(() => setIsLoading(false), 500);
   }
 
 
@@ -293,6 +295,7 @@ function App() {
             onMoviesSearch={handleSearchMovies}
             isSearched={isSearched}
             isLoading={isLoading}
+            setPreloader={setIsLoading}
             onThemeChange={setThemeLight}
           />
           <ProtectedRoute path="/saved-movies" component={Movies}
@@ -302,6 +305,7 @@ function App() {
             onMoviesSearch={handleSearchSavedMovies}
             isSearched={isSavedSearched}
             isLoading={isLoading}
+            setPreloader={setIsLoading}
             onThemeChange={setThemeLight}
             />
           <ProtectedRoute path="/profile" component={Profile}

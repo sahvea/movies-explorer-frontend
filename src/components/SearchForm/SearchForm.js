@@ -29,6 +29,7 @@ function SearchForm(props) {
     } else {
       props.onMoviesSearch(input);
       setValidityError('');
+      props.setPreloader(true);
     }
   }
 

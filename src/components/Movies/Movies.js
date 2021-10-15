@@ -53,6 +53,7 @@ function Movies(props) {
           onMoviesSearch={props.onMoviesSearch}
           setIsChecked={setIsChecked}
           isLoading={props.isLoading}
+          setPreloader={props.setPreloader}
         />
 
         {isSearchResponse

@@ -55,6 +55,7 @@ export const infoMessages = {
   searchResponseEmpty: 'Введите запрос.',
   searchResponseNotFound: 'Ничего не найдено.',
   searchResponseNoSavedMovies: 'Нет сохраненных фильмов.',
+  searchInputEmpty: 'Нужно ввести ключевое слово.',
 };
 
 export const movieDataOptions = {

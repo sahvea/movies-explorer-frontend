@@ -24,6 +24,7 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [isFormLoading, setIsFormLoading] = React.useState(false);
   const [isSearched, setIsSearched] = React.useState(false);
+  const [isSavedSearched, setIsSavedSearched] = React.useState(false);
   const [isNewDataValid, setIsNewDataValid] = React.useState(true);
   const [isActionSuccess, setIsActionSuccess] = React.useState(true);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false);
@@ -167,7 +168,10 @@ function App() {
   }
 
   function handleSearchSavedMovies(keyword) {
-    setSearchedSavedMovies(filterMovies(savedMovies, keyword));
+    const filteredSavedMovies = filterMovies(savedMovies, keyword);
+
+    setSearchedSavedMovies(filteredSavedMovies);
+    setIsSavedSearched(true);
   }
 
 
@@ -296,7 +300,7 @@ function App() {
             movies={searchedSavedMovies}
             onMovieDelete={handleMovieDelete}
             onMoviesSearch={handleSearchSavedMovies}
-            isSearched={isSearched}
+            isSearched={isSavedSearched}
             isLoading={isLoading}
             onThemeChange={setThemeLight}
             />

@@ -62,7 +62,12 @@
   background-repeat: no-repeat;
   background-color: var(--main-elements-color);
   transition: .2s linear;
+  box-shadow: inset 0 0 1px var(--font-transp-color);
 }
+
+/* .search__error {
+
+} */
 
 .search__form-btn {
   width: 34px;

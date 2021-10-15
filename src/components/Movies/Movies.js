@@ -32,6 +32,9 @@ function Movies(props) {
     } else if (props.isSearched && props.movies.length === 0) {
       setIsSearchResponse(true);
       setSearchMessage(infoMessages.searchResponseNotFound);
+    } else if (!props.isSearched && shortMovies.length === 0 && isChecked) {
+      setIsSearchResponse(true);
+      setSearchMessage(infoMessages.searchResponseNotFound);
     } else if (props.isSearched && shortMovies.length === 0 && isChecked) {
       setIsSearchResponse(true);
       setSearchMessage(infoMessages.searchResponseNotFound);

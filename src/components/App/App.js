@@ -84,10 +84,7 @@ function App() {
           history.push(location.pathname);
         }
       })
-      .catch(err => {
-        console.log(err);
-        history.push('/');
-      });
+      .catch(err => console.log(err));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [history]);
 
@@ -98,7 +95,7 @@ function App() {
   function handleRegistration(email, password, name) {
     setIsFormLoading(true);
     authApi.register(email, password, name)
-      .then(res => {
+      .then(() => {
         handleActionSuccess();
         handleLogin(email, password);
       })
@@ -112,7 +109,7 @@ function App() {
       .then(() => {
         handleTokenCheck();
         setLoggedIn(true);
-        history.push('/movies');
+        setTimeout(() => history.push('/movies'), 200);
       })
       .catch(err => checkErrorStatus(err))
       .finally(() => setIsFormLoading(false));

@@ -36,7 +36,7 @@ function SearchForm(props) {
   React.useEffect(() => {
     setValidityError('');
     setInput('');
-  }, [location])
+  }, [location]);
 
   return (
     <section className="search">

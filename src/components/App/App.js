@@ -33,6 +33,7 @@ function App() {
   const [movies, setMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [searchedMovies, setSearchedMovies] = React.useState(
+    // []
     JSON.parse(localStorage.getItem('searchResult')) || []
   );
   const [searchedSavedMovies, setSearchedSavedMovies] = React.useState([]);
@@ -53,7 +54,7 @@ function App() {
 
           let userMoviesList = userMovies.filter(movie => {
             const userMovie = movie.owner === currentUser._id;
-            localStorage.setItem(`${movie.movieId}`, JSON.stringify(true));
+            localStorage.setItem(`${movie.movieId}`, JSON.stringify(`${movie.movieId}`));
             return userMovie;
           });
           setSavedMovies(userMoviesList);
@@ -169,6 +170,7 @@ function App() {
     const filteredSavedMovies = filterMovies(savedMovies, keyword);
 
     setSearchedSavedMovies(filteredSavedMovies);
+
     setIsSavedSearched(true);
     setTimeout(() => setIsLoading(false), 500);
   }
@@ -179,20 +181,45 @@ function App() {
   function handleMovieSave(movie) {
     mainApi.createMovie(movie)
       .then(newMovie => {
-        setSavedMovies([newMovie, ...savedMovies]);
-        setSearchedSavedMovies([newMovie, ...savedMovies])
+        setSavedMovies([...savedMovies, newMovie]);
+        setSearchedSavedMovies([...searchedSavedMovies, newMovie]);
 
-        localStorage.setItem(`${newMovie.movieId}`, JSON.stringify(true));
+        localStorage.setItem(`${newMovie.movieId}`, JSON.stringify(`${newMovie.movieId}`));
       })
       .catch(err => console.log(err));
   }
 
-  function handleMovieDelete(movieId, movie) {
-    mainApi.deleteMovie(movieId)
+  function handleMovieDelete(movie) {
+    // console.log('1 movie');
+    // console.log(movie);
+
+    let movieDeleteId = '';
+    if (location.pathname === '/movies') {
+      const movieCard = movie._id
+        || savedMovies.filter(m => m.movieId === (movie.id || movie.movieId))[0]
+        || savedMovies.find(i => i.movieId === (movie.id || movie.movieId))
+        || savedMovies.filter(f => f.data?.movieId === movie.id)[0];
+
+      // console.log('movies: PROBLEM (movieCard)');
+      // console.log(movieCard);
+      movieDeleteId = movieCard._id;
+
+      // console.log('movies: id + ._id');
+      // console.log(movieDeleteId);
+    } else {
+      movieDeleteId = movie._id;
+
+      // console.log('saved: movie._id');
+      // console.log(movieDeleteId);
+    }
+
+    mainApi.deleteMovie(movieDeleteId)
       .then(() => {
-        const filtedMovies = savedMovies.filter(m => m._id !== movieId);
+        const filtedMovies = savedMovies.filter(m => m._id !== movieDeleteId);
+        const filtedSavedMovies = searchedSavedMovies.filter(m => m._id !== movieDeleteId);
+
         setSavedMovies(filtedMovies);
-        setSearchedSavedMovies(filtedMovies);
+        setSearchedSavedMovies(filtedSavedMovies);
 
         localStorage.removeItem(`${movie.movieId}`);
       })
@@ -285,7 +312,7 @@ function App() {
           <ProtectedRoute path="/movies" component={Movies}
             loggedIn={loggedIn}
             movies={searchedMovies}
-            savedMovies={savedMovies}
+            // savedMovies={savedMovies}
             onMovieSave={handleMovieSave}
             onMovieDelete={handleMovieDelete}
             onMoviesSearch={handleSearchMovies}
@@ -297,7 +324,7 @@ function App() {
           <ProtectedRoute path="/saved-movies" component={Movies}
             loggedIn={loggedIn}
             movies={searchedSavedMovies}
-            savedMovies={savedMovies}
+            // savedMovies={savedMovies}
             onMovieDelete={handleMovieDelete}
             onMoviesSearch={handleSearchSavedMovies}
             isSearched={isSavedSearched}

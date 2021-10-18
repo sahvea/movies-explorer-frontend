@@ -4,12 +4,19 @@
 
 .card-list__list {
   padding: 0 0 30px;
-  margin: 0;
+  margin: 0 auto;
+  width: 100%;
   list-style: none;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px 24px;
   justify-items: center;
+}
+
+.card-list__list-item {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .card-list__more-btn {

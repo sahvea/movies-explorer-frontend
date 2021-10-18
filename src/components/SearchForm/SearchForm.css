@@ -35,8 +35,9 @@
 .search__form-input {
   flex: 1;
   width: 100%;
+  height: 34px;
   padding: 0;
-  margin-right: 45px;
+  margin-right: 5px;
   border: 0;
   outline: none;
   background-color: transparent;
@@ -48,6 +49,29 @@
 
 .search__form-input::placeholder {
   color: var(--font-transp-color);
+}
+
+.search__form-input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 48px;
+  background-image: url('../../images/icons/delete-icon.svg');
+  background-size: 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: var(--bright-color);
+  transition: .2s linear;
+  filter: saturate(0.5);
+  cursor: pointer;
+}
+
+.search__error {
+  margin: 0 auto;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.2;
+  color: var(--error-color);
 }
 
 .search__form-btn {

@@ -8,7 +8,7 @@
 .dots-loader__dot {
   font-size: 14px;
   line-height: 2;
-  color: #fff;
+  color: var(--font-main-color);
 }
 
 .dots-loader__dot:nth-child(1) {

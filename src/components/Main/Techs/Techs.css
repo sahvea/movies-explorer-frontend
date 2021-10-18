@@ -42,6 +42,7 @@
   background-color: var(--landing-elements-color);
   border-radius: 10px;
   transition: .3s linear;
+  user-select: none;
 }
 
 .techs__skill::before {

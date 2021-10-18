@@ -9,7 +9,7 @@ import AboutMe from './AboutMe/AboutMe';
 function Main(props) {
   return (
     <>
-      <Header loggedIn={props.loggedIn} />
+      <Header loggedIn={props.loggedIn} onThemeChange={props.onThemeChange} />
       <main className="main">
         <Promo />
         <AboutProject />

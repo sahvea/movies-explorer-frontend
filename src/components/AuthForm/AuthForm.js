@@ -17,12 +17,13 @@ function AuthForm(props) {
 
   return (
     <section className="auth">
-      <form className="auth__form" name={props.name} onSubmit={props.onSubmit} >
-      {/* noValidate */}
-        <fieldset className="auth__user-info">
+      <form name={props.name} className="auth__form" onSubmit={props.onSubmit} noValidate>
+        <fieldset className="auth__user-info" disabled={props.isFormLoading}>
           <legend className="auth__form-title">{props.title}</legend>
+
             {props.children}
-          <button type="submit" name="submit" className="app__button auth__form-btn" disabled={props.isFormLoading || props.isSubmitDisabled ? true : ''}>
+
+          <button type="submit" name="submit" className="app__button auth__form-btn" disabled={props.isSubmitDisabled}>
             {props.buttonText}
             {props.isFormLoading && (<DotsLoader />)}
           </button>

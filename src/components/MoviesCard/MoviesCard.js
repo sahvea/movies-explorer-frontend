@@ -1,10 +1,12 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import './MoviesCard.css';
 import { convertTime } from '../../utils/utils';
 
 function MoviesCard(props) {
   const location = useLocation();
+  const currentUser = React.useContext(CurrentUserContext);
   const [isMovieSaved, setIsMovieSaved] = React.useState(false);
 
   const movieDuration = convertTime(props.movie.duration);
@@ -25,6 +27,13 @@ function MoviesCard(props) {
       setIsMovieSaved(true);
     }
   }, [props.movie.nameRU]);
+
+  React.useEffect(() => {
+    const savedMovies = props.savedMovies.some(i => i.nameRU === props.movie.nameRU && i.owner === currentUser._id);
+    if (savedMovies) {
+      setIsMovieSaved(true);
+    }
+  }, [currentUser._id, props.movie.nameRU, props.savedMovies]);
 
   function handleBtnClick() {
     isMovieSaved ? handleDeleteClick() : handleSaveClick();

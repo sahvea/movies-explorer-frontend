@@ -62,8 +62,7 @@ function App() {
         .catch(err => console.log(err))
         .finally(() => setIsLoading(false));
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loggedIn]);
+  }, [currentUser._id, loggedIn]);
 
 
   /* =--- регистрация, авторизация, аутентификация ---= */
@@ -307,6 +306,7 @@ function App() {
           <ProtectedRoute path="/movies" component={Movies}
             loggedIn={loggedIn}
             movies={searchedMovies}
+            savedMovies={savedMovies}
             onMovieSave={handleMovieSave}
             onMovieDelete={handleMovieDelete}
             onMoviesSearch={handleSearchMovies}
@@ -318,6 +318,7 @@ function App() {
           <ProtectedRoute path="/saved-movies" component={Movies}
             loggedIn={loggedIn}
             movies={searchedSavedMovies}
+            savedMovies={savedMovies}
             onMovieDelete={handleMovieDelete}
             onMoviesSearch={handleSearchSavedMovies}
             isSearched={isSavedSearched}

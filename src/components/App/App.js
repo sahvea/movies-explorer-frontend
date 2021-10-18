@@ -174,6 +174,12 @@ function App() {
     setTimeout(() => setIsLoading(false), 500);
   }
 
+  React.useEffect(() => {
+    if (location.pathname === '/saved-movies') {
+      setSearchedSavedMovies(savedMovies);
+    }
+  }, [location.pathname, savedMovies]);
+
 
   /* =--- сохранение/удаление фильма ---= */
 

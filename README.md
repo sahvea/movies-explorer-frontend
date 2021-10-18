@@ -6,6 +6,7 @@
 Бэкенд часть находтся в репозитории [movies-explorer-api](https://github.com/sahvea/movies-explorer-api).
 
 
+
 #### Ссылки:
 * Домен: https://sahvea.diploma.nomoredomains.club/
 * Поддомен для API: https://api.sahvea.diploma.nomoredomains.club/
@@ -23,4 +24,5 @@
 ## Количество баллов за верстку: 100
 * [Чек-лист по верстке](https://github.com/sahvea/movies-explorer-frontend/pull/1#issuecomment-9289427177)
 
-## Количество баллов за функциональность: ___
+## Количество баллов за функциональность: 100
+* [Чек-лист по функциональности](https://github.com/sahvea/movies-explorer-frontend/pull/2#issuecomment-945771117)

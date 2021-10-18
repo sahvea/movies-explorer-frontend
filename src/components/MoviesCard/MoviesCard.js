@@ -20,11 +20,11 @@ function MoviesCard(props) {
   } ${movieBtnSavedClass}`;
 
   React.useEffect(() => {
-    const userMovie = JSON.parse(localStorage.getItem(`${props.movie.movieId}`));
+    const userMovie = JSON.parse(localStorage.getItem(`${props.movie.nameRU}`));
     if (userMovie) {
       setIsMovieSaved(true);
     }
-  }, [props.movie.movieId]);
+  }, [props.movie.nameRU]);
 
   function handleBtnClick() {
     isMovieSaved ? handleDeleteClick() : handleSaveClick();

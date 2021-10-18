@@ -61,7 +61,6 @@ function Movies(props) {
           :
           <MoviesCardList
             movies={isChecked ? shortMovies : props.movies}
-            // savedMovies={props.savedMovies}
             onMovieSave={props.onMovieSave}
             onMovieDelete={props.onMovieDelete}
             isSearched={props.isSearched}
